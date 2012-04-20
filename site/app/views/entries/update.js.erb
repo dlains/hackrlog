@@ -1,0 +1,17 @@
+// Find the div to be edited and fade it out.
+$('#entries div#<%= @entry.id %>').fadeOut('normal');
+
+// Queue the replaceWith call in the 'fx' queue so the replaceWith call doesn't happen during
+// the fadeOut animation.
+$('#entries div#<%= @entry.id %>').queue('fx',
+  function() {
+    $(this).replaceWith($('<%= escape_javascript(render @entry) %>'));
+    $(this).dequeue('fx');
+  }
+);
+
+// Fade in the div with the form elements in place.
+$('#entries div#<%= @entry.id %>').fadeIn('normal');
+
+// Update the Tag Usage sidebar.
+$('#tag_manager').replaceWith('<%= escape_javascript(render :partial => "tags/list") %>')

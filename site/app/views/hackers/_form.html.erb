@@ -1,0 +1,34 @@
+<%= form_for(@hacker) do |f| %>
+  <h3>Join hackrLog</h3>
+  <% if @hacker.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@hacker.errors.count, "error") %> prohibited this hacker from being saved:</h4>
+
+      <ul>
+      <% @hacker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :name, "Nickname (optional)" %>
+    <%= f.text_field :name %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :password, 'Password' %>
+    <%= f.password_field :password, :size => 40 %>
+  </fieldset>
+  <fieldset>
+    <%= f.label :password_confirmation, 'Confirm Password' %>
+    <%= f.password_field :password_confirmation, :size => 40 %>
+  </fieldset>
+  <div class="actions">
+    <%= submit_tag "Join" %>
+  </div>
+<% end %>

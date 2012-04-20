@@ -1,0 +1,9 @@
+<div id="combine_results">
+<p>
+  <strong>Tag(s):</strong>
+  <%= h @tags.join(", ") %><br/>
+  <strong>Count:</strong> <%= @entries.count %>
+</p>
+
+<%= render partial: 'entry', collection: @entries %>
+</div>

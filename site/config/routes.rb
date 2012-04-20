@@ -1,4 +1,30 @@
 Hackrlog::Application.routes.draw do
+
+  resources :tags
+
+  get "home/index"
+  get "home/about"
+  get "home/tos"
+  get "home/privacy"
+
+  controller :sessions do
+    get  'login'  => :new
+    post 'login'  => :create
+    get  'logout' => :destroy
+    get  'reset'  => :reset
+    post 'reset'  => :reset_send
+    get  'reopen' => :reopen
+    post 'reopen' => :reopen_send
+  end
+
+  resources :hackers do
+    member do
+      get  'export'
+      post 'cancel'
+    end
+  end
+  resources :entries
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +74,7 @@ Hackrlog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'home#index', :as => 'home'
 
   # See how all your routes lay out with "rake routes"
 

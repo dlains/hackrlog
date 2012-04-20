@@ -1,0 +1,81 @@
+<%= form_for(@hacker) do |f| %>
+  <% if @hacker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hacker.errors.count, "error") %> prohibited this hacker from being saved:</h2>
+
+      <ul>
+      <% @hacker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div id="settings-form" class="form-container grid_4 alpha">
+    <fieldset>
+      <legend>Contact Information</legend>
+      <fieldset>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </fieldset>
+      <fieldset>
+        <%= f.label :name, "Nickname" %>
+        <%= f.text_field :name %>
+      </fieldset>
+      <fieldset>
+        <%= f.label :time_zone, "Time Zone" %>
+        <%= f.text_field :time_zone %>
+        <!-- TODO Get Timezone select working. -->
+        <%= # select_tag("hacker[setting_attributes][time_zone]", time_zone_options_for_select(@hacker.setting.time_zone, ActiveSupport::TimeZone.us_zones)) %>
+      </fieldset>
+    </fieldset>
+
+    <fieldset>
+      <legend>Password</legend>
+      <fieldset>
+        <%= label_tag :current_password, 'Current Password' %><br/>
+        <%= password_field_tag :current_password, nil, :size => 40 %>
+      </fieldset>
+      <fieldset>
+        <%= f.label :password, 'New Password' %><br />
+        <%= f.password_field :password, :size => 40 %>
+      </fieldset>
+      <fieldset>
+        <%= f.label :password_confirmation, 'Confirm Password' %><br />
+        <%= f.password_field :password_confirmation, :size => 40 %>
+      </fieldset>
+    </fieldset>
+    <p>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>
+<%= form_tag(export_hacker_url, :method => "get") do %>
+  <div id="export-form" class="form-container grid_4">
+    <fieldset>
+      <legend>Export Your Data</legend>
+      <p>
+        Select one of these formats:
+      </p>
+      <%= radio_button_tag(:export_format, "csv", true) %>
+      <%= label_tag(:export_format_csv, "CSV") %><br/>
+      <%= radio_button_tag(:export_format, "json") %>
+      <%= label_tag(:export_format_json, "JSON") %><br/>
+      <%= radio_button_tag(:export_format, "yml") %>
+      <%= label_tag(:export_format_yml, "YAML") %><br/>
+      <%= radio_button_tag(:export_format, "txt") %>
+      <%= label_tag(:export_format_txt, "Plain Text") %><br/><br/>
+      <div>
+        <%= hidden_field_tag :id, @hacker.id %>
+        <%= submit_tag "Export" %>
+      </div>
+    </fieldset>
+  </div>
+<% end %>
+<div id="cancel-form" class="form-container grid_4">
+  <fieldset>
+    <legend>Cancel Account</legend>
+    <p>Export your data if you want to use it outside of this application.</p>
+    <%= button_to 'Cancel', {action: "cancel", id: @hacker.id}, confirm: 'Are you sure?', method: :post %>
+  </fieldset>
+</div>

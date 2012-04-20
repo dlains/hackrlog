@@ -1,0 +1,19 @@
+<div id="login-form" class="form-container grid_6 push_3">
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+  <%= form_tag do %>
+  <h3>Login</h3>
+  <fieldset>
+    <label for="email">Email</label>
+    <%= email_field_tag :email, params[:email], :placeholder => 'Email', :autofocus => 'autofocus' %>
+  </fieldset>
+  <fieldset>
+    <label for="password">Password</label>
+    <%= password_field_tag :password, params[:password], :placeholder => 'Password' %>
+  </fieldset>
+  <%= link_to 'Reset password?', reset_url %>
+  <br/>
+  <%= submit_tag "Login" %>
+  <% end %>
+</div>

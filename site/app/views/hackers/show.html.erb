@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @hacker.email %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @hacker.name %>
+</p>
+
+<p>
+  <b>Time zone:</b>
+  <%= @hacker.time_zone %>
+</p>
+
+<p>
+  <b>Enabled:</b>
+  <%= @hacker.enabled %>
+</p>
+
+
+<%= link_to 'Edit', edit_hacker_path(@hacker) %> |
+<%= link_to 'Back', hackers_path %>

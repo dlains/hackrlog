@@ -1,0 +1,8 @@
+<%= form_for(@new_tag, remote: true) do |f| %>
+  <table>
+    <tr>
+      <td><%= f.text_field :name, size: 20, accesskey: 'A', placeholder: 'New tag.' %></td>
+      <td colspan="2"><%= submit_tag 'Create' %></td>
+    </tr>
+  </table>
+<% end %>

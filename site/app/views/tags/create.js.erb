@@ -1,0 +1,5 @@
+// Clear the form for another entry.
+$('#new_tag')[0].reset();
+
+// Update the Tag Manager sidebar.
+$('#tag_manager').replaceWith('<%= escape_javascript(render :partial => "list") %>')

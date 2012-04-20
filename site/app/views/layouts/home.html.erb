@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title><%= owners %> hackrLog</title>
+  <title>Welcome to hackrLog</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -10,36 +10,28 @@
 </head>
 <body>
   <div id="wrap" class="container_12">
-    <div class="grid_12">
-      <div id="logo" class="grid_9 alpha">
-        <h1>hackrLog</h1>
-        <h2>Development notes that work.</h2>
-      </div>
-      <ul id="nav" class="grid_3 omega">
-        <li><%= link_to 'Log', entries_path %></li>
-        <li><%= link_to 'Logout', logout_path %></li>
-      </ul>
+    <div id="logo" class="grid_9 alpha">
+      <h1>hackrLog</h1>
+      <h2>Development notes that work.</h2>
     </div>
+    <ul id="nav" class="grid_3 omega">
+      <li><%= link_to 'Home', home_url %></li>
+      <li><%= link_to 'About', :controller => 'home', :action => 'about' %></li>
+      <!-- <li><a href="#">Blog</a></li> -->
+      <li><%= link_to 'Login', login_path %></li>
+    </ul>
 
-    <div class="grid_12">
-      <div id="main" class="grid_9 alpha">
-        <%= yield %>
-      </div> <!-- main end -->
+    <div id="main" class="container_12">
+      <%= yield %>
+    </div> <!-- main end -->
 
-      <div id="sidebar" class="grid_3 omega">
-        <!-- Render partials here -->
-        <%= render :partial => "/search/form" %>
-        <%= render :partial => "/tags/list" %>
-      </div> <!-- sidebar end -->
-    </div>
-
-    <div id="footer" class="grid_12 omega">
+    <div id="footer" class="grid_12 alpha">
       <p>
-        &copy; 2010 HackrApps, All Rights Reserved
+        &copy; 2012 HackrApps, All Rights Reserved
         <%= link_to 'Terms of Service', :controller => 'home', :action => 'tos' %>
         <%= link_to 'Privacy Policy', :controller => 'home', :action => 'privacy' %>
       </p>
-    </div> <!-- footer end -->    
+    </div> <!-- footer end -->
   </div> <!-- wrap end -->
 </body>
 <!-- Google Analytics Tracking code. -->
