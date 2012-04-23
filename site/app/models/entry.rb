@@ -1,7 +1,7 @@
 class Entry < ActiveRecord::Base
   belongs_to :hacker
   has_and_belongs_to_many :tags
-  attr_accessible :content, :hacker_id
+  attr_accessible :content, :hacker_id, :tag_ids
   validates :content, presence: true
   validates :hacker_id, numericality: { greater_than_or_equal_to: 1 }
   

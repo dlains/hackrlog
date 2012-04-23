@@ -10,4 +10,22 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def login_as(hacker)
+    session[:hacker_id] = hackers(hacker).id
+  end
+  
+  def logout
+    session.delete :hacker_id
+  end
+  
+  def setup
+    login_as :dave if defined? session
+  end
+  
+  # Enable the Rails logger in our unit tests. Handy for sometimes checking
+  # the output that is causing test failures.
+  def logger
+    ::Rails.logger
+  end
+  
 end

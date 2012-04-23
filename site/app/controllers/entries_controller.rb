@@ -2,11 +2,11 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.new
+    @entry = Entry.new
 
     # Get the logged in Hacker's entries
     hacker = Hacker.find(session[:hacker_id])
-    @entried = Entry.all
+    @entries = Entry.where('hacker_id = ?', session[:hacker_id]).order('created_at DESC')
     
     # TODO OLD VERSION. REPLACE paginate with infinite scroll.
     #@entries = Entry.paginate_by_sql ['select * from entries as e where e.hacker_id = ? order by created_at desc', session[:hacker_id]],
@@ -74,7 +74,7 @@ class EntriesController < ApplicationController
   def update
     process_tags
     begin
-      @entry = Hacker.find(session[:hacker_id].entries.find(params[:id])
+      @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to update an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
@@ -96,7 +96,7 @@ class EntriesController < ApplicationController
   # DELETE /entries/1.json
   def destroy
     begin
-      @entry = Hacker.find(session[:hacker_id].entries.find(params[:id])
+      @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to delete an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)

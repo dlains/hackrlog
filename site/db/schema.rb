@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(:version => 20120419230255) do
   end
 
   create_table "tags", :force => true do |t|
-    t.string   "name"
-    t.integer  "hacker_id"
+    t.string   "name",       :null => false
+    t.integer  "hacker_id",  :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

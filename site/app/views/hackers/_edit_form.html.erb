@@ -24,9 +24,7 @@
       </fieldset>
       <fieldset>
         <%= f.label :time_zone, "Time Zone" %>
-        <%= f.text_field :time_zone %>
-        <!-- TODO Get Timezone select working. -->
-        <%= # select_tag("hacker[setting_attributes][time_zone]", time_zone_options_for_select(@hacker.setting.time_zone, ActiveSupport::TimeZone.us_zones)) %>
+        <%= select_tag("hacker[time_zone]", time_zone_options_for_select(@hacker.time_zone, ActiveSupport::TimeZone.us_zones)) %>
       </fieldset>
     </fieldset>
 

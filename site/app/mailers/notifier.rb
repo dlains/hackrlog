@@ -33,7 +33,7 @@ class Notifier < ActionMailer::Base
     @hacker = hacker
     @password = password
 
-    mail to: @hacker.email, subject 'hackrLog account reopened.'
+    mail to: @hacker.email, subject: 'hackrLog account reopened.'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

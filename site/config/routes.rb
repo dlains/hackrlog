@@ -1,7 +1,5 @@
 Hackrlog::Application.routes.draw do
 
-  resources :tags
-
   get "home/index"
   get "home/about"
   get "home/tos"
@@ -17,6 +15,10 @@ Hackrlog::Application.routes.draw do
     post 'reopen' => :reopen_send
   end
 
+  controller :search do
+    get  'search' => :search
+  end
+  
   resources :hackers do
     member do
       get  'export'
@@ -24,7 +26,14 @@ Hackrlog::Application.routes.draw do
     end
   end
   resources :entries
+  resources :tags
 
+  # Support method for Tag Manager in place editing.
+  post "tags/set_tag_name"
+
+  # Support method for Tag combining form.
+  post  "tags/combine"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

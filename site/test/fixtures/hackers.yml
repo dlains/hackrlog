@@ -1,15 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  email: MyString
-  name: MyString
-  password_digest: MyString
-  time_zone: MyString
+dave:
+  email: dave@domain.com
+  name: dave
+  password_digest: <%= BCrypt::Password.create('dave') %>
+  enabled: true
+
+joe:
+  email: joe@domain.com
+  name: joe
+  password_digest: <%= BCrypt::Password.create('joe') %>
   enabled: false
 
-two:
-  email: MyString
-  name: MyString
-  password_digest: MyString
-  time_zone: MyString
-  enabled: false
+tim:
+  email: tim@tooltime.com
+  name: time
+  password_digest: <%= BCrypt::Password.create('tim') %>
+  enabled: true
+
+mike:
+  email: mike@fireball.net
+  name: mike
+  password_digest: <%= BCrypt::Password.create('mike') %>
+  enabled: true

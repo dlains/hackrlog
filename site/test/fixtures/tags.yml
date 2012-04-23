@@ -1,9 +1,35 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+dave_mysql:
+  name: MySQL
+  hacker: dave
 
-one:
-  name: MyString
-  hacker_id: 1
+dave_ruby:
+  name: Ruby
+  hacker: dave
 
-two:
-  name: MyString
-  hacker_id: 1
+dave_rails:
+  name: Rails
+  hacker: dave
+
+joe_mysql:
+  name: MySQL
+  hacker: joe
+
+joe_ruby:
+  name: Ruby
+  hacker: joe
+
+joe_java:
+  name: Java
+  hacker: joe
+
+tim_textile:
+  name: Textile
+  hacker: tim
+
+tim_textmate:
+  name: Textmate
+  hacker: tim
+
+mike_markdown:
+  name: Markdown
+  hacker: mike

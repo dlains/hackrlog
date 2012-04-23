@@ -17,6 +17,7 @@
       </div>
       <ul id="nav" class="grid_3 omega">
         <li><%= link_to 'Log', entries_path %></li>
+        <li><%= link_to 'Settings', edit_hacker_path(Hacker.find(session[:hacker_id])) %></li>
         <li><%= link_to 'Logout', logout_path %></li>
       </ul>
     </div>

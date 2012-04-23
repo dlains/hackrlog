@@ -11,3 +11,411 @@
  *= require_self
  *= require_tree .
 */
+//= require reset
+//= require text
+//= require 960
+//= require pygments
+
+/*
+  The primary styles for HackrLog.
+*/
+
+/* global settings
+-------------------------------------------------------- */
+
+body {
+  color: #2e2e2e;
+  background: #f6f6f6;
+}
+
+a {
+  color: #bf2726;
+}
+
+img {
+  padding: 9px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.emphasis {
+  color: #bf2726;
+}
+
+.large-text {
+  font-size: 20px;
+}
+
+/* forms
+-------------------------------------------------------- */
+
+div.form-container {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-radius: 4px;
+}
+
+form h3 {
+  line-height: 21px;
+  font-weight: lighter;
+}
+
+form h4 {
+  font-weight: lighter;
+}
+
+fieldset {
+  margin: 0 0 15px 0;
+}
+
+fieldset legend {
+  font-size: 21px;
+  font-weight: bold;
+  color: #bf2726;
+}
+
+fieldset + label {
+  margin: 0 0 3px 0;
+  font-weight: bold;
+}
+
+form label {
+  margin: 0 0 3px 0;
+  font-weight: bold;
+}
+
+fieldset input[type=text],
+fieldset input[type=password],
+fieldset input[type=email],
+fieldset textarea {
+  width: 95%;
+  padding: 5px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+td input[type=text] {
+  padding: 5px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+input[type=submit],
+input[type=reset] {
+  font: 12px/16px Helvetica, Arial, sans-serif;
+  background-color: #2e2e2e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+fieldset input:focus {
+  background: #fff;
+}
+
+.combine_tag {
+  color: #fff;
+  background: #808080;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+
+.combine_tag label {
+  font-weight: normal;
+}
+
+.combine_tag:hover {
+  background: #2e2e2e;
+}
+
+.combine_tag:focus {
+  background: #2e2e2e;
+}
+
+/* header
+-------------------------------------------------------- */
+
+#logo h1 {
+  color: #2e2e2e;
+  font-size: 36px;
+  line-height: 36px;
+  font-weight: lighter;
+  margin: 40px 0 0 0;
+}
+
+#logo h2 {
+  color: #bf2726;
+  font-size: 14px;
+  font-weight: lighter;
+  margin-bottom: 30px;
+}
+
+#nav {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  margin: 50px 0 30px 0;
+  padding: 4px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+#nav li {
+  margin: 0 5px 0 0;
+  display: inline;
+}
+
+#nav li a {
+  text-decoration: none;
+  color: #bf2726;
+}
+
+#nav li a:hover {
+  color: #333;
+}
+
+/* main styles
+-------------------------------------------------------- */
+#features div {
+  padding-top: 20px;
+}
+
+/* Log entry form elements. */
+div#entry_form {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-radius: 4px;
+}
+
+div#entry_form form {
+  padding: 10px;
+}
+
+div#login-form form {
+  padding: 10px;
+}
+
+div#create-form form {
+  padding: 10px;
+}
+
+div#settings-form {
+  padding: 10px;
+}
+
+div#export-form {
+  padding: 10px;
+}
+
+div#cancel-form {
+  padding: 10px;
+}
+
+div#reset-form {
+  padding: 10px;
+}
+
+div#search input[type=search] {
+  width: 80%;
+}
+
+/* Log entry elements. */
+div#entries {
+  padding-top: 20px;
+}
+
+.entry p {
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+div.meta ul {
+  list-style: none;
+}
+
+div.meta li {
+  margin: 0;
+  padding-left: 10px;
+}
+
+.times time {
+  margin: 0;
+  padding: 0;
+}
+
+.actions {
+  margin: 0;
+  list-style: none;
+}
+
+.actions li {
+  display: inline;
+}
+
+.actions a {
+  font: 12px/16px Helvetica, Arial, sans-serif;
+  background-color: #2e2e2e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px 4px;
+  text-decoration: none;
+}
+ /*
+.actions a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.actions a:hover {
+  color: #2e2e2e;
+}
+*/
+
+.tag_list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag_list li {
+  margin: 5px 0 0 5px;
+  display: inline;
+}
+
+.tag_list a {
+  text-decoration: none;
+}
+
+.tag_list a:hover {
+  color: #2e2e2e;
+}
+
+/* entry text default styles
+-------------------------------------------------------- */
+div.text table {
+  border-collapse: separate;
+}
+
+div.text th {
+  padding: 2px;
+  font-weight: bold;
+  text-align: left;
+}
+
+div.text td {
+  padding: 2px;
+}
+
+div.text caption {
+  text-align: center;
+}
+
+div.text ul ul,
+div.text ol ol {
+  margin-bottom: 0px;
+}
+
+div.text b,
+div.text strong {
+  font-weight: bolder;
+}
+
+div.text i,
+div.text cite,
+div.text em,
+div.text var,
+div.text dfn {
+  font-style: italic;
+}
+
+div.text u,
+div.text ins {
+  text-decoration: underline;
+}
+
+div.text s,
+div.text strike,
+div.text del {
+  text-decoration: line-through;
+}
+
+/* sidebar styles
+-------------------------------------------------------- */
+
+#tag_manager {
+  margin-top: 10px;
+  padding-bottom: 4px;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-radius: 4px;
+}
+
+#tag_manager table {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#tag_manager th#title {
+  margin: 0;
+  padding: 7px;
+  border-bottom: 2px solid #eaeaea;
+}
+
+#tag_manager td {
+  padding: 4px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+#tag_manager td.action {
+  text-align: center;
+  font-size: 0.8em;
+}
+
+#tag_manager td a {
+  text-decoration: none;
+}
+
+#tag_manager td a:hover {
+  color: #2e2e2e;
+}
+
+#tag_manager td em {
+  font-style: normal;
+  font-weight: normal;
+  color: #333;
+}
+
+/* footer styles
+-------------------------------------------------------- */
+
+#footer {
+  text-align: center;
+}
+
+#footer p {
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* misc styles
+-------------------------------------------------------- */
+.hide {
+  display: none;
+}
+
+a img {
+  border: none;
+}

@@ -2,48 +2,98 @@ require 'test_helper'
 
 class HackersControllerTest < ActionController::TestCase
   setup do
-    @hacker = hackers(:one)
+    @input_attributes = {
+      :email => "someone@somewhere.com",
+      :name => "Someone",
+      :password => "private",
+      :password_confirmation => "private"
+    }
+    
+    @update_attributes = {
+      :email => "someone@somewhere.com",
+      :name => "Someone",
+      :password => "newhotness",
+      :password_confirmation => "newhotness"
+    }
+
+    @hacker = hackers(:dave)
   end
 
-  test "should get index" do
+  test "unauthenticated user should not get index" do
+    logout
     get :index
-    assert_response :success
-    assert_not_nil assigns(:hackers)
+    assert_redirected_to login_url
   end
-
-  test "should get new" do
+  
+  test "authenticated hacker should not get index" do
+    login_as(:dave)
+    get :index
+    assert_redirected_to entries_url
+  end
+  
+  test "everyone should get new" do
+    logout
+    get :new
+    assert_response :success
+    login_as(:dave)
     get :new
     assert_response :success
   end
 
   test "should create hacker" do
     assert_difference('Hacker.count') do
-      post :create, hacker: { email: @hacker.email, enabled: @hacker.enabled, name: @hacker.name, password_digest: @hacker.password_digest, time_zone: @hacker.time_zone }
+      post :create, :hacker => @input_attributes
     end
 
-    assert_redirected_to hacker_path(assigns(:hacker))
+    assert_redirected_to entries_path
   end
 
-  test "should show hacker" do
-    get :show, id: @hacker
+  test "unauthenticated user should not show hacker" do
+    logout
+    get :show, :id => @hacker.to_param
+    assert_redirected_to login_url
+  end
+  
+  test "authenticated hacker should not show hacker" do
+    login_as(:dave)
+    get :show, :id => hackers(:dave).id
+    assert_redirected_to entries_url
+  end
+  
+  test "unauthorized user should not get edit" do
+    logout
+    get :edit, :id => @hacker.to_param
+    assert_redirected_to login_url
+  end
+  
+  test "authorized hacker should get edit" do
+    login_as(:dave)
+    get :edit, :id => hackers(:dave).id
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @hacker
-    assert_response :success
+  test "unauthorized user should not update hacker" do
+    logout
+    put :update, :id => @hacker.to_param, :hacker => @update_attributes
+    assert_redirected_to login_url
   end
-
-  test "should update hacker" do
-    put :update, id: @hacker, hacker: { email: @hacker.email, enabled: @hacker.enabled, name: @hacker.name, password_digest: @hacker.password_digest, time_zone: @hacker.time_zone }
-    assert_redirected_to hacker_path(assigns(:hacker))
+  
+  test "hacker should not update a different hacker" do
+    login_as(:dave)
+    put :update, :id => hackers(:joe).id, :hacker => @update_attributes
+    assert_redirected_to entries_path
+    assert_equal('You do not have access to that information.', flash[:notice])
   end
-
-  test "should destroy hacker" do
-    assert_difference('Hacker.count', -1) do
-      delete :destroy, id: @hacker
-    end
-
-    assert_redirected_to hackers_path
+  
+  test "unauthorized user should not destroy hacker" do
+    logout
+    delete :destroy, :id => @hacker.to_param
+    assert_redirected_to login_url
+  end
+  
+  test "hacker can not destroy hacker" do
+    login_as(:dave)
+    delete :destroy, :id => @hacker.to_param
+    assert_redirected_to entries_path
   end
 end

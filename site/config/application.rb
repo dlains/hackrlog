@@ -55,5 +55,8 @@ module Hackrlog
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Enable table related tags in sanitize
+    config.action_view.sanitized_allowed_tags = 'table', 'th', 'tr', 'td'
   end
 end

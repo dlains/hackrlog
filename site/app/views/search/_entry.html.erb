@@ -1,0 +1,13 @@
+<div id="<%= entry.id %>" class="log-entry">
+  <div id="meta" class="grid_2 alpha">
+    <ul class="times">
+      <li><time datetime="<%= entry.updated_at %>"><%= entry.updated_at.to_s(:short) %></time></li>
+    </ul>
+  </div> <!-- meta end -->
+  <div id="text" class="grid_7 omega">
+    <%= sanitize format_content(entry) %>
+    <ul class="tag_list">
+      <%= render :partial => '/tags/tag', :collection => entry.tags %>
+    </ul>
+  </div> <!-- text end -->
+</div>

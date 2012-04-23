@@ -43,7 +43,7 @@ class TagsController < ApplicationController
   # GET /tags/new
   # GET /tags/new.json
   def new
-    @tag = Tag.new
+    @new_tag = Tag.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,7 +53,7 @@ class TagsController < ApplicationController
 
   # GET /tags/1/edit
   def edit
-    @tag = Tag.find(params[:id])
+    @new_tag = Tag.find(params[:id])
   end
 
   # POST /tags

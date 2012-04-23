@@ -1,9 +1,83 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+dave_first_entry:
+  hacker: dave
+  content:
+    This is my first entry in this new development diary thing called HackrLog. I hope I do well and
+    continue to use this and become better at being a developer.
 
-one:
-  hacker_id: 1
-  content: MyText
+dave_second_entry:
+  hacker: dave
+  content:
+    I was wondering what I could do with this new web application. I think I can store information about
+    what I am working on so I can find it again at a later time.
 
-two:
-  hacker_id: 1
-  content: MyText
+mike_markdown_table:
+  hacker: mike
+  content:
+      This is the first paragraph and it is the only paragraph.
+      
+      
+      <table>
+        <tr>
+          <th>Heading One</th>
+          <th>Heading Two</th>
+        </tr>
+        <tr>
+          <td>Row One Column One</td>
+          <td>Row One Column Two</td>
+        </tr>
+        <tr>
+          <td>Row Two Column One</td>
+          <td>Row Two Column Two</td>
+        </tr>
+      </table>
+
+mike_markdown_headings:
+  hacker: mike
+  content:
+      "# This is Heading One
+
+
+      ## This is Heading Two
+
+
+      ### This is Heading Three
+
+
+      #### This is Heading Four
+
+
+      ##### This is Heading Five
+
+
+      ###### This is Heading Six"
+
+mike_markdown_blockquote:
+  hacker: mike
+  content:
+    This is simple paragraph text. The next part should be a blockquote.
+    
+    
+    > This would be the blockquote mentioned above.
+
+mike_markdown_unordered_list:
+  hacker: mike
+  content:
+    "* Unordered One
+    
+    * Unordered Two
+    
+    * Unordered Three"
+
+mike_markdown_ordered_list:
+  hacker: mike
+  content:
+    "1. Numbered One
+    
+    2. Numbered Two
+    
+    3. Numbered Three"
+
+mike_markdown_div:
+  hacker: mike
+  content:
+    "<div>This is a new div.</div>"
