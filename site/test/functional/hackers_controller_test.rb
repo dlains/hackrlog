@@ -72,6 +72,13 @@ class HackersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "hacker should not edit a different hacker" do
+    login_as(:dave)
+    get :edit, :id => hackers(:mike).id
+    assert_redirected_to entries_path
+    assert_equal('You do not have access to that information.', flash[:notice])
+  end
+  
   test "unauthorized user should not update hacker" do
     logout
     put :update, :id => @hacker.to_param, :hacker => @update_attributes

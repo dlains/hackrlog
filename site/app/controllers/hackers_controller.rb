@@ -29,6 +29,7 @@ class HackersController < ApplicationController
 
   # GET /hackers/1/edit
   def edit
+    return unless modifying_self?
     @hacker = Hacker.find(params[:id])
   end
 
