@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
     
     respond_to do |format|
       reset_hacker_password(hacker, false)
-      #Notifier.password_reset(hacker, password).deliver
+      Notifier.password_reset(hacker, password).deliver
 
       format.html {redirect_to login_url, :notice => "Your new password has been sent to your email account."}
     end
@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
     
     respond_to do |format|
       reset_hacker_password(hacker, true)
-      #Notifier.account_reopened(hacker, password).deliver
+      Notifier.account_reopened(hacker, password).deliver
 
       format.html {redirect_to login_url, :notice => "Your account has been reopened and a new password has been sent to your email account."}
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419230255) do
+ActiveRecord::Schema.define(:version => 20120501162804) do
 
   create_table "entries", :force => true do |t|
     t.integer  "hacker_id",  :null => false
@@ -20,10 +20,14 @@ ActiveRecord::Schema.define(:version => 20120419230255) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "entries", ["hacker_id"], :name => "index_entries_on_hacker_id"
+
   create_table "entries_tags", :id => false, :force => true do |t|
     t.integer "entry_id", :null => false
     t.integer "tag_id",   :null => false
   end
+
+  add_index "entries_tags", ["entry_id", "tag_id"], :name => "index_entries_tags_on_entry_id_and_tag_id", :unique => true
 
   create_table "hackers", :force => true do |t|
     t.string   "email",                                                     :null => false
@@ -35,11 +39,16 @@ ActiveRecord::Schema.define(:version => 20120419230255) do
     t.datetime "updated_at",                                                :null => false
   end
 
+  add_index "hackers", ["email"], :name => "index_hackers_on_email", :unique => true
+
   create_table "tags", :force => true do |t|
     t.string   "name",       :null => false
     t.integer  "hacker_id",  :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "tags", ["hacker_id"], :name => "index_tags_on_hacker_id"
+  add_index "tags", ["name"], :name => "index_tags_on_name"
 
 end
