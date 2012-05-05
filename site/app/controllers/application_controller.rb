@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
   #end
 
   protected
-  
+
+  # Verify the hacker id stored in the session is an actual user in the
+  # database and ensure that user account has not been disabled.
   def authorize
     @current_user = Hacker.find_by_id(session[:hacker_id])
     
@@ -25,6 +27,9 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  # Provide access to the currently logged in user. Using this method consistantly will reduce
+  # the amount of database queries run just to get the logged in user. It is also available as
+  # a helper method in the views.
   def current_user
     begin
       @current_user ||= Hacker.find(session[:hacker_id])

@@ -14,7 +14,7 @@ class TagSetsController < ApplicationController
   # GET /tag_sets/1.json
   def show
     begin
-      @tag_set = Hacker.find(session[:hacker_id]).tag_sets.find(params[:id])
+      @tag_set = current_user.tag_sets.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to access an tag set belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
@@ -40,7 +40,7 @@ class TagSetsController < ApplicationController
   # GET /tag_sets/1/edit
   def edit
     begin
-      @tag_set = Hacker.find(session[:hacker_id]).tag_sets.find(params[:id])
+      @tag_set = current_user.tag_sets.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to access an tag set belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
@@ -68,7 +68,7 @@ class TagSetsController < ApplicationController
   # PUT /tag_sets/1.json
   def update
     begin
-      @tag_set = Hacker.find(session[:hacker_id]).tag_sets.find(params[:id])
+      @tag_set = current_user.tag_sets.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to access a tag set belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
@@ -89,7 +89,7 @@ class TagSetsController < ApplicationController
   # DELETE /tag_sets/1.json
   def destroy
     begin
-      @tag_set = Hacker.find(session[:hacker_id]).tag_sets.find(params[:id])
+      @tag_set = current_user.tag_sets.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to access a tag set belonging to another user: #{params[:id]}."
       redirect_to(entries_url)

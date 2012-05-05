@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Hacker.find(session[:hacker_id]).tags
+    @tags = current_user.tags
 
     respond_to do |format|
       format.html # index.html.erb
@@ -78,7 +78,7 @@ class TagsController < ApplicationController
   # PUT /tags/1.json
   def update
     begin
-      @tag = Hacker.find(session[:hacker_id]).tags.find(params[:id])
+      @tag = current_user.tags.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to update a tag belonging to another user: #{params[:id]}."
       redirect_to(tags_url)
@@ -99,7 +99,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1.json
   def destroy
     begin
-      @tag = Hacker.find(session[:hacker_id]).tags.find(params[:id])
+      @tag = current_user.tags.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to delete a tag belonging to another user: #{params[:id]}."
       redirect_to(tags_url)

@@ -30,7 +30,7 @@ class HackersController < ApplicationController
   # GET /hackers/1/edit
   def edit
     return unless modifying_self?
-    @hacker = Hacker.find(params[:id])
+    @hacker = current_user
   end
 
   # POST /hackers
@@ -56,7 +56,7 @@ class HackersController < ApplicationController
   # PUT /hackers/1.json
   def update
     return unless modifying_self?
-    @hacker = Hacker.find(params[:id])
+    @hacker = current_user
 
     respond_to do |format|
       if @hacker.update_attributes(params[:hacker])
@@ -93,11 +93,11 @@ class HackersController < ApplicationController
   def cancel
     return unless modifying_self?
     
-    @hacker = Hacker.find(params[:id])
+    @hacker = current_user
     @hacker.enabled = false
     @hacker.save!
 
-    #Notifier.account_closed(hacker).deliver
+    Notifier.account_closed(hacker).deliver
 
     session.delete :hacker_id
     session.delete :admin

@@ -22,8 +22,7 @@ class EntriesController < ApplicationController
   # GET /entries/1.json
   def show
     begin
-      # TODO... This way of getting the entry has to be slow... check and adjust to Entry.where('id = ? and hacker_id = ?')
-      @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
+      @entry = current_user.entries.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to access an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
@@ -49,7 +48,7 @@ class EntriesController < ApplicationController
   # GET /entries/1/edit
   def edit
     begin
-      @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
+      @entry = current_user.entries.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to access and entry belonging to another user: #{params[:id]}"
       redirect_to(entries_url)
@@ -80,7 +79,7 @@ class EntriesController < ApplicationController
   def update
     process_tags
     begin
-      @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
+      @entry = current_user.entries.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to update an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
@@ -102,7 +101,7 @@ class EntriesController < ApplicationController
   # DELETE /entries/1.json
   def destroy
     begin
-      @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
+      @entry = current_user.entries.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to delete an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
