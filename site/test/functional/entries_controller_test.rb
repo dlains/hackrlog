@@ -14,19 +14,33 @@ class EntriesControllerTest < ActionController::TestCase
     }
   end
 
-  test "should get index" do
+  test "authorized user should get index" do
     login_as(:dave)
     get :index
     assert_response :success
     assert_not_nil assigns(:entries)
   end
 
-  test "should get new" do
+  test "unauthorized user should not get index" do
+    logout
+    get :index
+    assert_redirected_to login_url
+  end
+  
+  test "authorized user should get new" do
+    login_as(:dave)
     get :new
     assert_response :success
   end
 
-  test "should create entry" do
+  test "unauthorized user should not get new" do
+    logout
+    get :new
+    assert_redirected_to login_url
+  end
+  
+  test "authorized user should create entry" do
+    login_as(:dave)
     assert_difference('Entry.count') do
       post :create, :entry => @update
     end
@@ -34,7 +48,8 @@ class EntriesControllerTest < ActionController::TestCase
     assert_redirected_to entries_url
   end
 
-  test "should create entry with tags" do
+  test "authorized user should create entry with tags" do
+    login_as(:dave)
     assert_difference('Entry.count') do
       post :create, {:tags => "Ruby", :entry => @update_with_tags}
     end
@@ -42,38 +57,69 @@ class EntriesControllerTest < ActionController::TestCase
     assert_redirected_to entries_url
   end
   
-  test "should show entry" do
-    get :show, :id => @entry.to_param
+  test "unauthorized user should not create entry" do
+    logout
+    post :create, entry: @update
+    assert_redirected_to login_url
+  end
+  
+  test "authorized owner should show entry" do
+    login_as(:dave)
+    get :show, id: @entry
     assert_response :success
   end
 
-  # Log in as dave and try to see admin's entries.
-  test "should not show entry" do
+  test "authorized non-owner should not show entry" do
     login_as :dave
     get :show, :id => entries(:mike_markdown_table).id
     assert_redirected_to entries_url
   end
+  
+  test "unauthorized user should not show entry" do
+    logout
+    get :show, id: @entry
+    assert_redirected_to login_url
+  end
+  
 
-  test "should get edit" do
-    get :edit, :id => @entry.to_param
+  test "authorized owner should get edit" do
+    login_as(:dave)
+    get :edit, id: @entry
     assert_response :success
   end
 
-  test "should update entry" do
-    login_as :dave
-    put :update, :id => @entry.to_param, :entry => @update
+  test "authorized non-owner should not get edit" do
+    login_as(:mike)
+    get :edit, id: @entry
+    assert_redirected_to entries_url
+  end
+  
+  test "unauthorized user should not get edit" do
+    logout
+    get :edit, id: @entry
+    assert_redirected_to login_url
+  end
+  
+  test "authorized user should update entry" do
+    login_as(:dave)
+    put :update, id: @entry, entry: @update
     assert_redirected_to entry_path(assigns(:entry))
   end
   
-  # Log in as dave and try to update admin's entries.
-  test "should not update entry" do
-    login_as :mike
-    put :update, :id => @entry.to_param, :entry => @update
+  test "authorized non-owner should not update entry" do
+    login_as(:mike)
+    put :update, id: @entry, entry: @update
     assert_redirected_to entries_url
   end
 
-  test "should destroy entry" do
-    login_as :dave
+  test "unauthorized user should not update entry" do
+    logout
+    put :update, id: @entry, entry: @update
+    assert_redirected_to login_url
+  end
+  
+  test "authorized owner should destroy entry" do
+    login_as(:dave)
     assert_difference('Entry.count', -1) do
       delete :destroy, :id => @entry.to_param
     end
@@ -81,13 +127,22 @@ class EntriesControllerTest < ActionController::TestCase
     assert_redirected_to entries_path
   end
   
-  test "should not destroy entry" do
-    login_as :mike
+  test "authorized non-owner should not destroy entry" do
+    login_as(:mike)
     assert_difference('Entry.count', 0) do
       delete :destroy, :id => @entry.to_param
     end
     
     assert_redirected_to entries_url
+  end
+  
+  test "unauthorized user should not destroy entry" do
+    logout
+    assert_difference('Entry.count', 0) do
+      delete :destroy, id: @entry
+    end
+    
+    assert_redirected_to login_url
   end
   
   # Markdown formatting tests.

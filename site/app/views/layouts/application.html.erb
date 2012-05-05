@@ -1,57 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title><%= owners %> hackrLog</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-  <link rel="shortcut icon" href="/favicon.ico" />
-</head>
-<body>
-  <div id="wrap" class="container_12">
-    <div class="grid_12">
-      <div id="logo" class="grid_9 alpha">
-        <h1>hackrLog</h1>
-        <h2>Development notes that work.</h2>
-      </div>
-      <ul id="nav" class="grid_3 omega">
-        <li><%= link_to 'Log', entries_path %></li>
-        <li><%= link_to 'Settings', edit_hacker_path(Hacker.find(session[:hacker_id])) %></li>
-        <li><%= link_to 'Logout', logout_path %></li>
-      </ul>
-    </div>
+  <head>
+    <meta charset="utf-8">
+    <title><%= owners %> hackrLog</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%# Maybe remove this favicon link...??? 
+    <link rel="shortcut icon" href="/favicon.ico" />
+    %>
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
 
-    <div class="grid_12">
-      <div id="main" class="grid_9 alpha">
+    <div class="container">
+      <section id="content">
         <%= yield %>
-      </div> <!-- main end -->
+      </section><%# content end %>
+      <section id="sidebar">
+        <%= render partial: "tags/list" %>
+        <%= render partial: 'tag_sets/list' %>
+      </section><%# sidebar end %>
+    </div><%# container end %>
 
-      <div id="sidebar" class="grid_3 omega">
-        <!-- Render partials here -->
-        <%= render :partial => "/search/form" %>
-        <%= render :partial => "/tags/list" %>
-      </div> <!-- sidebar end -->
-    </div>
-
-    <div id="footer" class="grid_12 omega">
-      <p>
-        &copy; 2010 HackrApps, All Rights Reserved
-        <%= link_to 'Terms of Service', :controller => 'home', :action => 'tos' %>
-        <%= link_to 'Privacy Policy', :controller => 'home', :action => 'privacy' %>
-      </p>
-    </div> <!-- footer end -->    
-  </div> <!-- wrap end -->
-</body>
-<!-- Google Analytics Tracking code. -->
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-20146877-1']);
-  _gaq.push(['_trackPageview']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+    <%= render 'layouts/footer' %>
+  </body>
+  <%= render 'layouts/analytics' %>
 </html>

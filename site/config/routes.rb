@@ -27,6 +27,7 @@ Hackrlog::Application.routes.draw do
   end
   resources :entries
   resources :tags
+  resources :tag_sets
 
   # Support method for Tag Manager in place editing.
   post "tags/set_tag_name"

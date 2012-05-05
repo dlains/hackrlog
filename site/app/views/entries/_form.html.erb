@@ -16,7 +16,7 @@
     <%= f.text_area :content, :rows => 5, :cols => 80, :placeholder => 'Note text.', :accesskey => 'E' %>
   </fieldset>
   <fieldset>
-    <%= label_tag :tags, "Tags" %>
+    <%= label_tag :tags, "Tags" %><%= link_to 'Create Tag Set', new_tag_set_path %>
     <%= text_field_tag :tags, tag_values(@entry), :size => 103, :placeholder => 'Tags, comma separated.', :accesskey => 'T' %>
   </fieldset>
 

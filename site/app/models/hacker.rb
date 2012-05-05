@@ -1,6 +1,7 @@
 class Hacker < ActiveRecord::Base
   has_many :entries
   has_many :tags
+  has_many :tag_sets
 
   attr_accessible :email, :name, :time_zone, :password, :password_confirmation
   validates :email, presence: true, uniqueness: true, email: true

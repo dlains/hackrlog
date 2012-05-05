@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501162804) do
+ActiveRecord::Schema.define(:version => 20120503044331) do
 
   create_table "entries", :force => true do |t|
     t.integer  "hacker_id",  :null => false
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20120501162804) do
   end
 
   add_index "hackers", ["email"], :name => "index_hackers_on_email", :unique => true
+
+  create_table "tag_sets", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "tags",       :null => false
+    t.integer  "hacker_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "tags", :force => true do |t|
     t.string   "name",       :null => false

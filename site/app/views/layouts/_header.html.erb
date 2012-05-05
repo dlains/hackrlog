@@ -1,0 +1,6 @@
+<header id="page_header" role="banner">
+  <%= link_to(image_tag("logo.png", alt: "hackrLog", id: "logo"), entries_url, title: "Home") %>
+  <%# TODO: Add link here to open and close the note input form. %>
+  <%= render partial: "search/form" %>
+  <%= yield :main_navigation %>
+</header>

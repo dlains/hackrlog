@@ -22,6 +22,7 @@ class EntriesController < ApplicationController
   # GET /entries/1.json
   def show
     begin
+      # TODO... This way of getting the entry has to be slow... check and adjust to Entry.where('id = ? and hacker_id = ?')
       @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to access an entry belonging to another user: #{params[:id]}."
@@ -47,7 +48,12 @@ class EntriesController < ApplicationController
 
   # GET /entries/1/edit
   def edit
-    @entry = Entry.find(params[:id])
+    begin
+      @entry = Hacker.find(session[:hacker_id]).entries.find(params[:id])
+    rescue
+      logger.error "Hacker id #{session[:hacker_id]} attempted to access and entry belonging to another user: #{params[:id]}"
+      redirect_to(entries_url)
+    end
   end
 
   # POST /entries

@@ -9,19 +9,25 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require normalize
+ *= require pygments
+ *= require layout
+ *= require sidebar
 */
-//= require reset
-//= require text
-//= require 960
-//= require pygments
 
+/* BELOW = ORIGINAL */
+/*
+//= r reset
+//= r text
+//= r 960
+//= r pygments
+*/
 /*
   The primary styles for HackrLog.
 */
 
 /* global settings
--------------------------------------------------------- */
+-------------------------------------------------------- 
 
 body {
   color: #2e2e2e;
@@ -45,9 +51,9 @@ img {
 .large-text {
   font-size: 20px;
 }
-
+*/
 /* forms
--------------------------------------------------------- */
+-------------------------------------------------------- 
 
 div.form-container {
   border-top: 1px solid #ccc;
@@ -135,9 +141,9 @@ fieldset input:focus {
 .combine_tag:focus {
   background: #2e2e2e;
 }
-
+*/
 /* header
--------------------------------------------------------- */
+-------------------------------------------------------- 
 
 #logo h1 {
   color: #2e2e2e;
@@ -178,14 +184,14 @@ fieldset input:focus {
 #nav li a:hover {
   color: #333;
 }
-
+*/
 /* main styles
--------------------------------------------------------- */
+--------------------------------------------------------
 #features div {
   padding-top: 20px;
 }
-
-/* Log entry form elements. */
+*/
+/* Log entry form elements. 
 div#entry_form {
   border-top: 1px solid #ccc;
   border-left: 1px solid #ccc;
@@ -225,8 +231,8 @@ div#reset-form {
 div#search input[type=search] {
   width: 80%;
 }
-
-/* Log entry elements. */
+*/
+/* Log entry elements. 
 div#entries {
   padding-top: 20px;
 }
@@ -269,6 +275,7 @@ div.meta li {
   padding: 2px 4px;
   text-decoration: none;
 }
+*/
  /*
 .actions a {
   font-weight: bold;
@@ -279,7 +286,7 @@ div.meta li {
   color: #2e2e2e;
 }
 */
-
+/*
 .tag_list ul {
   margin: 0;
   padding: 0;
@@ -298,9 +305,9 @@ div.meta li {
 .tag_list a:hover {
   color: #2e2e2e;
 }
-
+*/
 /* entry text default styles
--------------------------------------------------------- */
+-------------------------------------------------------- 
 div.text table {
   border-collapse: separate;
 }
@@ -347,9 +354,9 @@ div.text strike,
 div.text del {
   text-decoration: line-through;
 }
-
+*/
 /* sidebar styles
--------------------------------------------------------- */
+-------------------------------------------------------- 
 
 #tag_manager {
   margin-top: 10px;
@@ -396,9 +403,9 @@ div.text del {
   font-weight: normal;
   color: #333;
 }
-
+*/
 /* footer styles
--------------------------------------------------------- */
+-------------------------------------------------------- 
 
 #footer {
   text-align: center;
@@ -409,9 +416,9 @@ div.text del {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
+*/
 /* misc styles
--------------------------------------------------------- */
+-------------------------------------------------------- 
 .hide {
   display: none;
 }
@@ -419,3 +426,4 @@ div.text del {
 a img {
   border: none;
 }
+*/
