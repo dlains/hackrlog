@@ -3,7 +3,7 @@
 $('#entries').prepend($('<%= escape_javascript(render @entry) %>').css('display', 'none'));
 
 // Perform the slideDown animation on the newly created entry.
-$('#entries div#<%= @entry.id %>').slideDown('slow');
+$('#entries article#entry_<%= @entry.id %>').slideDown('slow');
 
 // Clear the form for another entry.
 $('#new_entry')[0].reset();

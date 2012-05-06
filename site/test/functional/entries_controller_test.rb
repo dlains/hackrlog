@@ -103,7 +103,7 @@ class EntriesControllerTest < ActionController::TestCase
   test "authorized user should update entry" do
     login_as(:dave)
     put :update, id: @entry, entry: @update
-    assert_redirected_to entry_path(assigns(:entry))
+    assert_redirected_to entries_url
   end
   
   test "authorized non-owner should not update entry" do
@@ -151,7 +151,16 @@ class EntriesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     id = entries(:mike_markdown_table).id
-    assert_select("##{id} .text table")
+    assert_select("#entry_#{id} .entry_content table")
+  end
+
+  test "markdown entry should contain anchor markup" do
+    login_as :mike
+    get :index
+    assert_response :success
+    id = entries(:mike_markdown_anchor).id
+    assert_select("#entry_#{id} .entry_content a", "An external link")
+    assert_select("#entry_#{id} .entry_content a[href=\"http://www.test.com\"]")
   end
   
   test "markdown entry should contain html heading markup" do
@@ -159,12 +168,12 @@ class EntriesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     id = entries(:mike_markdown_headings).id
-    assert_select("##{id} .text h1")
-    assert_select("##{id} .text h2")
-    assert_select("##{id} .text h3")
-    assert_select("##{id} .text h4")
-    assert_select("##{id} .text h5")
-    assert_select("##{id} .text h6")
+    assert_select("#entry_#{id} .entry_content h1", "This is Heading One")
+    assert_select("#entry_#{id} .entry_content h2", "This is Heading Two")
+    assert_select("#entry_#{id} .entry_content h3", "This is Heading Three")
+    assert_select("#entry_#{id} .entry_content h4", "This is Heading Four")
+    assert_select("#entry_#{id} .entry_content h5", "This is Heading Five")
+    assert_select("#entry_#{id} .entry_content h6", "This is Heading Six")
   end
   
   test "markdown entry should contain blockquote markup" do
@@ -172,7 +181,7 @@ class EntriesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     id = entries(:mike_markdown_blockquote).id
-    assert_select("##{id} .text blockquote")
+    assert_select("#entry_#{id} .entry_content blockquote")
   end
   
   test "markdown entry should contain unordered list markup" do
@@ -180,7 +189,7 @@ class EntriesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     id = entries(:mike_markdown_unordered_list).id
-    assert_select("##{id} .text ul")
+    assert_select("#entry_#{id} .entry_content ul")
   end
   
   test "markdown entry should contain ordered list markup" do
@@ -188,7 +197,7 @@ class EntriesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     id = entries(:mike_markdown_ordered_list).id
-    assert_select("##{id} .text ol")
+    assert_select("#entry_#{id} .entry_content ol")
   end
 
   test "markdown entry should contain division markup" do
@@ -196,7 +205,7 @@ class EntriesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     id = entries(:mike_markdown_div).id
-    assert_select("##{id} .text div")
+    assert_select("#entry_#{id} .entry_content div")
   end
 
 end

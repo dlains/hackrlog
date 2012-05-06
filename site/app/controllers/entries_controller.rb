@@ -86,7 +86,7 @@ class EntriesController < ApplicationController
     else
       respond_to do |format|
         if @entry.update_attributes(params[:entry])
-          format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
+          format.html { redirect_to entries_url, notice: 'Entry was successfully updated.' }
           format.js
           format.json { head :no_content }
         else

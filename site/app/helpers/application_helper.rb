@@ -17,10 +17,6 @@ module ApplicationHelper
     @tags = Tag.tag_usage(hacker)
   end
 
-  def tag_sets_usage(hacker)
-    @tag_sets = TagSet.where('hacker_id = ?', hacker)
-  end
-  
   def get_datetime_for_entry(entry)
     hacker = Hacker.find(session[:hacker_id])
     entry.updated_at.in_time_zone(hacker.time_zone).strftime('%b. %d, %Y %I:%M %p')

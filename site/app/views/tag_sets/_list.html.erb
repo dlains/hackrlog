@@ -1,10 +1,9 @@
-<% @tag_sets = tag_sets_usage(session[:hacker_id]) %>
 <div id="tag_sets_manager">
   <table>
     <tr>
       <th id="title" colspan="3">Tag Sets</th>
     </tr>
-    <% @tag_sets.each do |tag_set| %>
+    <% current_user.tag_sets.each do |tag_set| %>
     <tr>
       <td><a href="/tag_set/<%= tag_set.id %>"><%= tag_set.name %></a></td>
       <td class="action"><%= link_to 'A', tag_set, remote: true, method: :get, title: "Activate" %></td>

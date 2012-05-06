@@ -31,6 +31,11 @@ mike_markdown_table:
         </tr>
       </table>
 
+mike_markdown_anchor:
+  hacker: mike
+  content:
+    "This is some preamble text that happens to have [An external link](http://www.test.com)"
+
 mike_markdown_headings:
   hacker: mike
   content:
@@ -38,7 +43,7 @@ mike_markdown_headings:
 
 
       ## This is Heading Two
-
+      
 
       ### This is Heading Three
 
