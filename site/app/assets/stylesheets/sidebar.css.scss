@@ -1,7 +1,9 @@
+@import "constants";
+
 section#sidebar
 {
-  background-color: #eee;
-  color: #666;
+  background-color: $sidebar-bg-color;
+  color: $sidebar-text-color;
   font-size: 0.8em;
   font-weight: normal;
   line-height: 1.3em;
@@ -10,13 +12,13 @@ section#sidebar
   a:link,
   a:visited
   {
-    color: #666;
+    color: $sidebar-text-color;
     text-decoration: underline;
   }
   
   a:hover,
   a:active
   {
-    color: #b5d;
+    color: $sidebar-link-color;
   }
 }

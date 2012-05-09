@@ -19,8 +19,10 @@ module EntriesHelper
   end
   
   def tag_values(entry)
-    unless entry.tags.empty?
+    if !entry.tags.empty?
       entry.tags.join(", ")
+    elsif session.key?(:current_tags)
+      session[:current_tags]
     end
   end
   

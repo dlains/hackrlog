@@ -1,7 +1,9 @@
+@import "constants";
+
 header#page_header
 {
-  background-color: #000;
-  color: #fff;
+  background-color: $text-color;
+  color: $text-color;
   height: 60px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -13,7 +15,7 @@ header#page_header
   a:active,
   a:visited
   {
-    color: #ccc;
+    color: $link-color;
     text-decoration: none;
   }
   
@@ -52,8 +54,8 @@ section#sidebar
 
 footer#page_footer
 {
-  background-color: #fff;
-  color: #000;
+  background-color: $bg-color;
+  color: $text-color;
   font-size: 0.8em;
   
   ul
@@ -63,7 +65,7 @@ footer#page_footer
     
     li
     {
-      border-right: 1px solid #ccc;
+      border-right: 1px solid $border-color;
       display: inline;
       margin: 0;
       &:last-child

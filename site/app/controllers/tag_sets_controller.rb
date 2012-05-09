@@ -1,4 +1,55 @@
 class TagSetsController < ApplicationController
+
+  # GET /tag_sets/1/activate
+  # GET /tag_sets/1/activate.json
+  def activate
+    begin
+      @entry = Entry.new
+      @tag_set = current_user.tag_sets.find(params[:id])
+    rescue
+      logger.error "Hacker id #{session[:hacker_id]} attempted to access a tag set belonging to another user: #{params[:id]}."
+      redirect_to entries_url
+    else
+      # Add this tag set to the session.
+      session[:tag_set_id]   = @tag_set.id
+      session[:current_tags] = @tag_set.tags
+      
+      # Update the notice
+      flash[:notice] = "Tag set #{@tag_set.name} activated."
+      
+      respond_to do |format|
+        format.html { redirect_to entries_url }
+        format.js
+        format.json { render json: @tag_set }
+      end
+    end
+  end
+  
+  # GET /tag_sets/1/deactivate
+  # GET /tag_sets/1/deactivate.json
+  def deactivate
+    begin
+      @entry = Entry.new
+      @tag_set = current_user.tag_sets.find(params[:id])
+    rescue
+      logger.error "Hacker id #{session[:hacker_id]} attempted to access a tag set belonging to another user: #{params[:id]}."
+      redirect_to entries_url
+    else
+      # Clear the tag set from the session.
+      session.delete :tag_set_id
+      session.delete :current_tags
+      
+      # Update the notice
+      flash[:notice] = "Tag set #{@tag_set.name} deactivated."
+      
+      respond_to do |format|
+        format.html { redirect_to entries_url }
+        format.js
+        format.json { head :no_content }
+      end
+    end
+  end
+  
   # GET /tag_sets
   # GET /tag_sets.json
   def index
