@@ -26,4 +26,13 @@ module EntriesHelper
     end
   end
   
+  # Easy create or update submit buttons for the entries/_form.html.erb form
+  def entry_submit_tag(entry)
+    if(entry.new_record?)
+      submit_tag('Create') + submit_tag('Reset', type: 'reset')
+    else
+      submit_tag('Update')
+    end
+  end
+  
 end

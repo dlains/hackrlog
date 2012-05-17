@@ -1,0 +1,26 @@
+@import "constants";
+
+fieldset ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+fieldset label {
+  display: block;
+}
+
+fieldset.inline label,
+fieldset li.inline label {
+  display: inline;
+}
+
+fieldset li.required label {
+  font-weight: bold;
+}
+
+fieldset div.field_with_errors {
+  label {
+    color: $field-error-color;
+  }
+}

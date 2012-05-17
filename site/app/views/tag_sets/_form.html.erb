@@ -1,25 +1,17 @@
 <%= form_for(@tag_set) do |f| %>
-  <% if @tag_set.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tag_set.errors.count, "error") %> prohibited this tag_set from being saved:</h2>
-
-      <ul>
-      <% @tag_set.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :tags %><br />
-    <%= f.text_field :tags %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <fieldset>
+    <ol>
+      <li>
+        <%= f.label :name %>
+        <%= f.text_field :name, placeholder: 'Tag Set Name', tabindex: 1 %>
+        <%= form_field_error(@tag_set, :name) %>
+      </li>
+      <li>
+        <%= f.label :tags %>
+        <%= f.text_field :tags, placeholder: 'Tags', tabindex: 2 %>
+        <%= form_field_error(@tag_set, :tags) %>
+      </li>
+    </ol>
+  </fieldset>
+  <%= f.submit %>
 <% end %>

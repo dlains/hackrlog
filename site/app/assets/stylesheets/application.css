@@ -12,6 +12,7 @@
  *= require pygments
  *= require layout
  *= require sidebar
+ *= require forms
  *= require_self
 */
 

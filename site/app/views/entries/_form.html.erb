@@ -1,29 +1,19 @@
 <%= form_for(@entry, remote: remote) do |f| %>
-  <% if @entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
-
-      <ul>
-      <% @entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <fieldset>
-    <%= f.label :content, "Log Entry" %>
-    <%= f.text_area :content, :rows => 5, :cols => 80, :placeholder => 'Log entry text.', :accesskey => 'E' %>
+    <ol>
+      <li class="required">
+        <%= f.label :content, "Log Entry" %>
+        <%= f.text_area :content, rows: 5, cols: 80, placeholder: 'Log entry text.', accesskey: 'E', tabindex: 1 %>
+        <%= form_field_error(@entry, :content) %>
+      </li>
+      <li>
+        <%= label_tag :tags, "Tags" %>
+        <%= text_field_tag :tags, tag_values(@entry), size: 78, placeholder: 'Tags, comma separated.', accesskey: 'T', tabindex: 2 %>
+        <%= link_to 'Create Tag Set', new_tag_set_path %>
+        <%= link_to 'Save Tag Set', new_tag_set_path %>
+        <%= form_field_error(@entry, :tags) %>
+      </li>
+    </ol>
   </fieldset>
-  <fieldset>
-    <%= label_tag :tags, "Tags" %><%= link_to 'Create Tag Set', new_tag_set_path %>
-    <%= text_field_tag :tags, tag_values(@entry), :size => 103, :placeholder => 'Tags, comma separated.', :accesskey => 'T' %>
-  </fieldset>
-
-  <% unless @entry.id? %>
-    <%= submit_tag 'Create' %>
-    <%= f.submit 'Reset', :type => 'reset' %>
-  <% else %>
-    <%= submit_tag 'Update' %>
-  <% end %>
+  <%= entry_submit_tag(@entry) %>
 <% end %>

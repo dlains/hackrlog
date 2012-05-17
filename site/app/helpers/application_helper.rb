@@ -22,4 +22,11 @@ module ApplicationHelper
     entry.updated_at.in_time_zone(hacker.time_zone).strftime('%b. %d, %Y %I:%M %p')
   end
 
+  # Add an <span class="error"> for form fields with errors.
+  def form_field_error(object, attribute)
+    if object.errors[attribute].any?
+      content_tag(:span, object.errors[attribute].to_sentence, class: 'error')
+    end
+  end
+
 end
