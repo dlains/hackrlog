@@ -3,12 +3,12 @@
     <ol>
       <li class="required">
         <%= f.label :content, "Log Entry" %>
-        <%= f.text_area :content, rows: 5, cols: 80, placeholder: 'Log entry text.', accesskey: 'E', tabindex: 1 %>
+        <%= f.text_area :content, rows: 5, placeholder: 'Log entry text.', accesskey: 'E', tabindex: 1 %>
         <%= form_field_error(@entry, :content) %>
       </li>
       <li>
         <%= label_tag :tags, "Tags" %>
-        <%= text_field_tag :tags, tag_values(@entry), size: 78, placeholder: 'Tags, comma separated.', accesskey: 'T', tabindex: 2 %>
+        <%= text_field_tag :tags, tag_values(@entry), placeholder: 'Tags, comma separated.', accesskey: 'T', tabindex: 2 %>
         <%= link_to 'Create Tag Set', new_tag_set_path %>
         <%= link_to 'Save Tag Set', new_tag_set_path %>
         <%= form_field_error(@entry, :tags) %>

@@ -10,20 +10,20 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     %>
   </head>
-  <body>
+  <body class="container_12">
     <%= render 'layouts/header' %>
 
     <div class="container">
-      <section id="content">
-        <%= yield %>
-      </section><%# content end %>
-      <section id="sidebar">
+      <section id="sidebar" class="grid_3">
         <%= render partial: "tags/list" %>
         <%= render partial: 'tag_sets/list' %>
+        <%= render 'layouts/footer' %>
       </section><%# sidebar end %>
+      <section id="content" class="grid_9">
+        <%= yield %>
+      </section><%# content end %>
     </div><%# container end %>
 
-    <%= render 'layouts/footer' %>
   </body>
   <%= render 'layouts/analytics' %>
 </html>

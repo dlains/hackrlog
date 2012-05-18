@@ -1,5 +1,5 @@
 <% content_for :main_navigation do %>
-  <nav id="main_nav" role="navigation">
+  <nav id="main_nav" role="navigation" class="grid_4 omega">
     <ul>
       <%= nav_tab 'Home',    entries_path,                   current: current_tab %>
       <%= nav_tab 'Profile', edit_hacker_path(current_user), current: current_tab %>

@@ -1,5 +1,12 @@
 @import "constants";
 
+body
+{
+  background-image: url('12_col.gif');
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
 header#page_header
 {
   background-color: $text-color;
@@ -7,7 +14,6 @@ header#page_header
   height: 60px;
   margin-bottom: 10px;
   overflow: hidden;
-  padding: 10px 20px;
   
   a,
   a:link,
@@ -19,55 +25,39 @@ header#page_header
     text-decoration: none;
   }
   
-  div#search
-  {
-    display: inline;
-    
-    form
-    {
-      display: inline;
-    }
-  }
-  
   nav
   {
-    float: right;
-    
-    li
+    margin: 0;
+    padding: 0;
+
+    ul
     {
-      display: inline;
+      margin: 0;
+      padding: 0;
+
+      li
+      {
+	    display: inline;
+      }
     }
   }
-}
-
-section#content
-{
-  float: left;
-}
-
-section#sidebar
-{
-  float: right;
-  margin-right: -20px;
-  width: 300px;
 }
 
 footer#page_footer
 {
-  background-color: $bg-color;
   color: $text-color;
   font-size: 0.8em;
   
   ul
   {
-    margin-left: -10px;
-    padding: 0;
-    
+    margin: 0;
+	padding: 0;
+	
     li
     {
       border-right: 1px solid $border-color;
       display: inline;
-      margin: 0;
+      padding-right: 2px;
       &:last-child
       {
         border-right: none;
