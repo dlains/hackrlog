@@ -1,3 +1,27 @@
 // Place all the styles related to the Entries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+section#content div#entry_form
+{
+  margin-bottom: 20px;
+}
+
+section#content div#entries article,
+section#content div#combine_results article
+{
+  margin-bottom: 10px;
+  
+  .meta ul
+  {
+    margin: 0;
+    padding: 0;
+      
+    li
+    {
+      list-style: none;
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+}

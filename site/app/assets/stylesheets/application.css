@@ -14,6 +14,8 @@
  *= require sidebar
  *= require forms
  *= require 960
+ *= require entries
+ *= require tags
  *= require_self
 */
 
