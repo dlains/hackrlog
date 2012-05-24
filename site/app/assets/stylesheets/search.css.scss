@@ -1,3 +1,23 @@
-// Place all the styles related to the Search controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#search
+{
+	width: 200px;
+	background: #f6f4ed url('magnify.png') no-repeat;
+	color: #86856f;
+	padding: 3px 4px 3px 28px;
+	margin-top: 18px;
+	border: solid 1px #bebdaa;
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	-webkit-transition: .7s;
+	-moz-transition: .7s;
+	-o-transition: .7s;
+	transition: .7s;
+}
+
+#search:focus
+{
+	color: #333;
+	width: 230px;
+	background-color: #fff;
+}

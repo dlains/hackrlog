@@ -16,6 +16,7 @@
  *= require 960
  *= require entries
  *= require tags
+ *= require search
  *= require_self
 */
 

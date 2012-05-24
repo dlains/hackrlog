@@ -2,17 +2,26 @@
 
 body
 {
-  background-image: url('12_col.gif');
-  background-repeat: repeat-y;
-  background-position: center;
+  background-image: url('12_col.gif'), url('background-pattern.png');
+  background-position: center, top left;
+  background-repeat: repeat-y, repeat;
+/*  background-position: center; */
+  
+  font-family: serif;
+  
+  .container
+  {
+/*    background-color: $bg-color; */
+    padding-top: 10px;
+  }
 }
 
 header#page_header
 {
-  background-color: $text-color;
+  background-image: url('header-pattern.png');
+  background-repeat: repeat;
   color: $text-color;
   height: 60px;
-  margin-bottom: 10px;
   overflow: hidden;
   
   a,
@@ -32,12 +41,43 @@ header#page_header
 
     ul
     {
-      margin: 0;
+      margin: 14px 0 0 0;
       padding: 0;
-
+      list-style: none;
+      float: right;
+      
       li
       {
-	    display: inline;
+	      display: inline;
+	      
+	      a
+	      {
+          font-family: Helvetica Arial sans-serif;
+	        line-height: 35px;
+	        text-transform: uppercase;
+	        padding: 5px 10px;
+	        border-radius: 3px;
+          -webkit-transition: background-color .1s linear, color .1s linear;
+      	  -moz-transition: background-color .1s linear, color .1s linear;
+  	      -o-transition: background-color .1s linear, color .1s linear;
+    	    -ms-transition: background-color .1s linear, color .1s linear;
+	        transition: background-color .1s linear, color .1s linear;
+	      }
+      }
+      
+      a:hover
+      {
+        background: #3b3b3b;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 1px 1px rgba(0, 0, 0, 0.3);
+      }
+      
+      li.active
+      {
+        a
+        {
+          background: #5b5b5b;
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
       }
     }
   }
@@ -51,7 +91,7 @@ footer#page_footer
   ul
   {
     margin: 0;
-	padding: 0;
+	  padding: 0;
 	
     li
     {

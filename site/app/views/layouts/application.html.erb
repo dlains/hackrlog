@@ -13,13 +13,13 @@
   <body class="container_12">
     <%= render 'layouts/header' %>
 
-    <div class="container">
-      <section id="sidebar" class="grid_3">
+    <div class="container grid_12">
+      <section id="sidebar" class="grid_3 alpha">
         <%= render partial: "tags/list" %>
         <%= render partial: 'tag_sets/list' %>
         <%= render 'layouts/footer' %>
       </section><%# sidebar end %>
-      <section id="content" class="grid_9">
+      <section id="content" class="grid_9 omega">
         <%= yield %>
       </section><%# content end %>
     </div><%# container end %>
