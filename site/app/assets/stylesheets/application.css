@@ -10,6 +10,7 @@
  *
  *= require normalize
  *= require pygments
+ *= require fonts
  *= require layout
  *= require sidebar
  *= require forms

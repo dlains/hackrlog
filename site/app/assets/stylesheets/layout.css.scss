@@ -2,22 +2,22 @@
 
 body
 {
-  background-image: url('12_col.gif'), url('background-pattern.png');
-  background-position: center, top left;
-  background-repeat: repeat-y, repeat;
+  background-image: url('background-pattern.png');
+  background-repeat: repeat;
 /*  background-position: center; */
-  
-  font-family: serif;
+
+  font: 16px/18px 'DejaVuSerifBook', Times, 'Times New Roman', serif;
   
   .container
   {
-/*    background-color: $bg-color; */
+    background-color: $bg-color;
     padding-top: 10px;
   }
 }
 
 header#page_header
 {
+  font: 18px/27px 'AnonymousProRegular', Arial, sans-serif;
   background-image: url('header-pattern.png');
   background-repeat: repeat;
   color: $text-color;
@@ -52,9 +52,7 @@ header#page_header
 	      
 	      a
 	      {
-          font-family: Helvetica Arial sans-serif;
 	        line-height: 35px;
-	        text-transform: uppercase;
 	        padding: 5px 10px;
 	        border-radius: 3px;
           -webkit-transition: background-color .1s linear, color .1s linear;

@@ -1,7 +1,44 @@
-$tag-text-color: #fff;
-$tag-background-color: #b7b7b7;
-$tag-border-color: #777;
+/* Styles for the tag_manager in the sidebar. */
+div#tag_manager
+{
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #aaa;
+  
+  h3
+  {
+    margin: 0 0 5px 0;
+    padding: 0;
+  }
 
+  table
+  {
+    width: 100%;
+    
+    tr:nth-child(2n-1)
+    {
+      background-color: #eee;
+    }
+    
+    td a
+    {
+      text-decoration: none;
+    }
+  }
+  
+  input[type=text]
+  {
+    margin-top: 10px;
+    width: 92%;
+  }
+  
+  input[type=submit]
+  {
+    margin-top: 5px;
+  }
+}
+
+/* Styles for tag_list's anywhere in the application. */
 ul.tag_list
 {
   margin: 0;

@@ -2,22 +2,4 @@
 
 section#sidebar
 {
-  background-color: $sidebar-bg-color;
-  color: $sidebar-text-color;
-  font-size: 0.8em;
-  font-weight: normal;
-  line-height: 1.3em;
-  a,
-  a:link,
-  a:visited
-  {
-    color: $sidebar-text-color;
-    text-decoration: underline;
-  }
-  
-  a:hover,
-  a:active
-  {
-    color: $sidebar-link-color;
-  }
 }

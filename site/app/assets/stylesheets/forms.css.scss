@@ -1,38 +1,45 @@
 @import "constants";
 
-fieldset {
+fieldset
+{
   border: none;
   margin: 0;
   padding: 0;
 }
 
-fieldset ol {
+fieldset ol
+{
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-fieldset label {
+fieldset label
+{
   display: block;
 }
 
-fieldset li {
+fieldset li
+{
   margin-bottom: 10px;
 }
 
 fieldset.inline label,
-fieldset li.inline label {
+fieldset li.inline label
+{
   display: inline;
 }
 
-fieldset li.required label {
+fieldset li.required label
+{
   font-weight: bold;
 }
 
 fieldset li input[type=text],
 fieldset li input[type=password],
 fieldset li input[type=email],
-fieldset li textarea {
+fieldset li textarea
+{
   width: 98%;
   padding: 5px;
   background: #fff;
@@ -40,8 +47,10 @@ fieldset li textarea {
 }
 
 input[type=submit],
-input[type=reset] {
-  background-color: #2e2e2e;
+input[type=reset]
+{
+  font: 14px/18px 'AnonymousProRegular', Arial, sans-serif;
+  background-color: $header-fill-color;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -49,8 +58,16 @@ input[type=reset] {
   margin-right: 10px;
 }
 
-fieldset div.field_with_errors {
-  label {
+input[type=submit]:hover,
+input[type=reset]:hover
+{
+  background-color: $background-fill-color;
+}
+
+fieldset div.field_with_errors
+{
+  label
+  {
     color: $field-error-color;
   }
 }
