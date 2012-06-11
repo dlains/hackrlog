@@ -1,14 +1,21 @@
+@import "constants";
+
 /* Styles for the tag_manager in the sidebar. */
 div#tag_manager
 {
+  background-image: url('sidebar-pattern.png');
+  background-repeat: repeat;
   margin-left: 10px;
   padding: 5px;
   border: 1px solid #aaa;
+  border-radius: 4px;
   
   h3
   {
+    font-family: 'AnonymousProRegular', Arial, sans-serif;
+    border-bottom: 2px dotted $text-color;
     margin: 0 0 5px 0;
-    padding: 0;
+    padding: 0 0 5px 0;
   }
 
   table
@@ -17,7 +24,7 @@ div#tag_manager
     
     tr:nth-child(2n-1)
     {
-      background-color: #eee;
+      background-color: #ddd;
     }
     
     td a

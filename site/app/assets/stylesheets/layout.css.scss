@@ -7,6 +7,7 @@ body
 /*  background-position: center; */
 
   font: 16px/18px 'DejaVuSerifBook', Times, 'Times New Roman', serif;
+  color: $text-color;
   
   .container
   {
@@ -83,8 +84,14 @@ header#page_header
 
 footer#page_footer
 {
+  background-image: url('sidebar-pattern.png');
+  background-repeat: repeat;
   color: $text-color;
   font-size: 0.8em;
+  margin: 10px 0 0 10px;
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
   
   ul
   {
@@ -93,13 +100,8 @@ footer#page_footer
 	
     li
     {
-      border-right: 1px solid $border-color;
       display: inline;
-      padding-right: 2px;
-      &:last-child
-      {
-        border-right: none;
-      }
+      padding-right: 3px;
     }
   }
 }
