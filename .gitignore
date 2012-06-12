@@ -3,3 +3,4 @@ site/.bundle
 site/db/*.sqlite3
 site/log/*.log
 site/tmp/**/*
+.vagrant
