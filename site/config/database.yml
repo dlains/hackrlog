@@ -4,8 +4,8 @@ development:
   encoding: utf8
   database: hackrlog
   pool: 5
-  username: hackrapps
-  password: h4ckr4pps43v4h
+  username: hackrlog
+  password: h4ckrl0g43v3r
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -16,8 +16,8 @@ test:
   encoding: utf8
   database: hackrlog_test
   pool: 5
-  username: hackrapps
-  password: h4ckr4pps43v4h
+  username: hackrlog
+  password: h4ckrl0g43v3r
   socket: /tmp/mysql.sock
 
 production:
@@ -25,6 +25,6 @@ production:
   encoding: utf8
   database: hackrlog
   pool: 5
-  username: hackrapps
-  password: h4ckr4pps43v4h
+  username: hackrlog
+  password: h4ckrl0g43v3r
   socket: /var/run/mysqld/mysqld.sock

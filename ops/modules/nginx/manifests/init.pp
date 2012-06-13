@@ -28,8 +28,8 @@ class nginx
   service
   {
     "nginx":
-    ensure => true,
-    enable => true,
+    ensure    => true,
+    enable    => true,
     subscribe => File["/etc/nginx/nginx.conf", "/etc/nginx/conf.d/hackrlog.conf"];
   }
 }
