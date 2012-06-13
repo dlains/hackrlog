@@ -4,7 +4,9 @@ class hackrlog
   {
     ["/var/hackrlog/",
      "/var/hackrlog/shared/",
-     "/var/hackrlog/shared/config/"]:
+     "/var/hackrlog/shared/config/",
+     "/var/hackrlog/shared/log/",
+     "/var/hackrlog/shared/pids/"]:
     ensure => directory,
     owner  => vagrant,
     group  => vagrant,
