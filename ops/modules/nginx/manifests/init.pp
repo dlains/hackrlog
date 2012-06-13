@@ -4,7 +4,7 @@ class nginx
   {
     "nginx": 
     ensure => present,
-    before => File["/etc/nginx/nginx.conf", "/etc/nginx/conf.d/hackrlog.conf"];
+    before => [File["/etc/nginx/nginx.conf"], File["/etc/nginx/conf.d/hackrlog.conf"]];
   }
 
   file
@@ -30,6 +30,6 @@ class nginx
     "nginx":
     ensure    => true,
     enable    => true,
-    subscribe => File["/etc/nginx/nginx.conf", "/etc/nginx/conf.d/hackrlog.conf"];
+    subscribe => [File["/etc/nginx/nginx.conf"], File["/etc/nginx/conf.d/hackrlog.conf"]];
   }
 }

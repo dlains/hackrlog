@@ -4,4 +4,5 @@ Exec
 }
 
 include nginx
+include hackrlog
 include mysql

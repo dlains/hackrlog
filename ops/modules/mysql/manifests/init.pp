@@ -26,12 +26,12 @@ class mysql
   exec
   {
     "mysql_password":
-      unless  => "mysqladmin -u root -p esc4pehe11 status",
-      command => "mysqladmin -u root password esc4pehe11",
+      unless  => "mysqladmin -uroot -pesc4pehe11 status",
+      command => "mysqladmin -uroot password esc4pehe11",
       require => Service["mysql"];
     "hackrlog_db":
-      unless  => "mysql -u hackrlog -p h4ckrl0g43v3r hackrlog",
-      command => "mysql -u hackrlog -p h4ckrl0g43v3r < /etc/puppet/modules/mysql/files/create.sql",
+      unless  => "mysql -uhackrlog -ph4ckrl0g43v3r hackrlog",
+      command => "mysql -uroot -pesc4pehe11 < /etc/puppet/modules/mysql/files/hackrlog_create.sql",
       require => Exec["mysql_password"]
   }
 }
