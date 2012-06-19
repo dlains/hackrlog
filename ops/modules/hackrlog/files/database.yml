@@ -1,9 +1,0 @@
-# MySQL version 5.1
-production:
-  adapter: mysql
-  encoding: utf8
-  database: hackrlog
-  pool: 5
-  username: hackrlog
-  password: h4ckrl0g43v3r
-  socket: /var/run/mysqld/mysqld.sock
