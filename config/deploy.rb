@@ -8,8 +8,6 @@ set :port, 14400
 set :deploy_to, "/home/dave/public_html/#{application}"
 set :user, "dave"
 set :use_sudo, false
-set :deploy_via, :copy
-set :copy_strategy, :export
 set :keep_releases, 3
 
 role :web, application
