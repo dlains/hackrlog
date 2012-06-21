@@ -21,7 +21,7 @@ worker_processes 2
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-working_directory "/var/hackrlog/current"
+working_directory "/home/dave/public_html/hackrlog/current"
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
@@ -32,13 +32,13 @@ listen 8080, :tcp_nopush => true
 timeout 30
 
 # feel free to point this anywhere accessible on the filesystem
-pid "/var/hackrlog/shared/pids/unicorn.pid"
+pid "/home/dave/public_html/hackrlog/shared/pids/unicorn.pid"
 
 # By default, the Unicorn logger will write to stderr.
 # Additionally, ome applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path "/var/hackrlog/shared/log/unicorn.stderr.log"
-stdout_path "/var/hackrlog/shared/log/unicorn.stdout.log"
+stderr_path "/home/dave/public_html/hackrlog/shared/log/unicorn.stderr.log"
+stdout_path "/home/dave/public_html/hackrlog/shared/log/unicorn.stdout.log"
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
