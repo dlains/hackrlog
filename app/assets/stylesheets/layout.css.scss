@@ -105,3 +105,22 @@ footer#page_footer
     }
   }
 }
+
+footer#home_footer
+{
+  background-color: $bg-color;
+  color: $text-color;
+  font-size: 0.8em;
+  
+  ul
+  {
+    margin: 0;
+    padding: 0;
+    
+    li
+    {
+      display: inline;
+      padding-right: 3px;
+    }
+  }
+}
