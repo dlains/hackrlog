@@ -1,6 +1,5 @@
 class Hacker < ActiveRecord::Base
-  has_many :entries
-  has_many :tags
+  has_many :entries, :inverse_of => :hacker
   has_many :tag_sets
 
   attr_accessible :email, :name, :time_zone, :password, :password_confirmation

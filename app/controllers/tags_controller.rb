@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = current_user.tags
+    @tags = Tag.current_hacker_tags(current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,11 +16,10 @@ class TagsController < ApplicationController
     tag_ids = []
     tag_ids << params[:id]
     begin
-      @tags = Tag.where('id = ? and hacker_id = ?', params[:id], session[:hacker_id])
-      @entries = Entry.entries_for_tags(session[:hacker_id], tag_ids)
+      @tags = Tag.current_hacker_tags(current_user.id)
+      @entries = Entry.entries_for_tags(current_user.id, tag_ids)
     rescue
-      logger.info "Exception caught: #{$!}."
-      logger.error "Hacker id #{session[:hacker_id]} attempted to access a tag belonging to another user: #{params[:id]}."
+      logger.error "Exception caught: #{$!}."
       redirect_to(entries_url)
     else
       respond_to do |format|
@@ -32,8 +31,8 @@ class TagsController < ApplicationController
 
   # GET /tags/combine
   def combine
-    @tags = Tag.find_all_by_id_and_hacker_id(params[:tag_ids], session[:hacker_id])
-    @entries = Entry.entries_for_tags(session[:hacker_id], params[:tag_ids])
+    @tags = Tag.current_hacker_tags(current_user.id)
+    @entries = Entry.entries_for_tags(current_user.id, params[:tag_ids])
     
     respond_to do |format|
       format.js
@@ -60,7 +59,6 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(params[:tag])
-    @tag.hacker_id = session[:hacker_id]
 
     respond_to do |format|
       if @tag.save
@@ -74,11 +72,12 @@ class TagsController < ApplicationController
     end
   end
 
+  # TODO: The update action is probably not needed. Once a tag is created it should be static.
   # PUT /tags/1
   # PUT /tags/1.json
   def update
     begin
-      @tag = current_user.tags.find(params[:id])
+      @tag = current_user.entries.tags.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to update a tag belonging to another user: #{params[:id]}."
       redirect_to(tags_url)
@@ -95,11 +94,12 @@ class TagsController < ApplicationController
     end
   end
 
+  # TODO: Tags as an app wide resource should never be deleted.
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
     begin
-      @tag = current_user.tags.find(params[:id])
+      @tag = current_user.entries.tags.find(params[:id])
     rescue
       logger.error "Hacker id #{session[:hacker_id]} attempted to delete a tag belonging to another user: #{params[:id]}."
       redirect_to(tags_url)

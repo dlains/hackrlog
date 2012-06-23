@@ -20,7 +20,7 @@ module EntriesHelper
   
   def tag_values(entry)
     if !entry.tags.empty?
-      entry.tags.join(", ")
+      entry.tags.join(" ")
     elsif session.key?(:current_tags)
       session[:current_tags]
     end

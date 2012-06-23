@@ -1,12 +1,11 @@
 class Entry < ActiveRecord::Base
-  belongs_to :hacker
+  belongs_to :hacker, :inverse_of => :entries
   has_and_belongs_to_many :tags
   attr_accessible :content, :hacker_id, :tag_ids
   validates :content, presence: true
   validates :hacker_id, numericality: { greater_than_or_equal_to: 1 }
   
   class << self
-    
     # The SQL query works as follows: The sub query selects all entries_tags records that have a tag_id
     # from one of the requested tags. What we want is only the entries that have ALL of the selected tags
     # so the sub query groups by the entry_id and the tag_ids are counted. The outter query then selects
@@ -18,9 +17,9 @@ class Entry < ActiveRecord::Base
         (
           SELECT id, count(tag_id) AS count
           FROM entries AS e LEFT JOIN entries_tags AS j ON e.id = j.entry_id
-          WHERE e.hacker_id = " + hacker_id.to_s + " AND j.tag_id IN (" + tags.join(',') + ")
+          WHERE e.hacker_id = #{hacker_id} AND j.tag_id IN (#{tags.join(',')})
           GROUP BY id
-        ) AS sub WHERE sub.count = " + tags.count.to_s + ";"
+        ) AS sub WHERE sub.count = #{tags.count};"
       )
       
       ids.collect! {|e| e.id}

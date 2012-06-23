@@ -1,15 +1,11 @@
 module TagsHelper
 
+  # TODO: Remove!
   def add_tag_mini_form
     @new_tag = Tag.new
     render :partial => 'tags/form'
   end
 
-  # Get the collection of tags for the logged in hacker.
-  def hackers_tags
-    tags = Tag.find_all_by_hacker_id(session[:hacker_id], order: 'name')
-  end
-  
   # Should the tag check box be checked?
   def checked?(tag)
     if params.has_key?(:id)

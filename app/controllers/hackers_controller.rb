@@ -129,13 +129,6 @@ class HackersController < ApplicationController
   end
   
   def create_initial_user_data(hacker)
-    # Create the initial Tag records.
-    hacker.tags.build(:name => 'Reminder')
-    hacker.tags.build(:name => 'Todo')
-    hacker.tags.build(:name => 'Fix')
-    hacker.tags.build(:name => 'Hack')
-    hacker.save
-    
     # Text for the first log entry.
     # TODO: Update this before going live.
     # TODO: Include pointers to markdown help.
@@ -144,7 +137,7 @@ class HackersController < ApplicationController
     # Create the first entry now that the tags have been created.
     hacker.entries.build({
       :content => content,
-      :tag_ids => [Tag.find_by_name_and_hacker_id("Todo", hacker.id).id]
+      :tag_ids => [Tag.find_by_name("todo").id]
     })
     hacker.save
   end

@@ -6,7 +6,6 @@
     <tr>
       <td class="tag"><a href="/tags/<%= tag.id %>"><%= tag.name %></a></td>
       <td><%= tag.count %></td>
-      <td class="action"><%= link_to 'X', tag, remote: true, confirm: 'Are you sure you wish to delete this Tag?', method: :delete, title: "Delete Tag: #{tag.name}" %></td>
     </tr>
     <% end %>
   </table>

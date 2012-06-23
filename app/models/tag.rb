@@ -1,21 +1,31 @@
 class Tag < ActiveRecord::Base
-  belongs_to :hacker
   has_and_belongs_to_many :entries
   
-  attr_accessible :hacker_id, :name
+  attr_accessible :name
   validates :name, presence: true
-  validates :hacker_id, numericality: { greater_than_or_equal_to: 1 }
 
   def to_s
     name
   end
   
   class << self
-    def tag_usage(id)
-      find_by_sql("SELECT id, name, count(e.entry_id) AS count
-        FROM tags AS t LEFT OUTER JOIN entries_tags AS e ON e.tag_id = t.id
-        WHERE t.hacker_id = " + id.to_s + 
-        " GROUP BY t.name
+    
+    # Get a list of all tags used by the logged in hacker.
+    def current_hacker_tags(hacker)
+      find_by_sql("SELECT DISTINCT t.* FROM tags AS t
+        JOIN entries_tags AS et ON et.tag_id = t.id
+        JOIN entries AS e ON e.id = et.entry_id
+        WHERE e.hacker_id = #{hacker}
+        ORDER BY t.name;")
+    end
+    
+    def tag_usage(hacker)
+      find_by_sql("SELECT t.id, t.name, count(et.entry_id) AS count
+        FROM tags AS t 
+        LEFT OUTER JOIN entries_tags AS et ON et.tag_id = t.id
+        LEFT OUTER JOIN entries AS e ON et.entry_id = e.id
+        WHERE e.hacker_id = #{hacker}
+        GROUP BY t.name
         ORDER BY count DESC, name ASC;")
     end
   end

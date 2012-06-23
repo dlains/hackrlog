@@ -120,16 +120,15 @@ class EntriesController < ApplicationController
   def process_tags
     return unless params.has_key?(:tags)
     ids = []
-    tag_names = params[:tags].split(",").collect! { |name| name.strip }
+    tag_names = params[:tags].split(" ").collect! { |name| name.strip.downcase }
 
     tag_names.each do |name|
-      tag = Tag.find_by_name_and_hacker_id(name, session[:hacker_id])
+      tag = Tag.find_by_name(name)
       if tag != nil
         ids << tag.id
       else
         new_tag = Tag.new
         new_tag.name = name
-        new_tag.hacker_id = session[:hacker_id]
         new_tag.save!
         ids << new_tag.id
       end
