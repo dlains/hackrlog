@@ -1,35 +1,38 @@
+default_reminder:
+  name: reminder
+
+default_todo:
+  name: todo
+
+default_fix:
+  name: fix
+
+default_hack:
+  name: hack
+
 dave_mysql:
-  name: MySQL
-  hacker: dave
+  name: mysql
 
 dave_ruby:
-  name: Ruby
-  hacker: dave
+  name: ruby
 
 dave_rails:
-  name: Rails
-  hacker: dave
+  name: rails
 
 joe_mysql:
-  name: MySQL
-  hacker: joe
+  name: mysql
 
 joe_ruby:
-  name: Ruby
-  hacker: joe
+  name: ruby
 
 joe_java:
-  name: Java
-  hacker: joe
+  name: java
 
 tim_textile:
-  name: Textile
-  hacker: tim
+  name: textile
 
 tim_textmate:
-  name: Textmate
-  hacker: tim
+  name: textmate
 
 mike_markdown:
-  name: Markdown
-  hacker: mike
+  name: markdown

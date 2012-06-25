@@ -64,5 +64,5 @@
 <fieldset>
   <legend>Cancel Account</legend>
   <p>Export your data if you want to use it outside of this application.</p>
-  <%= button_to 'Cancel', {action: "cancel", id: @hacker.id}, confirm: 'Are you sure?', method: :post %>
+  <%= button_to 'Cancel', {action: "cancel", id: @hacker.id}, data: { confirm: 'Are you sure?' }, method: :post %>
 </fieldset>

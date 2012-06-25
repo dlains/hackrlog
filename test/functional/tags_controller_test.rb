@@ -18,7 +18,7 @@ class TagsControllerTest < ActionController::TestCase
 
   test "should create tag" do
     assert_difference('Tag.count') do
-      post :create, tag: { hacker_id: @tag.hacker_id, name: @tag.name }
+      post :create, tag: { name: @tag.name }
     end
 
     assert_redirected_to tag_path(assigns(:tag))
@@ -36,18 +36,19 @@ class TagsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update tag" do
+  test "should not update tag" do
     login_as(:dave)
-    put :update, id: @tag, tag: { hacker_id: @tag.hacker_id, name: @tag.name }
-    assert_redirected_to tag_path(assigns(:tag))
+    put :update, id: @tag, tag: { name: "new_name" }
+    assert_equal "mysql", @tag.name
+    assert_redirected_to tags_url
   end
 
-  test "should destroy tag" do
+  test "should not destroy tag" do
     login_as(:dave)
-    assert_difference('Tag.count', -1) do
+    assert_difference('Tag.count', 0) do
       delete :destroy, id: @tag
     end
 
-    assert_redirected_to tags_path
+    assert_redirected_to tags_url
   end
 end

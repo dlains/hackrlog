@@ -3,7 +3,7 @@
     <ul>
       <li><time datetime="<%= entry.updated_at %>"><%= get_datetime_for_entry(entry) %></time></li>
       <li><%= link_to 'Edit', edit_entry_path(entry), :remote => true %></li>
-      <li><%= link_to 'Delete', entry, confirm: 'Are you sure?', method: :delete %></li>
+      <li><%= link_to 'Delete', entry, data: { confirm: 'Are you sure?' }, method: :delete %></li>
     </ul>
   </div><%# meta end %>
   <div class="entry_content">

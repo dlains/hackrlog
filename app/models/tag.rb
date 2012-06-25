@@ -3,7 +3,7 @@ class Tag < ActiveRecord::Base
   
   attr_accessible :name
   validates :name, presence: true
-
+  validates :name, format: { with: /\A[^\s]*\z/ }
   def to_s
     name
   end

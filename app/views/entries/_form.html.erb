@@ -8,7 +8,7 @@
       </li>
       <li>
         <%= label_tag :tags, "Tags" %>
-        <%= text_field_tag :tags, tag_values(@entry), placeholder: 'Tags, comma separated.', accesskey: 'T', tabindex: 2 %>
+        <%= text_field_tag :tags, tag_values(@entry), placeholder: 'Tags, space separated.', accesskey: 'T', tabindex: 2 %>
         <%= form_field_error(@entry, :tags) %>
       </li>
     </ol>

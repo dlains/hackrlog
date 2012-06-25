@@ -72,57 +72,16 @@ class TagsController < ApplicationController
     end
   end
 
-  # TODO: The update action is probably not needed. Once a tag is created it should be static.
   # PUT /tags/1
   # PUT /tags/1.json
   def update
-    begin
-      @tag = current_user.entries.tags.find(params[:id])
-    rescue
-      logger.error "Hacker id #{session[:hacker_id]} attempted to update a tag belonging to another user: #{params[:id]}."
-      redirect_to(tags_url)
-    else
-      respond_to do |format|
-        if @tag.update_attributes(params[:tag])
-          format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-          format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @tag.errors, status: :unprocessable_entity }
-        end
-      end
-    end
+    redirect_to tags_url
   end
 
-  # TODO: Tags as an app wide resource should never be deleted.
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    begin
-      @tag = current_user.entries.tags.find(params[:id])
-    rescue
-      logger.error "Hacker id #{session[:hacker_id]} attempted to delete a tag belonging to another user: #{params[:id]}."
-      redirect_to(tags_url)
-    else
-      @tag.destroy
-
-      respond_to do |format|
-        format.html { redirect_to tags_url }
-        format.js
-        format.json { head :no_content }
-      end
-    end
-  end
-
-  # In place edit for Tag Manager.
-  def set_tag_name
-    if request.method != 'POST' then
-      logger.warn "Attempt to in place edit with method other than POST."
-      return render(:text => 'Method not allowed', :status => 405)
-    end
-    @tag = Tag.find(params[:id])
-    @tag.update_attribute('name', params[:value])
-    render :text => CGI::escapeHTML(@tag.send('name').to_s)
+    redirect_to tags_url
   end
   
 end
