@@ -1,2 +1,2 @@
 $('div#entries').append($('<%= escape_javascript(render partial: "entry", collection: @entries) %>'));
-$('div#entries').attr('data-last', '<%= @count %>');
+$('div#entries').attr('data-last', '<%= (@entries.count > 0) ? @count : "complete" %>');

@@ -5,5 +5,5 @@
 
 <div id="entries" data-last="<%= @count %>">
   <%= render partial: 'entry', collection: @entries %>
-  <div id="loading"></div>
 </div><%# entries end %>
+<div id="loading"><%= image_tag 'spinner.gif', alt: 'Loading...' %></div>

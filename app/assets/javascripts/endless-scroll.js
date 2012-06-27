@@ -13,16 +13,17 @@ function lowEnough() {
 
 function checkScroll() {
   if(!lowEnough()) return pollScroll();
-  // $('loading').show();
+  $('div#loading').show();
   $.ajax({
     url: '/entries',
     data: { last: $('div#entries').attr('data-last')},
     dataType: 'script',
-    complete: function() { $('loading').hide(); },
+    complete: function() { $('div#loading').hide(); },
     success: pollScroll
   });
 }
 
 function pollScroll() {
-  setTimeout(checkScroll, 100);
+  if($('div#entries').attr('data-last') != 'complete')
+    setTimeout(checkScroll, 100);
 }

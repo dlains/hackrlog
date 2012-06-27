@@ -7,6 +7,20 @@ section#content div#entry_form
   margin-bottom: 20px;
 }
 
+section#content div#loading
+{
+  display: none;
+  width: 100%;
+  height: 100%;
+  
+  img
+  {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 section#content div#entries article,
 section#content div#combine_results article
 {
