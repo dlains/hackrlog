@@ -5,15 +5,13 @@ class EntriesController < ApplicationController
     @entry = Entry.new
 
     # Get the logged in Hacker's entries
-    hacker = Hacker.find(session[:hacker_id])
-    @entries = Entry.where('hacker_id = ?', session[:hacker_id]).order('created_at DESC')
-    
-    # TODO OLD VERSION. REPLACE paginate with infinite scroll.
-    #@entries = Entry.paginate_by_sql ['select * from entries as e where e.hacker_id = ? order by created_at desc', session[:hacker_id]],
-    #  :page => params[:page], :per_page => hacker.setting.entries_per_page
+    offset = (params[:last].blank?) ? 0 : params[:last].to_i
+    @count = offset + 20
+    @entries = Entry.where('hacker_id = ?', current_user.id).order('created_at DESC').limit(20).offset(offset)
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.json { render json: @entries }
     end
   end

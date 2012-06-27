@@ -12,7 +12,6 @@
  *= require pygments
  *= require fonts
  *= require layout
- *= require sidebar
  *= require forms
  *= require 960
  *= require entries

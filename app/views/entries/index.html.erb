@@ -1,8 +1,9 @@
 <%= currently_at 'Home' %>
 <div id="entry_form">
-  <%= render partial: 'form', locals: {:remote => true} %>
-</div> <!-- entry_form end -->
+  <%= render partial: 'form', locals: {remote: true} %>
+</div><%# entry_form end %>
 
-<div id="entries">
-  <%= render :partial => 'entry', :collection => @entries %>
-</div>
+<div id="entries" data-last="<%= @count %>">
+  <%= render partial: 'entry', collection: @entries %>
+  <div id="loading"></div>
+</div><%# entries end %>

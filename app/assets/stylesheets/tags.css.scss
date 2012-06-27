@@ -7,8 +7,10 @@ div#tag_manager
   background-repeat: repeat;
   margin-left: 10px;
   padding: 5px;
-  border: 1px solid #aaa;
+  border: 2px solid #aaa;
   border-radius: 4px;
+  max-height: 600px;
+  overflow: auto;
   
   h3
   {
