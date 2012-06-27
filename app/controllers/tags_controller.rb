@@ -16,8 +16,9 @@ class TagsController < ApplicationController
     tag_ids = []
     tag_ids << params[:id]
     begin
-      @tags = Tag.current_hacker_tags(current_user.id)
+      @selected_tags = Tag.where('id = ?', params[:id])
       @entries = Entry.entries_for_tags(current_user.id, tag_ids)
+      @tags = Tag.tags_used_by(@entries)
     rescue
       logger.error "Exception caught: #{$!}."
       redirect_to(entries_url)
@@ -31,8 +32,9 @@ class TagsController < ApplicationController
 
   # GET /tags/combine
   def combine
-    @tags = Tag.current_hacker_tags(current_user.id)
+    @selected_tags = Tag.find_all_by_id(params[:tag_ids])
     @entries = Entry.entries_for_tags(current_user.id, params[:tag_ids])
+    @tags = Tag.tags_used_by(@entries)
     
     respond_to do |format|
       format.js

@@ -19,6 +19,19 @@ class Tag < ActiveRecord::Base
         ORDER BY t.name;")
     end
     
+    # Get a list of all tags used by the given entries.
+    def tags_used_by(entries)
+      ids = []
+      unless entries.blank?
+        entries.each {|entry| ids << entry.id}
+        find_by_sql("SELECT DISTINCT t.* FROM tags AS t
+          JOIN entries_tags AS et ON et.tag_id = t.id
+          WHERE et.entry_id IN (#{ids.join(',')})
+          ORDER BY t.name;")
+      end
+    end
+
+    # Get a list tags and a count of their usage for the tag manager.
     def tag_usage(hacker)
       find_by_sql("SELECT t.id, t.name, count(et.entry_id) AS count
         FROM tags AS t 

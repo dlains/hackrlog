@@ -1,8 +1,8 @@
 <div id="combine_results">
 <p>
-  <strong>Tag(s):</strong>
-  <%= h @tags.join(", ") %><br/>
-  <strong>Count:</strong> <%= @entries.count %>
+  <strong>Filtered on:</strong>
+  <%= h @selected_tags.join(", ") %><br/>
+  <strong>Found:</strong> <%= @entries.count %>
 </p>
 
 <%= render partial: 'entries/entry', collection: @entries %>
