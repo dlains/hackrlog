@@ -1,15 +1,4 @@
 <%= currently_at 'Home' %>
 <h2>Filter on Tags</h2>
-<%= form_tag('combine', remote: true) do %>
-<p>
-  <% for tag in @tags %>
-  <span class="combine_tag">
-    <%= tags_check_box_tag 'tag_ids[]', "tag_id_#{tag.id}", tag.id, checked?(tag), class: 'combine_checkbox' %>
-    <%= label_tag "tag_id_#{tag.id}", tag.name %>
-  </span>
-  <% end %>
-  <br/><br/><%= submit_tag 'Update' %>
-</p>
-<% end %>
-
+<%= render partial: 'form' %>
 <%= render partial: 'results' %>

@@ -1,7 +1,13 @@
-<%= form_for(@new_tag, remote: true) do |f| %>
-  <fieldset>
-    <ol>
-      <li><%= f.text_field :name, size: 20, accesskey: 'A', placeholder: 'New tag.' %><%= submit_tag 'Create' %></li>
-    </ol>
-  </fieldset>
-<% end %>
+<div id="combine-form">
+  <%= form_tag('combine', remote: true) do %>
+  <p>
+    <% for tag in @tags %>
+    <span class="combine_tag">
+      <%= tags_check_box_tag 'tag_ids[]', "tag_id_#{tag.id}", tag.id, checked?(tag), class: 'combine_checkbox' %>
+      <%= label_tag "tag_id_#{tag.id}", tag.name %>
+    </span>
+    <% end %>
+    <br/><br/><%= submit_tag 'Update' %>
+  </p>
+  <% end %>
+</div>
