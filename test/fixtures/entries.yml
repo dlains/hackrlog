@@ -3,12 +3,14 @@ dave_first_entry:
   content:
     This is my first entry in this new development diary thing called HackrLog. I hope I do well and
     continue to use this and become better at being a developer.
+  tags: dave_mysql, dave_ruby
 
 dave_second_entry:
   hacker: dave
   content:
     I was wondering what I could do with this new web application. I think I can store information about
     what I am working on so I can find it again at a later time.
+  tags: dave_mysql, dave_ruby
 
 mike_markdown_table:
   hacker: mike

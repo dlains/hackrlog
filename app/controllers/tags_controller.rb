@@ -44,46 +44,30 @@ class TagsController < ApplicationController
   # GET /tags/new
   # GET /tags/new.json
   def new
-    @new_tag = Tag.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @tag }
-    end
+    redirect_to entries_url
   end
 
   # GET /tags/1/edit
   def edit
-    @new_tag = Tag.find(params[:id])
+    redirect_to entries_url
   end
 
   # POST /tags
   # POST /tags.json
   def create
-    @tag = Tag.new(params[:tag])
-
-    respond_to do |format|
-      if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.js
-        format.json { render json: @tag, status: :created, location: @tag }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to entries_url
   end
 
   # PUT /tags/1
   # PUT /tags/1.json
   def update
-    redirect_to tags_url
+    redirect_to entries_url
   end
 
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    redirect_to tags_url
+    redirect_to entries_url
   end
   
 end

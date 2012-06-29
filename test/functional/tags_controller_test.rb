@@ -13,15 +13,12 @@ class TagsControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    assert_response :success
+    assert_redirected_to entries_url
   end
 
   test "should create tag" do
-    assert_difference('Tag.count') do
-      post :create, tag: { name: @tag.name }
-    end
-
-    assert_redirected_to tag_path(assigns(:tag))
+    post :create, tag: { name: @tag.name }
+    assert_redirected_to entries_url
   end
 
   test "should show tag" do
@@ -33,14 +30,14 @@ class TagsControllerTest < ActionController::TestCase
   test "should get edit" do
     login_as(:dave)
     get :edit, id: @tag
-    assert_response :success
+    assert_redirected_to entries_url
   end
 
   test "should not update tag" do
     login_as(:dave)
     put :update, id: @tag, tag: { name: "new_name" }
     assert_equal "mysql", @tag.name
-    assert_redirected_to tags_url
+    assert_redirected_to entries_url
   end
 
   test "should not destroy tag" do
@@ -49,6 +46,6 @@ class TagsControllerTest < ActionController::TestCase
       delete :destroy, id: @tag
     end
 
-    assert_redirected_to tags_url
+    assert_redirected_to entries_url
   end
 end
