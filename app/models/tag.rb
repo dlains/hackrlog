@@ -11,36 +11,32 @@ class Tag < ActiveRecord::Base
   class << self
     
     # Get a list of all tags used by the logged in hacker.
-    def current_hacker_tags(hacker)
+    def current_hacker_tags(hacker_id)
       find_by_sql("SELECT DISTINCT t.* FROM tags AS t
         JOIN entries_tags AS et ON et.tag_id = t.id
         JOIN entries AS e ON e.id = et.entry_id
-        WHERE e.hacker_id = #{hacker}
+        WHERE e.hacker_id = #{hacker_id}
         ORDER BY t.name;")
     end
     
-    # Get a list of all tags used by the given entries.
-    def tags_used_by(entries)
-      ids = []
-      unless entries.blank?
-        entries.each {|entry| ids << entry.id}
-        find_by_sql("SELECT DISTINCT t.* FROM tags AS t
-          JOIN entries_tags AS et ON et.tag_id = t.id
-          WHERE et.entry_id IN (#{ids.join(',')})
-          ORDER BY t.name;")
-      end
+    # Get a list of all tags used in entries containing the given tags.
+    def filtered_hacker_tags(tags, hacker_id)
+      find_by_sql("SELECT t.* FROM tags AS t
+        JOIN entries_tags AS et ON et.tag_id = t.id
+        WHERE et.entry_id IN
+          (SELECT entry_id FROM
+            (SELECT et.entry_id, count(et.entry_id) as count
+              FROM entries_tags AS et
+              JOIN entries AS e ON e.id = et.entry_id
+              WHERE et.tag_id IN (#{tags.join(',')})
+              AND e.hacker_id = #{hacker_id}
+              GROUP BY et.entry_id)
+            AS sub
+            WHERE sub.count = #{tags.count})
+        GROUP BY t.id
+        ORDER BY t.name ASC;")
     end
 
-    # Get a list tags and a count of their usage for the tag manager.
-    def tag_usage(hacker)
-      find_by_sql("SELECT t.id, t.name, count(et.entry_id) AS count
-        FROM tags AS t 
-        LEFT OUTER JOIN entries_tags AS et ON et.tag_id = t.id
-        LEFT OUTER JOIN entries AS e ON et.entry_id = e.id
-        WHERE e.hacker_id = #{hacker}
-        GROUP BY t.name
-        ORDER BY count DESC, name ASC;")
-    end
   end
 
 end

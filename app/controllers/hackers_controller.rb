@@ -107,6 +107,15 @@ class HackersController < ApplicationController
   
   private
   
+  # Get the tags needed for the sidebar.
+  def update_tags
+    if is_filtered?
+      @tags = Tag.filtered_hacker_tags(session[:filter], current_user.id)
+    else
+      @tags = Tag.current_hacker_tags(current_user.id)
+    end
+  end
+  
   def modifying_self?
     is_self = true
     if session[:hacker_id] != params[:id].to_i

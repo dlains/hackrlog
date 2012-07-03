@@ -1,12 +1,14 @@
-<% @tags = tag_usage(session[:hacker_id]) %>
+<% @tags = get_updated_tag_list %>
 <div id="tag_manager">
-  <h3>Your Tags</h3>
-  <table>
+  <h3 id="list_name">Used Tags</h3>
+  <ul>
     <% @tags.each do |tag| %>
-    <tr>
-      <td class="tag"><a href="/tags/<%= tag.id %>"><%= tag.name %></a></td>
-      <td><%= tag.count %></td>
-    </tr>
+      <li>
+        <span class="tag">
+          <%= tags_check_box_tag 'tag_ids[]', "tag_id_#{tag.id}", tag.id, checked?(tag), class: 'filter_checkbox' %>
+          <%= label_tag "tag_id_#{tag.id}", tag.name %>
+        </span>
+      </li>
     <% end %>
-  </table>
+  </ul>
 </div>

@@ -11,7 +11,7 @@ class Entry < ActiveRecord::Base
     # so the sub query groups by the entry_id and the tag_ids are counted. The outter query then selects
     # only the rows where the count equals the number of tags requested. This removes rows where only
     # some of the tags were found.
-    def entries_for_tags(hacker_id, tags)
+    def entries_for_tags(hacker_id, tags, limit, offset)
       ids = find_by_sql(
         "SELECT id FROM
         (
@@ -19,7 +19,9 @@ class Entry < ActiveRecord::Base
           FROM entries AS e LEFT JOIN entries_tags AS j ON e.id = j.entry_id
           WHERE e.hacker_id = #{hacker_id} AND j.tag_id IN (#{tags.join(',')})
           GROUP BY id
-        ) AS sub WHERE sub.count = #{tags.count};"
+          ORDER BY created_at DESC
+        ) AS sub WHERE sub.count = #{tags.count}
+        LIMIT #{limit} OFFSET #{offset};"
       )
       
       ids.collect! {|e| e.id}

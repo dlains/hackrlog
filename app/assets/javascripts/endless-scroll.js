@@ -12,7 +12,13 @@ function lowEnough() {
 }
 
 function checkScroll() {
+  // Don't do anything if the list is complete.
+  if($('div#entries').attr('data-last') == 'complete') return pollScroll();
+  
+  // Not complete, so, close enough to scroll?
   if(!lowEnough()) return pollScroll();
+
+  // Low enough, so show the loading div and make the call.
   $('div#loading').show();
   $.ajax({
     url: '/entries',
@@ -24,6 +30,5 @@ function checkScroll() {
 }
 
 function pollScroll() {
-  if($('div#entries').attr('data-last') != 'complete')
     setTimeout(checkScroll, 100);
 }

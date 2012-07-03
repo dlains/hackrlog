@@ -1,17 +1,36 @@
 class EntriesController < ApplicationController
+  
   # GET /entries
   # GET /entries.json
   def index
     @entry = Entry.new
 
-    # Get the logged in Hacker's entries
-    offset = (params[:last].blank?) ? 0 : params[:last].to_i
+    # Process any filter information provided.
+    filter_changed = process_filter
+    
+    # Was there an endless scroll event?
+    if params.has_key?(:last) && params[:last] != 'complete'
+      offset = params[:last].to_i
+      @scroll = true
+    else
+      offset = 0
+      @scroll = false
+    end
+      
+    # If the filter changed reset the offset
+    offset = 0 if filter_changed
+    
     @count = offset + 20
-    @entries = Entry.where('hacker_id = ?', current_user.id).order('created_at DESC').limit(20).offset(offset)
+    
+    if is_filtered?
+      @entries = Entry.entries_for_tags(current_user.id, session[:filter], 20, offset)
+    else
+      @entries = Entry.where('hacker_id = ?', current_user.id).order('created_at DESC').limit(20).offset(offset)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.js
+      format.js   # index.js.erb
       format.json { render json: @entries }
     end
   end
@@ -114,7 +133,8 @@ class EntriesController < ApplicationController
   end
   
   private
-  
+
+  # Find existing tags or create new tags from user input.
   def process_tags
     return unless params.has_key?(:tags)
     ids = []
@@ -132,6 +152,42 @@ class EntriesController < ApplicationController
       end
     end
     params[:entry][:tag_ids] = ids
+  end
+
+  # Is the /entries page being filtered?
+  def is_filtered?
+    if session.has_key?(:filter)
+      return session[:filter].length > 0
+    else
+      return false
+    end
+  end
+
+  # Add to or remove tag values from the filter.
+  def process_filter
+    # Create the session variable if necessary.
+    unless session.has_key?(:filter)
+      session[:filter] = Array.new
+    end
+
+    start_size = session[:filter].length
+    
+    # Adding to the filter?
+    if params.has_key?(:add_to_filter)
+      session[:filter] << params[:add_to_filter]
+    end
+
+    # Removing from the filter?
+    if params.has_key?(:remove_from_filter)
+      session[:filter].delete_at(session[:filter].index(params[:remove_from_filter]))
+    end
+    
+    # Clearing the filter?
+    if params.has_key?(:clear_filter)
+      session[:filter].clear
+    end
+    # If the filter was added to or removed from the size will have changed.
+    return session[:filter].length != start_size
   end
   
 end

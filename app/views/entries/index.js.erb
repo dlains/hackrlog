@@ -1,2 +1,29 @@
-$('div#entries').append($('<%= escape_javascript(render partial: "entry", collection: @entries) %>'));
+// If its just a scroll event just handle the entry list update.
+<% if @scroll == true %>
+  $('div#entries').append($('<%= escape_javascript(render partial: "entry", collection: @entries) %>'));
+<% elsif session[:filter].length > 0 %>
+  $('div#entries').children().replaceWith($('<%= escape_javascript(render partial: "entry", collection: @entries) %>'));
+  $('div#tag_manager').replaceWith($('<%= escape_javascript(render partial: "tags/list") %>'));
+<% else %>
+  $('div#entries').children().replaceWith($('<%= escape_javascript(render partial: "entry", collection: @entries) %>'));
+  $('div#tag_manager').replaceWith($('<%= escape_javascript(render partial: "tags/list") %>'));
+<% end %>
 $('div#entries').attr('data-last', '<%= (@entries.count > 0) ? @count : "complete" %>');
+
+// Rebind all checkboxes because they have been replaced in the DOM.
+$('.filter_checkbox').bind('change', function(event) {
+  if(event.target.checked) {
+    $.ajax({
+      url: '/entries',
+      data: { add_to_filter: event.target.value},
+      dataType: 'script'
+    });
+  }
+  else {
+    $.ajax({
+      url: '/entries',
+      data: { remove_from_filter: event.target.value },
+      dataType: 'script'
+    });
+  }
+});

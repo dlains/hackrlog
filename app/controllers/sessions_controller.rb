@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :hacker_id
+    session.delete :filter
     redirect_to home_url, notice: "Logged out"
   end
 

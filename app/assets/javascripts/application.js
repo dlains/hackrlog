@@ -14,3 +14,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(function() {
+  $('.filter_checkbox').bind('change', function(event) {
+    if(event.target.checked) {
+      $.ajax({
+        url: '/entries',
+        data: { add_to_filter: event.target.value},
+        dataType: 'script'
+      });
+    }
+    else {
+      $.ajax({
+        url: '/entries',
+        data: { remove_from_filter: event.target.value },
+        dataType: 'script'
+      });
+    }
+  });
+})

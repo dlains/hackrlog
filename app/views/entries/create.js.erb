@@ -10,3 +10,21 @@ $('#new_entry')[0].reset();
 
 // Update the Tag Manager sidebar.
 $('#tag_manager').replaceWith('<%= escape_javascript(render :partial => "tags/list") %>')
+
+// Rebind all checkboxes because they have been replaced in the DOM.
+$('.filter_checkbox').bind('change', function(event) {
+  if(event.target.checked) {
+    $.ajax({
+      url: '/entries',
+      data: { add_to_filter: event.target.value},
+      dataType: 'script'
+    });
+  }
+  else {
+    $.ajax({
+      url: '/entries',
+      data: { remove_from_filter: event.target.value },
+      dataType: 'script'
+    });
+  }
+});
