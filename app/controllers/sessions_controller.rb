@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
   def destroy
     session.delete :hacker_id
     session.delete :filter
+    session.delete :current_tags
     redirect_to home_url, notice: "Logged out"
   end
 

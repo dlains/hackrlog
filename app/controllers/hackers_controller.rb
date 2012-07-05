@@ -60,6 +60,14 @@ class HackersController < ApplicationController
 
     respond_to do |format|
       if @hacker.update_attributes(params[:hacker])
+        
+        # Check the save_tags setting. If it is false make sure the current_tags session data is cleared.
+        if @hacker.save_tags == false
+          if session.has_key? :current_tags
+            session.delete :current_tags
+          end
+        end
+        
         format.html { redirect_to @hacker, notice: "Hacker #{@hacker.email} was successfully updated." }
         format.json { head :no_content }
       else

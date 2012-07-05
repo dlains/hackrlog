@@ -10,6 +10,14 @@
 <% end %>
 $('div#entries').attr('data-last', '<%= (@entries.count > 0) ? @count : "complete" %>');
 
+// Update saved tags.
+<% if session.has_key?(:current_tags) %>
+  $('#tags').val('<%= session[:current_tags] %>');
+<% end %>
+ 
+// Make sure the log entry input is selected.
+$('#entry_content').focus();
+
 // Rebind all checkboxes because they have been replaced in the DOM.
 $('.filter_checkbox').bind('change', function(event) {
   if(event.target.checked) {

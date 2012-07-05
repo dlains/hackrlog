@@ -16,6 +16,10 @@
         <%= f.label :time_zone, "Time Zone" %>
         <%= select_tag("hacker[time_zone]", time_zone_options_for_select(@hacker.time_zone, ActiveSupport::TimeZone.us_zones)) %>
       </li>
+      <li>
+        <%= f.check_box :save_tags, tabindex: 4 %>
+        <%= f.label :save_tags, "Save Previous Tags?" %>
+      </li>
     </ol>
   </fieldset>
 
@@ -24,17 +28,17 @@
     <ol>
       <li>
         <%= label_tag :current_password, 'Current Password' %>
-        <%= password_field_tag :current_password, nil, size: 40, tabindex: 4 %>
+        <%= password_field_tag :current_password, nil, size: 40, tabindex: 5 %>
         <%= form_field_error(@hacker, :current_password) %>
       </li>
       <li>
         <%= f.label :password, 'New Password' %>
-        <%= f.password_field :password, size: 40, tabindex: 5 %>
+        <%= f.password_field :password, size: 40, tabindex: 6 %>
         <%= form_field_error(@hacker, :password) %>
       </li>
       <li>
         <%= f.label :password_confirmation, 'Confirm Password' %>
-        <%= f.password_field :password_confirmation, size: 40, tabindex: 6 %>
+        <%= f.password_field :password_confirmation, size: 40, tabindex: 7 %>
         <%= form_field_error(@hacker, :password_confirmation) %>
       </li>
     </ol>

@@ -2,7 +2,7 @@ class Hacker < ActiveRecord::Base
   has_many :entries, :inverse_of => :hacker
   has_many :tag_sets
 
-  attr_accessible :email, :name, :time_zone, :password, :password_confirmation
+  attr_accessible :email, :name, :time_zone, :password, :password_confirmation, :save_tags
   validates :email, presence: true, uniqueness: true, email: true
   validates :password, confirmation: true
   validates_presence_of :password_confirmation, :if => :password_provided?

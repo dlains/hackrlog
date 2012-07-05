@@ -13,3 +13,8 @@ $('article#entry_<%= @entry.id %>').queue('fx',
 
 // Fade in the div with the form elements in place.
 $('article#entry_<%= @entry.id %>').fadeIn('normal');
+
+// Update saved tags.
+<% if session.has_key?(:current_tags) %>
+  $(input#tags).val('<%= session[:current_tags] %>');
+<% end %>

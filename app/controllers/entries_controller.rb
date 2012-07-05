@@ -137,6 +137,18 @@ class EntriesController < ApplicationController
   # Find existing tags or create new tags from user input.
   def process_tags
     return unless params.has_key?(:tags)
+
+    # Save the current set of tags if the setting is true.
+    logger.info "Does the user want to save tags?"
+    if current_user.save_tags
+      logger.info "It seems the user DOES want to save tags."
+      unless session.has_key?(:current_tags)
+        session[:current_tags] = Array.new
+      end
+      session[:current_tags] = params[:tags]
+      logger.info "And the final result is Params: #{params[:tags]}, Session: #{session[:current_tags]}"
+    end
+    
     ids = []
     tag_names = params[:tags].split(" ").collect! { |name| name.strip.downcase }
 
