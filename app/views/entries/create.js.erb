@@ -20,7 +20,7 @@ $('#tag_manager').replaceWith('<%= escape_javascript(render :partial => "tags/li
 $('#entry_content').focus();
 
 // Rebind all checkboxes because they have been replaced in the DOM.
-$('.filter_checkbox').bind('change', function(event) {
+$('.filter-checkbox').bind('change', function(event) {
   if(event.target.checked) {
     $.ajax({
       url: '/entries',

@@ -1,8 +1,14 @@
-<header id="page_header" role="banner" class="grid_12">
-  <div id="logo" class="grid_4 alpha">
-    <%= link_to(image_tag("logo.png", alt: "hackrLog", id: "logo"), entries_url, title: "Home") %>
+<div id="page-banner" role="banner" class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <%= link_to "hackrLog()", entries_url, title: 'Home', class: 'brand' %>
+      <%= render partial: "search/form" %>
+      <%= yield :main_navigation %>
+    </div>
   </div>
-  <%# TODO: Add link here to open and close the note input form. %>
-  <%= render partial: "search/form" %>
-  <%= yield :main_navigation %>
-</header>
+</div>

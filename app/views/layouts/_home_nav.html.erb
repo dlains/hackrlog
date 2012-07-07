@@ -1,10 +1,10 @@
 <% content_for :home_navigation do %>
-  <nav id="home_nav" role="navigation" class="grid_5 omega">
-    <ul>
+  <div class="nav-collapse" role="navigation">
+    <ul class="nav pull-right">
       <%= nav_tab 'Home',    home_index_path,                current: current_tab %>
       <%= nav_tab 'About',   home_about_path,                current: current_tab %>
       <%= nav_tab 'Login',   login_path,                     current: current_tab %>
       <%= nav_tab 'Signup',  new_hacker_path,                current: current_tab %>
     </ul>
-  </nav>
+  </div>
 <% end %>

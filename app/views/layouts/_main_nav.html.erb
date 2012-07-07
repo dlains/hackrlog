@@ -1,9 +1,9 @@
 <% content_for :main_navigation do %>
-  <nav id="main_nav" role="navigation" class="grid_4 omega">
-    <ul>
+  <div class="nav-collapse" role="navigation">
+    <ul class="nav pull-right">
       <%= nav_tab 'Home',    entries_path,                   current: current_tab %>
       <%= nav_tab 'Profile', edit_hacker_path(current_user), current: current_tab %>
       <%= nav_tab 'Logout',  logout_path,                    current: current_tab %>
     </ul>
-  </nav>
+  </div>
 <% end %>

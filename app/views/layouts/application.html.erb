@@ -3,24 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title><%= owners %> hackrLog</title>
+    <%# Enable twitter bootstrap responsive display. %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <%# Maybe remove this favicon link...??? 
+    
+    <%# HTML5 shim, for IE6-8 support of HTML5 elements %>
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <%# Fav and apple icons %>
     <link rel="shortcut icon" href="/favicon.ico" />
+    <%#
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="hackrlog-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="hackrlog-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="hackrlog-icon-72.png">
+    <link rel="apple-touch-icon-precomposed" href="hackrlog-icon-57.png">
     %>
   </head>
-  <body class="container_12">
+  <body>
     <%= render 'layouts/header' %>
 
-    <div class="container grid_12">
-      <section id="sidebar" class="grid_3 alpha">
-        <%= render partial: "tags/list" %>
-        <%= render 'layouts/footer' %>
-      </section><%# sidebar end %>
-      <section id="content" class="grid_9 omega">
-        <%= yield %>
-      </section><%# content end %>
+    <div class="container">
+      <div class="row">
+        <section id="sidebar" class="span3">
+          <%= render partial: "tags/list" %>
+          <%= render 'layouts/footer' %>
+        </section><%# sidebar end %>
+        <section id="content" class="span9">
+          <%= yield %>
+        </section><%# content end %>
+      </div> <%# row end %>
     </div><%# container end %>
 
   </body>

@@ -1,8 +1,8 @@
 <footer id="page_footer">
+  <p>&copy; 2010-<%= Time.now.year %> David Lains</p>
   <ul>
-    <li>&copy; 2010-<%= Time.now.year %> David Lains</li>
     <li><%= link_to 'About', controller: 'home', action: 'about' %></li>
-    <li><%= link_to 'Help', controller: 'home', action: 'help' %></li><%# TODO: Make Help Page and Route. %>
+    <li><%= link_to 'Help', controller: 'home', action: 'help' %></li>
     <li><%= link_to 'Terms', :controller => 'home', :action => 'tos' %></li>
     <li><%= link_to 'Privacy', :controller => 'home', :action => 'privacy' %></li>
   </ul>

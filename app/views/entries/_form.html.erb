@@ -1,17 +1,9 @@
 <%= form_for(@entry, remote: remote) do |f| %>
-  <fieldset>
-    <ol>
-      <li class="required">
-        <%= f.label :content, "Log Entry" %>
-        <%= f.text_area :content, rows: 5, placeholder: 'Log entry text.', accesskey: 'E', tabindex: 1 %>
-        <%= form_field_error(@entry, :content) %>
-      </li>
-      <li>
-        <%= label_tag :tags, "Tags" %>
-        <%= text_field_tag :tags, tag_values(@entry), placeholder: 'Tags, space separated.', accesskey: 'T', tabindex: 2 %>
-        <%= form_field_error(@entry, :tags) %>
-      </li>
-    </ol>
-  </fieldset>
+  <%= f.label :content, "Log Entry" %>
+  <%= f.text_area :content, rows: 5, placeholder: 'Log entry text.', accesskey: 'E', tabindex: 1, class: 'span9' %>
+  <%= form_field_error(@entry, :content) %>
+  <%= label_tag :tags, "Tags" %>
+  <%= text_field_tag :tags, tag_values(@entry), placeholder: 'Tags, space separated.', accesskey: 'T', tabindex: 2, class: 'span9' %>
+  <%= form_field_error(@entry, :tags) %>
   <%= entry_submit_tag(@entry) %>
 <% end %>

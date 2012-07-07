@@ -1,22 +1,20 @@
 <%= currently_home_at 'Home' %>
-<div id="description" class="grid_6 alpha">
-  <p class="large-text">
+<div class="hero-unit">
+  <h1>hackrLog()</h1>
+  <p>
     Your note books are filled with tricky configuration solutions, handy algorithms, keyboard
     shortcuts and reminders to touch up certain bits of code. How do you find the right note when
     you need it again six months later?
   </p>
-  <p class="large-text emphasis">
+  <p>
     hackrLog makes it easy to enter and tag development notes so you can find the note you need when
     you need it.
   </p>
-</div> <!-- description end -->
-<div id="create-form" class="form-container grid_6 omega">
-  <% create_hacker %>
-  <%= render :partial => 'hackers/form' %>
-</div>
-  
-<div id="features" class="container_12">
-  <div class="grid_4 alpha">
+  <p><a class="btn btn-primary btn-large">Sign Up!</a></p>
+</div><%# description end %>
+
+<div id="features" class="row">
+  <div class="span4">
     <%= image_tag "write.png" %>
     <p>
       <strong>Enter Notes Quickly</strong> Capture notes while they are fresh in your mind. No need to hunt down
@@ -24,14 +22,14 @@
       <a href="http://daringfireball.net/projects/markdown/" title="Markdown Reference">Markdown</a> or plain text formatting.
     </p>
   </div>
-  <div class="grid_4">
+  <div class="span4">
     <%= image_tag "tag.png" %>
     <p>
       <strong>Tag Your Notes</strong> Use tags liberally to increase the chance of finding the information again in the future.
       Creating new tags is easy, simply add a new tag to a note and it will be created automatically.
     </p>
   </div>
-  <div class="grid_4 omega">
+  <div class="span4">
     <%= image_tag "find.png" %>
     <p>
       <strong>Find Notes</strong> Combine tags to filter out notes that are not relevant or use full text search
