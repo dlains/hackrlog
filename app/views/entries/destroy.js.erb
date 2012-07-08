@@ -1,0 +1,5 @@
+// Find the article to be edited and fade it out.
+$('#entry_<%= @entry.id %>').fadeOut('normal');
+
+// Remove the element from the DOM
+$('#entry_<%= @entry.id %>').remove();

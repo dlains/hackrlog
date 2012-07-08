@@ -1,0 +1,16 @@
+<div class="span9">
+  <%= form_for(@entry, remote: true) do |f| %>
+    <%= f.label :content, "Log Entry" %>
+    <%= f.text_area :content, rows: 5, placeholder: 'Log entry text.', accesskey: 'E', tabindex: 3, class: 'span9' %>
+    <%= form_field_error(@entry, :content) %>
+    <%= label_tag :tags, "Tags" %>
+    <%= text_field_tag :tags, tag_values(@entry), placeholder: 'Tags, space separated.', accesskey: 'T', tabindex: 4, class: 'span9' %>
+    <%= form_field_error(@entry, :tags) %>
+    <% if @entry.new_record? %>
+      <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Create</button>
+      <button type="reset" class="btn"><i class="icon-refresh"></i> Reset</button>
+    <% else %>
+      <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Update</button>
+    <% end %>
+  <% end %>
+</div>

@@ -1,20 +1,20 @@
-// Find the div to be edited and fade it out.
-$('article#entry_<%= @entry.id %>').fadeOut('normal');
+// Find the article to be edited and fade it out.
+$('#entry_<%= @entry.id %>').fadeOut('normal');
 
 // Queue the replaceWith call in the 'fx' queue so the replaceWith call doesn't happen during
 // the fadeOut animation.
-$('article#entry_<%= @entry.id %>').queue('fx',
+$('#entry_<%= @entry.id %>').queue('fx',
   function() {
     $(this).children().replaceWith(
-      $('<%= escape_javascript(render :partial => "form", :locals => {:entry => @entry, :remote => true}) %>'));
+      $('<%= escape_javascript(render :partial => "edit_form", :locals => {:entry => @entry, :remote => true}) %>'));
     $(this).dequeue('fx');
   }
 );
 
-// Fade in the div with the form elements in place.
-$('article#entry_<%= @entry.id %>').fadeIn('normal');
+// Fade in the article with the form elements in place.
+$('#entry_<%= @entry.id %>').fadeIn('normal');
 
 // Update saved tags.
 <% if session.has_key?(:current_tags) %>
-  $(input#tags).val('<%= session[:current_tags] %>');
+  $('#tags').val('<%= session[:current_tags] %>');
 <% end %>

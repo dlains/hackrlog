@@ -21,21 +21,25 @@ section#content div#loading
   }
 }
 
-section#content div#entries article,
-section#content div#combine_results article
+article.entry
 {
   margin-bottom: 10px;
   
-  .meta ul
+  .meta
   {
-    margin: 0;
-    padding: 0;
-      
-    li
+    margin-right: -1px;
+    border-right: 1px solid #eee;
+    
+    ul
     {
+      margin: 0;
+      padding: 0;
       list-style: none;
-      display: inline;
-      margin-right: 5px;
+
+      li
+      {
+        margin-bottom: 5px;
+      }
     }
   }
 }

@@ -14,6 +14,7 @@
  *= require_self
  *= require bootstrap/responsive
  *= require global
+ *= require entries
  *= require tags
  */
 

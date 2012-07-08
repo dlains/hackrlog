@@ -1,15 +1,15 @@
-<%= content_tag_for :article, entry, 'data-id' => entry.id do %>
-  <div class="meta">
+<article id="entry_<%= entry.id %>" class="entry row" data-id="<%= entry.id %>">
+  <div class="meta span2">
     <ul>
-      <li><time datetime="<%= entry.updated_at %>"><%= get_datetime_for_entry(entry) %></time></li>
-      <li><%= link_to 'Edit', edit_entry_path(entry), :remote => true %></li>
-      <li><%= link_to 'Delete', entry, data: { confirm: 'Are you sure?' }, method: :delete %></li>
+      <li class="meta-time"><time datetime="<%= entry.updated_at %>">Created <%= time_ago_in_words(entry.updated_at) %> ago.</time></li>
+      <li><a class="btn btn-mini" href="<%= edit_entry_path(entry) %>" data-remote="true" rel="nofollow"><i class="icon-edit"></i> Edit</a></li>
+      <li><a class="btn btn-mini btn-danger" href="<%= entry_path(entry) %>" data-confirm="Are you sure?" data-method="delete" data-remote="true" rel="nofollow"><i class="icon-remove icon-white"></i> Delete</a></li>
     </ul>
   </div><%# meta end %>
-  <div class="entry_content">
+  <div class="entry_content span7">
     <%= sanitize format_content(entry) %>
     <ul class="tag_list">
       <%= render partial: '/tags/tag', collection: entry.tags %>
     </ul>
   </div><%# entry_content end %>
-<% end %>
+</article>

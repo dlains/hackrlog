@@ -6,7 +6,7 @@
       <li>
         <label class="checkbox">
           <%= tags_check_box_tag 'tag_ids[]', "tag_id_#{tag.id}", tag.id, checked?(tag), class: 'filter-checkbox' %>
-          <%= tag.name %>
+          <span class="badge"><%= tag.name %></span>
         </label>
       </li>
     <% end %>
