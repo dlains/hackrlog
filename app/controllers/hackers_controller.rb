@@ -68,7 +68,7 @@ class HackersController < ApplicationController
           end
         end
         
-        format.html { redirect_to @hacker, notice: "Hacker #{@hacker.email} was successfully updated." }
+        format.html { redirect_to edit_hacker_path(@hacker), notice: "Hacker #{@hacker.email} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -115,18 +115,9 @@ class HackersController < ApplicationController
   
   private
   
-  # Get the tags needed for the sidebar.
-  def update_tags
-    if is_filtered?
-      @tags = Tag.filtered_hacker_tags(session[:filter], current_user.id)
-    else
-      @tags = Tag.current_hacker_tags(current_user.id)
-    end
-  end
-  
   def modifying_self?
     is_self = true
-    if session[:hacker_id] != params[:id].to_i
+    if current_user.id != params[:id].to_i
       logger.warn "Hacker id #{session[:hacker_id]} attempted to edit Hacker with id of #{params[:id]}."
       redirect_to(entries_url, notice: 'You do not have access to that information.')
       is_self = false
@@ -135,14 +126,13 @@ class HackersController < ApplicationController
   end
 
   def create_export_file
-    #hacker = Hacker.includes(:entries).find(params[:id])
-    #exporter = Exporter.new("#{hacker.email}.#{params[:export_format]}.gz", params[:export_format])
-    #exporter.perform_export(hacker.entries)
-    #return exporter.path
+    exporter = Exporter.new("#{current_user.email}.#{params[:export_format]}.gz", params[:export_format])
+    exporter.perform_export(current_user.entries)
+    return exporter.path
   end
   
   def hacker_layout
-    session[:hacker_id] == nil ? "home" : "application"
+    session.has_key?(:hacker_id) ? 'application' : 'home'
   end
   
   def create_initial_user_data(hacker)

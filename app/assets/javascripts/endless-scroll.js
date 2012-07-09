@@ -30,5 +30,6 @@ function checkScroll() {
 }
 
 function pollScroll() {
+  if($('div#entries').length)
     setTimeout(checkScroll, 100);
 }

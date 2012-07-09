@@ -1,5 +1,11 @@
 // Find the article to be edited and fade it out.
-$('#entry_<%= @entry.id %>').fadeOut('normal');
+$('#entry_<%= @entry.id %>').slideUp('normal');
 
-// Remove the element from the DOM
-$('#entry_<%= @entry.id %>').remove();
+// Queue the remove call in the 'fx' queue so the remove call doesn't happen during
+// the fadeOut animation.
+$('#entry_<%= @entry.id %>').queue('fx',
+  function() {
+    $(this).remove();
+    $(this).dequeue('fx');
+  }
+);
