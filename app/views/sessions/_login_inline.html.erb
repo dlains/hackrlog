@@ -1,0 +1,9 @@
+<%= form_tag(login_url, :method => "post", class: 'navbar-search form-inline pull-right') do %>
+  <%= email_field_tag :email, params[:email], placeholder: 'Email', class: 'search-query input-small' %>
+  <%= password_field_tag :password, params[:password], placeholder: 'Password', class: 'search-query input-small' %>
+  <label class="checkbox">
+    <%= check_box_tag :remember_me %>
+    Remember me
+  </label>
+  <button type="submit" class="btn btn-inverse">Login</button>
+<% end %>

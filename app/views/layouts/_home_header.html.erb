@@ -5,10 +5,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       </a>
       <%= link_to "hackrLog()", home_url, title: 'Home', class: 'brand' %>
-      <%= yield :home_navigation %>
+      <div class="nav-collapse" role="navigation">
+        <ul class="nav">
+          <li class="<%= active?('About') %>"><%= link_to 'About', controller: 'home', action: 'about' %></li>
+          <li class="<%= active?('Help') %>"><%= link_to 'Help', controller: 'home', action: 'help' %></li>
+        </ul>
+        <%= render 'sessions/login_inline' %>
+      </div>      
     </div>
   </div>
 </div>

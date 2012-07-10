@@ -40,7 +40,7 @@ class HackersController < ApplicationController
 
     respond_to do |format|
       if @hacker.save
-        session[:hacker_id] = @hacker.id
+        cookies[:auth_token] = @hacker.auth_token
         create_initial_user_data(@hacker)
         Notifier.account_created(@hacker).deliver
         format.html { redirect_to entries_url, notice: "Hacker #{@hacker.email} was successfully created." }
@@ -118,7 +118,7 @@ class HackersController < ApplicationController
   def modifying_self?
     is_self = true
     if current_user.id != params[:id].to_i
-      logger.warn "Hacker id #{session[:hacker_id]} attempted to edit Hacker with id of #{params[:id]}."
+      logger.warn "Hacker id #{current_user.id} attempted to edit Hacker with id of #{params[:id]}."
       redirect_to(entries_url, notice: 'You do not have access to that information.')
       is_self = false
     end
@@ -132,7 +132,7 @@ class HackersController < ApplicationController
   end
   
   def hacker_layout
-    session.has_key?(:hacker_id) ? 'application' : 'home'
+    cookies[:auth_token] ? 'application' : 'home'
   end
   
   def create_initial_user_data(hacker)

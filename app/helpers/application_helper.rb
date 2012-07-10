@@ -41,8 +41,7 @@ module ApplicationHelper
   end
 
   def get_datetime_for_entry(entry)
-    hacker = Hacker.find(session[:hacker_id])
-    entry.updated_at.in_time_zone(hacker.time_zone).strftime('%b %d, %Y %I:%M %p')
+    entry.updated_at.in_time_zone(current_user.time_zone).strftime('%b %d, %Y %I:%M %p')
   end
 
   # Add an <span class="error"> for form fields with errors.

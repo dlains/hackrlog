@@ -41,7 +41,7 @@ class EntriesController < ApplicationController
     begin
       @entry = current_user.entries.find(params[:id])
     rescue
-      logger.error "Hacker id #{session[:hacker_id]} attempted to access an entry belonging to another user: #{params[:id]}."
+      logger.error "Hacker id #{current_user.id} attempted to access an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
     else
       respond_to do |format|
@@ -67,7 +67,7 @@ class EntriesController < ApplicationController
     begin
       @entry = current_user.entries.find(params[:id])
     rescue
-      logger.error "Hacker id #{session[:hacker_id]} attempted to access and entry belonging to another user: #{params[:id]}"
+      logger.error "Hacker id #{current_user.id} attempted to access and entry belonging to another user: #{params[:id]}"
       redirect_to(entries_url)
     end
   end
@@ -77,7 +77,7 @@ class EntriesController < ApplicationController
   def create
     process_tags
     @entry = Entry.new(params[:entry])
-    @entry.hacker_id = session[:hacker_id]
+    @entry.hacker_id = current_user.id
     
     respond_to do |format|
       if @entry.save
@@ -98,7 +98,7 @@ class EntriesController < ApplicationController
     begin
       @entry = current_user.entries.find(params[:id])
     rescue
-      logger.error "Hacker id #{session[:hacker_id]} attempted to update an entry belonging to another user: #{params[:id]}."
+      logger.error "Hacker id #{current_user.id} attempted to update an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
     else
       respond_to do |format|
@@ -120,7 +120,7 @@ class EntriesController < ApplicationController
     begin
       @entry = current_user.entries.find(params[:id])
     rescue
-      logger.error "Hacker id #{session[:hacker_id]} attempted to delete an entry belonging to another user: #{params[:id]}."
+      logger.error "Hacker id #{current_user.id} attempted to delete an entry belonging to another user: #{params[:id]}."
       redirect_to(entries_url)
     else
       @entry.destroy

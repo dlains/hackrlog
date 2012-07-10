@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   # Verify the hacker id stored in the session is an actual user in the
   # database and ensure that user account has not been disabled.
   def authorize
-    @current_user = Hacker.find_by_id(session[:hacker_id])
+    @current_user = current_user
     
     unless @current_user
       redirect_to login_url, notice: "Please log in."
@@ -31,12 +31,7 @@ class ApplicationController < ActionController::Base
   # the amount of database queries run just to get the logged in user. It is also available as
   # a helper method in the views.
   def current_user
-    begin
-      @current_user ||= Hacker.find(session[:hacker_id])
-    rescue
-      logger.error "Attempt to find a non-existent hacker: #{session[:hacker_id]}."
-      return nil
-    end
+    @current_user ||= Hacker.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
   end
   
 end

@@ -11,11 +11,11 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   def login_as(hacker)
-    session[:hacker_id] = hackers(hacker).id
+    cookies[:auth_token] = hackers(hacker).auth_token
   end
   
   def logout
-    session.delete :hacker_id
+    cookies.delete :auth_token
   end
   
   def setup

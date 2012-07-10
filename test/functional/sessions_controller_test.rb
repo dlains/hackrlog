@@ -11,7 +11,7 @@ class SessionsControllerTest < ActionController::TestCase
     dave = hackers(:dave)
     post :create, :email => dave.email, :password => 'dave'
     assert_redirected_to entries_url
-    assert_equal dave.id, session[:hacker_id]
+    assert_equal dave.auth_token, cookies[:auth_token]
   end
   
   test "should fail login" do
@@ -23,7 +23,7 @@ class SessionsControllerTest < ActionController::TestCase
   test "should logout" do
     delete :destroy
     assert_redirected_to home_url
-    assert_nil session[:hacker_id]
+    assert_nil cookies[:auth_token]
   end
 
 end

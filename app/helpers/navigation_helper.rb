@@ -10,8 +10,4 @@ module NavigationHelper
     render partial: 'layouts/main_nav', locals: {current_tab: tab}
   end
   
-  def currently_home_at(tab)
-    render partial: 'layouts/home_nav', locals: {current_tab: tab}
-  end
-  
 end

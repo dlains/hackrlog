@@ -6,7 +6,7 @@ class SearchController < ApplicationController
     else
       words = params[:search].split(" ").map! { |word| "'%" + word + "%'" }
       words.map! { |word| "content like " + word }
-      @entries = Entry.where("hacker_id = ? and #{words.join(" or ")}", session[:hacker_id])
+      @entries = Entry.where("hacker_id = ? and #{words.join(" or ")}", current_user.id)
     end
     
     respond_to do |format|

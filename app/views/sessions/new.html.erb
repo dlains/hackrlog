@@ -1,22 +1,36 @@
-<%= currently_home_at 'Login' %>
-<%= form_tag do %>
-  <fieldset>
-    <legend>Login</legend>
-      <% if flash[:notice] %>
-        <p id="notice"><%= flash[:notice] %></p>
-      <% end %>
-      <ol>
-        <li class="required">
-          <%= label_tag 'Email' %>
-          <%= email_field_tag :email, params[:email], placeholder: 'Email', autofocus: true %>
-        </li>
-        <li class="required">
-          <%= label_tag 'Password' %>
-          <%= password_field_tag :password, params[:password], placeholder: 'Password' %>
-        </li>
-      </ol>
-  </fieldset>
-  <%= link_to 'Reset password?', reset_url %>
-  <br/>
-  <%= submit_tag "Login" %>
-<% end %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_tag(login_url, :method => "post", class: 'well form-horizontal') do %>
+      <fieldset>
+        <legend>Login</legend>
+        <% if flash[:notice] %>
+          <p id="notice"><%= flash[:notice] %></p>
+        <% end %>
+        <div class="control-group">
+          <%= label_tag :email, nil, class: 'control-label' %>
+          <div class="controls">
+            <%= email_field_tag :email, params[:email], placeholder: 'Email' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= label_tag 'Password', nil, class: 'control-label' %>
+          <div class="controls">
+            <%= password_field_tag :password, params[:password], placeholder: 'Password' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">
+              <%= check_box_tag :remember_me %>
+              Remember me
+            </label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <%= link_to 'Reset password?', reset_url, class: 'btn' %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
