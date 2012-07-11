@@ -6,11 +6,9 @@ class Notifier < ActionMailer::Base
   #
   #   en.notifier.password_reset.subject
   #
-  def password_reset(hacker, password)
+  def password_reset(hacker)
     @hacker = hacker
-    @password = password
-
-    mail to: @hacker.email, subject: 'hackrLog account access.'
+    mail to: hacker.email, subject: 'hackrLog password reset.'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

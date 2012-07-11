@@ -30,15 +30,17 @@ ActiveRecord::Schema.define(:version => 20120501162804) do
   add_index "entries_tags", ["entry_id", "tag_id"], :name => "index_entries_tags_on_entry_id_and_tag_id", :unique => true
 
   create_table "hackers", :force => true do |t|
-    t.string   "email",                                                     :null => false
+    t.string   "email",                                                            :null => false
     t.string   "name"
-    t.string   "password_digest",                                           :null => false
+    t.string   "password_digest",                                                  :null => false
     t.string   "auth_token"
-    t.string   "time_zone",       :default => "Pacific Time (US & Canada)"
-    t.boolean  "enabled",         :default => true
-    t.boolean  "save_tags",       :default => true
-    t.datetime "created_at",                                                :null => false
-    t.datetime "updated_at",                                                :null => false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.string   "time_zone",              :default => "Pacific Time (US & Canada)"
+    t.boolean  "enabled",                :default => true
+    t.boolean  "save_tags",              :default => true
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
   end
 
   add_index "hackers", ["email"], :name => "index_hackers_on_email", :unique => true

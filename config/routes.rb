@@ -10,8 +10,6 @@ Hackrlog::Application.routes.draw do
     get  'login'  => :new
     post 'login'  => :create
     get  'logout' => :destroy
-    get  'reset'  => :reset
-    post 'reset'  => :reset_send
     get  'reopen' => :reopen
     post 'reopen' => :reopen_send
   end
@@ -27,6 +25,7 @@ Hackrlog::Application.routes.draw do
     end
   end
   resources :entries
+  resources :password_resets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

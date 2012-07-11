@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       end
       redirect_to entries_url
     else
-      redirect_to login_url, notice: "Invalid email or password combination."
+      redirect_to login_url, alert: "Invalid email or password combination."
     end
   end
 
@@ -27,22 +27,6 @@ class SessionsController < ApplicationController
     session.delete :filter
     session.delete :current_tags
     redirect_to home_url, notice: "Logged out."
-  end
-
-  # POST /reset
-  def reset_send
-    if params[:email] == nil || params[:email] == ""
-      redirect_to reset_url, :notice => 'Email address must be supplied.'
-      return
-    end
-    hacker = Hacker.first(:conditions => ["email = ?", params[:email]])
-    
-    respond_to do |format|
-      reset_hacker_password(hacker, false)
-      Notifier.password_reset(hacker, password).deliver
-
-      format.html {redirect_to login_url, :notice => "Your new password has been sent to your email account."}
-    end
   end
 
   def reopen_send

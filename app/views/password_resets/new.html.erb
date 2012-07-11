@@ -1,8 +1,8 @@
 <div class="row">
   <div class="span6 offset3">
-    <%= form_tag(login_url, :method => "post", class: 'well form-horizontal') do %>
+    <%= form_tag(password_resets_path, :method => "post", class: 'well form-horizontal') do %>
       <fieldset>
-        <legend>Login</legend>
+        <legend>Reset Password</legend>
         <% if flash[:notice] %>
           <div class="alert alert-block alert-info">
             <a class="close" data-dismiss="alert" href="#">x</a>
@@ -22,23 +22,8 @@
             <%= email_field_tag :email, params[:email], placeholder: 'Email' %>
           </div>
         </div>
-        <div class="control-group">
-          <%= label_tag 'Password', nil, class: 'control-label' %>
-          <div class="controls">
-            <%= password_field_tag :password, params[:password], placeholder: 'Password' %>
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="controls">
-            <label class="checkbox">
-              <%= check_box_tag :remember_me %>
-              Remember me
-            </label>
-          </div>
-        </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Login</button>
-          <%= link_to 'Reset password?', new_password_reset_path, class: 'btn' %>
+          <button type="submit" class="btn btn-primary">Reset</button>
         </div>
       </fieldset>
     <% end %>

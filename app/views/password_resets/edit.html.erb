@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@hacker, url: password_reset_path(params[:id]), html: {class: 'well form-horizontal'}) do |f| %>
+      <fieldset>
+        <legend>Login</legend>
+        <% if flash[:notice] %>
+          <p id="notice"><%= flash[:notice] %></p>
+        <% end %>
+        <div class="control-group">
+          <%= f.label :password, 'New Password', class: "control-label" %>
+          <div class="controls">
+            <%= f.password_field :password, size: 40, tabindex: 2 %>
+            <%= form_field_error(@hacker, :password) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :password_confirmation, 'Confirm Password', class: 'control-label' %>
+          <div class="controls">
+            <%= f.password_field :password_confirmation, size: 40, tabindex: 3 %>
+            <%= form_field_error(@hacker, :password_confirmation) %>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Update Password</button>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
