@@ -2,6 +2,7 @@
   <ul class="nav nav-tabs">
     <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
     <li><a href="#password" data-toggle="tab">Password</a></li>
+    <li><a href="#premium" data-toggle="tab">Go Premium</a></li>
     <li><a href="#export" data-toggle="tab">Export Data</a></li>
     <li><a href="#cancel" data-toggle="tab">Cancel Account</a></li>
   </ul>
@@ -86,6 +87,51 @@
         <div class="form-actions">
           <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Update</button>
         </div>
+      </fieldset>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="premium">
+      <%= form_for(@hacker, html: {id: 'hacker_premium', class: 'well form-horizontal'}) do |f| %>
+      <fieldset>
+        <legend>hackrLog() Premium</legend>
+        <p>Unlimited entries for just $9.99 / year.</p>
+        <div id="stripe-error" style="display: none">
+          <noscript>Javascript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+          <div class="alert alert-block alert-error">
+            <a class="close" data-dismiss="alert" href="#">x</a>
+            <h4 class="alert-heading">Error!</h4>
+            <p id="stripe-error-text"></p>
+          </div>
+        </div>
+        <% if @hacker.premium_active %>
+          <p>Your account was upgraded to hackrLog() Premium on <%= @hacker.premium_start_date %>. The next charge will
+             occur in <%= distance_of_time_in_words(Date.today, @hacker.premium_start_date + 1.year) %>.</p>
+        <% else %>
+        <div class="control-group">
+          <%= label_tag :card_number, "Card Number", class: 'control-label' %>
+          <div class="controls">
+            <%= text_field_tag :card_number, nil, name: nil %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= label_tag :card_code, "Security Code (CVV)", class: 'control-label' %>
+          <div class="controls">
+            <%= text_field_tag :card_code, nil, name: nil %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= label_tag :card_month, "Card Expiration", class: 'control-label' %>
+          <div class="controls">
+            <%= select_month nil, {add_month_numbers: true}, {name: nil, id: 'card_month'} %>
+            <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: 'card_year'} %>
+          </div>
+        </div>
+        <div class="form-actions">
+          <%= f.hidden_field :activating_premium, value: true %>
+          <%= f.hidden_field :stripe_card_token %>
+          <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Submit</button>
+        </div>
+        <% end %>
       </fieldset>
       <% end %>
     </div>

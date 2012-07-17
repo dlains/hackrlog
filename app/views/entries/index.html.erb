@@ -1,4 +1,11 @@
 <%= currently_at 'Home' %>
+<div id="hackrlog-error" style="display: none">
+  <div class="alert alert-block alert-error">
+    <a class="close" data-dismiss="alert" href="#">x</a>
+    <h4 class="alert-heading">Error!</h4>
+    <p id="hackrlog-error-text"></p>
+  </div>
+</div>
 <div id="entry_form">
   <%= render partial: 'form', locals: {remote: true} %>
 </div><%# entry_form end %>

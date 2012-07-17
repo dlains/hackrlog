@@ -7,6 +7,9 @@ class CreateHackers < ActiveRecord::Migration
       t.string   :auth_token
       t.string   :password_reset_token
       t.datetime :password_reset_sent_at
+      t.date     :premium_start_date
+      t.boolean  :premium_active
+      t.string   :stripe_customer_token
       t.string   :time_zone, default: 'Pacific Time (US & Canada)'
       t.boolean  :enabled, default: true
       t.boolean  :save_tags, default: true

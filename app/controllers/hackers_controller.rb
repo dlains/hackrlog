@@ -58,25 +58,38 @@ class HackersController < ApplicationController
     return unless modifying_self?
     @hacker = current_user
 
-    respond_to do |format|
-      if @hacker.update_attributes(params[:hacker])
-        
-        # Check the save_tags setting. If it is false make sure the current_tags session data is cleared.
-        if @hacker.save_tags == false
-          if session.has_key? :current_tags
-            session.delete :current_tags
-          end
+    if params[:hacker][:activating_premium]
+      respond_to do |format|
+        if @hacker.update_with_premium(params[:hacker])
+          
+          format.html { redirect_to edit_hacker_path(@hacker), notice: "Congratulations, your account has been upgraded to hackrLog() Premium!" }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @hacker.errors, status: :unprocessable_entity }
         end
+      end
+    else
+      respond_to do |format|
+        if @hacker.update_attributes(params[:hacker])
         
-        format.html { redirect_to edit_hacker_path(@hacker), notice: "Hacker #{@hacker.email} was successfully updated." }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @hacker.errors, status: :unprocessable_entity }
+          # Check the save_tags setting. If it is false make sure the current_tags session data is cleared.
+          if @hacker.save_tags == false
+            if session.has_key? :current_tags
+              session.delete :current_tags
+            end
+          end
+        
+          format.html { redirect_to edit_hacker_path(@hacker), notice: "Your account was successfully updated." }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @hacker.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
-
+  
   # GET /hacker/1/export
   def export
     return unless modifying_self?
