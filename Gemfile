@@ -47,6 +47,7 @@ group :test do
 end
 
 gem 'simplecov', require: false, group: :test
+gem 'rails_best_practices', require: false, group: :development
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
