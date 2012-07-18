@@ -31,9 +31,19 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'unicorn', '4.3.1'
 
-# Deploy with Capistrano
 group :development do
   gem 'capistrano'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
 end
 
 # To use debugger

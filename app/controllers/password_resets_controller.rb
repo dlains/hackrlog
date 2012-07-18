@@ -6,9 +6,13 @@ class PasswordResetsController < ApplicationController
   end
   
   def create
-    hacker = Hacker.find_by_email(params[:email])
-    hacker.send_password_reset if hacker
-    redirect_to login_url, notice: 'Email sent with password reset instructions.'
+    hacker = Hacker.find_by_email(params[:reset_email])
+    if hacker
+      hacker.send_password_reset
+      redirect_to login_url, notice: 'Email sent with password reset instructions.'
+    else
+      redirect_to new_password_reset_path, notice: 'Invalid Email provided for password reset.'
+    end
   end
   
   def edit
