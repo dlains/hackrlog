@@ -1,3 +1,3 @@
 module HackersHelper
-  
+
 end

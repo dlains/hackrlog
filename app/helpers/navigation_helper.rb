@@ -1,5 +1,5 @@
 module NavigationHelper
-  
+
   def nav_tab(title, url, options = {})
     current_tab = options.delete(:current)
     options[:class] = (current_tab == title) ? 'active' : 'inactive'

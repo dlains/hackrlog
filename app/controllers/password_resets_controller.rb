@@ -4,7 +4,7 @@ class PasswordResetsController < ApplicationController
 
   def new
   end
-  
+
   def create
     hacker = Hacker.find_by_email(params[:reset_email])
     if hacker

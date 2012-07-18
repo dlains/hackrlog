@@ -34,7 +34,7 @@ Hackrlog::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-  
+
   # Set the host for URLs inside mailers.
   config.action_mailer.default_url_options = { host: 'localhost:8080' }
 end

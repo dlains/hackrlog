@@ -21,7 +21,7 @@ module ApplicationHelper
       @tags = Tag.current_hacker_tags(current_user.id)
     end
   end
-  
+
   # Is the /entries page being filtered?
   def is_filtered?
     if session.has_key?(:filter)

@@ -2,7 +2,7 @@ require 'zlib'
 
 class Exporter
   EXPORT_DIR = 'public/system/exports/'
-  
+
   attr_reader :path
   
   def initialize(file_name, format = 'csv')

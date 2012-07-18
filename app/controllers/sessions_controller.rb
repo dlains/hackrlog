@@ -30,13 +30,13 @@ class SessionsController < ApplicationController
   end
 
   def reopen_send
-    hacker = Hacker.first(:conditions => ["email = ?", params[:email]])
-    
+    hacker = Hacker.find_by_email(params[:email])
+
     respond_to do |format|
       reset_hacker_password(hacker, true)
       Notifier.account_reopened(hacker, password).deliver
 
-      format.html {redirect_to login_url, :notice => "Your account has been reopened and a new password has been sent to your email account."}
+      format.html {redirect_to login_url, notice: "Your account has been reopened and a new password has been sent to your email account."}
     end
   end
   

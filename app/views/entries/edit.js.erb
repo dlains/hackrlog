@@ -6,7 +6,7 @@ $('#entry_<%= @entry.id %>').fadeOut('normal');
 $('#entry_<%= @entry.id %>').queue('fx',
   function() {
     $(this).children().replaceWith(
-      $('<%= escape_javascript(render :partial => "edit_form", :locals => {:entry => @entry, :remote => true}) %>'));
+      $('<%= escape_javascript(render partial: "edit_form", locals: {entry: @entry, remote: true}) %>'));
     $(this).dequeue('fx');
   }
 );

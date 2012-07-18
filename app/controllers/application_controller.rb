@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   # database and ensure that user account has not been disabled.
   def authorize
     @current_user = current_user
-    
+
     unless @current_user
       redirect_to login_url, notice: "Please log in."
       return

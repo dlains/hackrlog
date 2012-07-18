@@ -15,7 +15,7 @@
   $('#new_entry')[0].reset();
 
   // Update the Tag Manager sidebar.
-  $('#tag_manager').replaceWith('<%= escape_javascript(render :partial => "tags/list") %>')
+  $('#tag_manager').replaceWith('<%= escape_javascript(render partial: "tags/list") %>')
 
   // Update saved tags.
   <% if session.has_key?(:current_tags) %>

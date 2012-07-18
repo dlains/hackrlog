@@ -14,7 +14,7 @@ $('#entry_<%= @entry.id %>').queue('fx',
 $('#entry_<%= @entry.id %>').fadeIn('normal');
 
 // Update the Tag Usage sidebar.
-$('#tag_manager').replaceWith('<%= escape_javascript(render :partial => "tags/list") %>');
+$('#tag_manager').replaceWith('<%= escape_javascript(render partial: "tags/list") %>');
 
 // Update saved tags.
 <% if session.has_key?(:current_tags) %>

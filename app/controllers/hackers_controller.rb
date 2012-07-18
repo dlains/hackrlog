@@ -1,6 +1,6 @@
 class HackersController < ApplicationController
   layout :hacker_layout
-  skip_before_filter :authorize, :only => [:new, :create]
+  skip_before_filter :authorize, only: [:new, :create]
 
   # GET /hackers
   # GET /hackers.json
@@ -61,7 +61,7 @@ class HackersController < ApplicationController
     if params[:hacker][:activating_premium]
       respond_to do |format|
         if @hacker.update_with_premium(params[:hacker])
-          
+
           format.html { redirect_to edit_hacker_path(@hacker), notice: "Congratulations, your account has been upgraded to hackrLog() Premium!" }
           format.json { head :no_content }
         else
@@ -156,8 +156,8 @@ class HackersController < ApplicationController
       
     # Create the first entry now that the tags have been created.
     hacker.entries.build({
-      :content => content,
-      :tag_ids => [Tag.find_by_name("todo").id]
+      content: content,
+      tag_ids: [Tag.find_by_name("todo").id]
     })
     hacker.save
   end

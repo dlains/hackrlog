@@ -14,7 +14,7 @@ $('div#entries').attr('data-last', '<%= (@entries.count > 0) ? @count : "complet
 <% if session.has_key?(:current_tags) %>
   $('#tags').val('<%= session[:current_tags] %>');
 <% end %>
- 
+
 // Make sure the log entry input is selected.
 $('#entry_content').focus();
 

@@ -6,7 +6,7 @@ module EntriesHelper
       Albino.colorize(code, language)
     end
   end
-  
+
   # Only need one instance of the markdown processor.
   @@markdown = Redcarpet::Markdown.new(HTMLAlbino, fenced_code_blocks: true, autolink: true, no_intra_emphasis: true)
   

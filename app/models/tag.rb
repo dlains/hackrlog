@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   has_and_belongs_to_many :entries
-  
+
   attr_accessible :name
   validates :name, presence: true
   validates :name, format: { with: /\A[^\s]*\z/ }

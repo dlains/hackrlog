@@ -1,10 +1,10 @@
 class Entry < ActiveRecord::Base
-  belongs_to :hacker, :inverse_of => :entries
+  belongs_to :hacker, inverse_of: :entries
   has_and_belongs_to_many :tags
   attr_accessible :content, :hacker_id, :tag_ids
   validates :content, presence: true
   validates :hacker_id, numericality: { greater_than_or_equal_to: 1 }
-  
+
   class << self
     # The SQL query works as follows: The sub query selects all entries_tags records that have a tag_id
     # from one of the requested tags. What we want is only the entries that have ALL of the selected tags
@@ -25,7 +25,7 @@ class Entry < ActiveRecord::Base
       )
       
       ids.collect! {|e| e.id}
-      find(ids, :order => 'created_at DESC')
+      find(ids, order: 'created_at DESC')
     end
   end
 

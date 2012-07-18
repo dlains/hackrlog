@@ -46,5 +46,7 @@ group :test do
   gem 'capybara'
 end
 
+gem 'simplecov', require: false, group: :test
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

@@ -17,7 +17,7 @@ Hackrlog::Application.routes.draw do
   controller :search do
     get  'search' => :search
   end
-  
+
   resources :hackers do
     member do
       get  'export'
@@ -76,7 +76,7 @@ Hackrlog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index', :as => 'home'
+  root to: 'home#index', as: 'home'
 
   # See how all your routes lay out with "rake routes"
 

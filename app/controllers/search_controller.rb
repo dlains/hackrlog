@@ -8,10 +8,10 @@ class SearchController < ApplicationController
       words.map! { |word| "content like " + word }
       @entries = Entry.where("hacker_id = ? and #{words.join(" or ")}", current_user.id)
     end
-    
+
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @entries }
+      format.xml  { render xml: @entries }
     end
   end
 
