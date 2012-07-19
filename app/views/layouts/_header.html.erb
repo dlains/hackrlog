@@ -7,8 +7,25 @@
         <span class="icon-bar"></span>
       </a>
       <%= link_to "hackrLog()", entries_url, title: 'Home', class: 'brand' %>
+      <div class="btn-group pull-right">
+        <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-user icon-white"></i> <%= current_user.name %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="<%= entries_path %>">Entries</a></li>
+          <li><a href="<%= edit_hacker_path(current_user) %>">Profile</a></li>
+          <li class="divider"></li>
+          <li><a href="<%= logout_path %>">Sign Out</a></li>
+        </ul>
+      </div>
+      <div class="nav-collapse" role="navigation">
+        <ul class="nav">
+          <li class="<%= active?('About') %>"><%= link_to 'About', controller: 'home', action: 'about' %></li>
+          <li class="<%= active?('Help') %>"><%= link_to 'Help', controller: 'home', action: 'help' %></li>
+        </ul>
+      </div>
       <%= render partial: "search/form" %>
-      <%= yield :main_navigation %>
     </div>
   </div>
 </div>
