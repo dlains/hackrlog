@@ -1,6 +1,5 @@
 class Hacker < ActiveRecord::Base
   has_many :entries, inverse_of: :hacker
-  has_many :tag_sets
 
   has_secure_password
   attr_accessible :email, :name, :time_zone, :password, :password_confirmation, :save_tags
@@ -50,7 +49,7 @@ class Hacker < ActiveRecord::Base
   private
 
   def password_provided?
-    password != "" && password != nil
+    self.password != "" && self.password != nil
   end
 
 end
