@@ -26,7 +26,13 @@ Hackrlog::Application.routes.draw do
     end
   end
   resources :entries
-  resources :password_resets
+  resources :password_resets, only: [:new, :create, :edit, :update]
+  
+  resources :beta_requests, except: [:destroy] do
+    collection do
+      get 'activate'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -59,24 +59,62 @@ describe Hacker do
   
   describe "#send_password_reset" do
     let(:hacker) { FactoryGirl.create(:hacker) }
-    it "generates a unique password_reset_token each time" do
+    
+    before do
       hacker.send_password_reset
+    end
+    
+    it "generates a unique password_reset_token each time" do
       last_token = hacker.password_reset_token
       hacker.send_password_reset
       hacker.password_reset_token.should_not eq(last_token)
     end
     
     it "saves the time the password reset was sent" do
-      hacker.send_password_reset
       hacker.reload.password_reset_sent_at.should be_present
     end
     
     it "delivers email to user" do
-      hacker.send_password_reset
       last_email.to.should include(hacker.email)
     end
   end
   
+  describe '#enable_beta_access' do
+    let(:hacker) { FactoryGirl.create(:hacker) }
+    
+    before do
+      hacker.enable_beta_access
+    end
+    
+    it 'enables the beta access flag' do
+      hacker.beta_access.should be_true
+    end
+    
+    it 'creates a fake password for the hacker' do
+      hacker.password_digest.should_not be_nil
+    end
+    
+    it 'delivers beta access request email to the user' do
+      last_email.to.should include(hacker.email)
+    end
+  end
+  
+  describe '#activate_beta_access' do
+    let(:hacker) { FactoryGirl.create(:hacker, beta_access: true) }
+    
+    before do
+      hacker.activate_beta_access
+    end
+    
+    it 'creates a password_reset_token' do
+      hacker.password_reset_token.should_not be_nil
+    end
+    
+    it 'delivers the activate beta access email' do
+      last_email.to.should include(hacker.email)
+    end
+  end
+
   describe "#generate_token" do
     it 'sets a token for the specified field' do
       @hacker.generate_token(:auth_token)

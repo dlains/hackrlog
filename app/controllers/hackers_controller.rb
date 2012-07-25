@@ -41,7 +41,7 @@ class HackersController < ApplicationController
     respond_to do |format|
       if @hacker.save
         cookies[:auth_token] = @hacker.auth_token
-        create_initial_user_data(@hacker)
+        @hacker.create_initial_data
         Notifier.account_created(@hacker).deliver
         format.html { redirect_to entries_url, notice: "Hacker #{@hacker.email} was successfully created." }
         format.json { render json: @hacker, status: :created, location: @hacker }

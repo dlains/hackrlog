@@ -66,7 +66,7 @@ describe 'Sessions' do
       
       current_path.should eq(entries_path)
       
-      click_link 'Logout'
+      click_link 'Sign Out'
       
       current_path.should eq(home_path)
     end

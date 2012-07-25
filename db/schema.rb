@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120501162804) do
     t.string   "stripe_customer_token"
     t.string   "time_zone",              :default => "Pacific Time (US & Canada)"
     t.boolean  "enabled",                :default => true
+    t.boolean  "beta_access",            :default => false
     t.boolean  "save_tags",              :default => true
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
