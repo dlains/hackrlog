@@ -16,6 +16,7 @@
  *= require global
  *= require entries
  *= require tags
+ *= require hackers
  */
 
 /* Pad the body tag at least 40px to move the content below the navbar. */

@@ -13,6 +13,22 @@ module ApplicationHelper
     end
   end
 
+  # For the _sidebar, show the tag list or the profile image and stats.
+  def show_profile?
+    if controller.controller_name == 'hackers'
+      true
+    else
+      false
+    end
+  end
+  
+  # Get Gravatar image for profile.
+  def gravatar_url(hacker)
+    gravatar_id = Digest::MD5.hexdigest(hacker.email.downcase)
+    # TODO: Switch to https://secure.gravatar.com/ when SSL is enabled.
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=200&r=r"
+  end
+  
   # Get the tags needed for the sidebar.
   def get_updated_tag_list
     if is_filtered?

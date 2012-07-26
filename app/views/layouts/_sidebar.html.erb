@@ -1,0 +1,6 @@
+<% if show_profile? %>
+  <%= render partial: "hackers/profile" %>
+<% else %>
+  <%= render partial: "tags/list" %>
+<% end %>
+<%= render 'layouts/footer' %>
