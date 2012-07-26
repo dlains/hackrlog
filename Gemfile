@@ -44,6 +44,8 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'spork'
+  gem 'guard-spork'
 end
 
 gem 'simplecov', require: false, group: :test

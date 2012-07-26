@@ -30,7 +30,7 @@ class Entry < ActiveRecord::Base
   end
 
   def export_csv
-    content + '","' + tags.join(" ") + '","' + created_at.to_s + '","' + updated_at.to_s + '"'
+    '"' + content + '","' + tags.join(" ") + '","' + created_at.to_s + '","' + updated_at.to_s + '"'
   end
   
   def csv_header
@@ -38,7 +38,7 @@ class Entry < ActiveRecord::Base
   end
   
   def export_json
-    '{"entry":{"content":"' + content + '","tags":"' + tags.join(" ") + '","created_at:":"' + created_at.to_s + '","updated_at":"' + updated_at.to_s + '"}}'
+    '{"entry":{"content":"' + content + '","tags":"' + tags.join(" ") + '","created_at":"' + created_at.to_s + '","updated_at":"' + updated_at.to_s + '"}}'
   end
   
   def export_yml
