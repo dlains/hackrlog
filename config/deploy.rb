@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 
-set :application, "hackrlog"
+set :application, "hackrlog.com"
 set :scm, :git
 set :repository,  "git@github.com:dlains/hackrlog.git"
 
