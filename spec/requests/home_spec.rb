@@ -76,7 +76,7 @@ describe 'Home' do
   end
   
   describe 'GET privacy_path' do
-    it 'gets the pricing page' do
+    it 'gets the privacy page' do
 
       visit home_url
       click_link 'Privacy'

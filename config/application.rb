@@ -18,6 +18,9 @@ module Hackrlog
     # Load the custom form builder and data export code.
     config.autoload_paths += %W(#{config.root}/lib)
 
+    # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+    config.force_ssl = true
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

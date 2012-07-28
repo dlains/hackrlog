@@ -1,14 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
-  #include ::SslRequirement OLD VERSION CHECK ON NEW SSL STUFF TODO TODO
   before_filter :authorize
   protect_from_forgery
-
-  # TODO OLD VERSION UPDATE AS NECESSARY
-  #def ssl_required?
-  #  return false if ::Rails.env == 'development' || ::Rails.env == 'test'
-  #  super
-  #end
 
   protected
 

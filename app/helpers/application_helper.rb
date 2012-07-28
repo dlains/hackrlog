@@ -25,8 +25,7 @@ module ApplicationHelper
   # Get Gravatar image for profile.
   def gravatar_url(hacker)
     gravatar_id = Digest::MD5.hexdigest(hacker.email.downcase)
-    # TODO: Switch to https://secure.gravatar.com/ when SSL is enabled.
-    "http://gravatar.com/avatar/#{gravatar_id}.png?s=200&r=r"
+    "https://secure.gravatar.com/avatar/#{gravatar_id}.png?s=200&r=r"
   end
   
   # Get the tags needed for the sidebar.

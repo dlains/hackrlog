@@ -2,9 +2,6 @@ class SessionsController < ApplicationController
   layout "home"
   skip_before_filter :authorize
 
-  # TODO OLD VERSION Look into how to do SSL now.
-  #ssl_required :new, :create, :reset_send
-
   def new
   end
 
