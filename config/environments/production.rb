@@ -54,7 +54,7 @@ Hackrlog::Application.configure do
   # Mail configuration
   config.action_mailer.smtp_settings = {
     user_name: 'support',
-    password: 'khaym4nz0r'
+    password: 'khaym4nz0r',
     authentication: :login
   }
   
