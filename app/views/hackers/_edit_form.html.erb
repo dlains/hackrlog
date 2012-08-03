@@ -136,7 +136,7 @@
       <% end %>
     </div>
     <div class="tab-pane" id="export">
-      <%= form_tag(export_hacker_url, method: "get", class: 'well form-horizontal') do %>
+      <%= form_tag(export_hacker_url(@hacker.id), method: "get", class: 'well form-horizontal') do %>
       <fieldset>
         <legend>Export Your Data</legend>
         <div class="control-group">
@@ -168,8 +168,12 @@
       <% end %>
     </div>
     <div class="tab-pane" id="cancel">
-      <%= form_tag(cancel_hacker_url, method: :post, class: 'well form-horizontal') do %>
+      <%= form_tag(cancel_hacker_url(@hacker.id), method: :post, id: 'cancel-form', class: 'well form-horizontal') do %>
         <fieldset>
+          <div class="alert alert-info">
+            <h4 class="alert-heading">Beware!</h4>
+            <p id="notice">If you cancel your account your data will be deleted. If you wish to keep your data please export it first.</p>
+          </div>
           <div class="control-group">
               <%= label_tag :cancel, "Cancel Account", class: 'control-label' %>
               <div class="controls">
@@ -177,6 +181,13 @@
                   <%= check_box_tag :cancel %>
                   Are you sure you wish to cancel your account?
                 </label>
+              </div>
+              <div class="control-group">
+                <%= label_tag :cancel_password, 'Password', class: "control-label" %>
+                <div class="controls">
+                  <%= password_field_tag :cancel_password, nil, size: 40, tabindex: 1, class: 'span3' %>
+                  <%= form_field_error(@hacker, :cancel_password) %>
+                </div>
               </div>
             </div>
             <div class="form-actions">

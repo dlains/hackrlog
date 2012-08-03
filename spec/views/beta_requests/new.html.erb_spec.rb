@@ -6,7 +6,6 @@ describe 'beta_requests/new.html.erb' do
     render
     rendered.should have_selector('input', type: 'text')
     rendered.should have_selector('input', type: 'submit', value: 'Request Beta Access')
-    rendered.should have_content('@hackrlog')
   end
   
   it 'renders a form to request beta access' do

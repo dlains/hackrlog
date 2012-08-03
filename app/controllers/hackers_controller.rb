@@ -113,17 +113,18 @@ class HackersController < ApplicationController
   # POST /hackers/1/cancel
   def cancel
     return unless modifying_self?
-    
-    @hacker = current_user
-    @hacker.enabled = false
-    @hacker.save!
 
-    Notifier.account_closed(hacker).deliver
-
-    session.delete :hacker_id
-    session.delete :admin
+    if current_user.authenticate(params[:cancel_password])
+      current_user.cancel_account
     
-    redirect_to home_url
+      cookies.delete :auth_token
+      session.delete :filter
+      session.delete :current_tags
+    
+      redirect_to home_url
+    else
+      redirect_to(edit_hacker_path(current_user), alert: 'Incorrect password supplied')
+    end
   end
   
   private
@@ -148,18 +149,4 @@ class HackersController < ApplicationController
     cookies[:auth_token] ? 'application' : 'home'
   end
   
-  def create_initial_user_data(hacker)
-    # Text for the first log entry.
-    # TODO: Update this before going live.
-    # TODO: Include pointers to markdown help.
-    content = "## Welcome to __hackrLog__\n\nThis is your first note. You can edit it by clicking the 'Edit' link to the left, or delete it and start fresh with a new note.\n\n### Getting Started\n\nEnter new notes at the top of the page. Notes appear in this list, newest first. As more notes are added a stream of information is created that can become very long.\n\nThis is where Tags become useful. Tags can be created automatically by adding them to a note or manually in the Tag Manager on the right. Tags are case sensative and can have spaces. Separate tags in the form with commas.\n\nWhen you wish to find a particular note or set of notes click a Tag name, either in a note or in the Tag Manager on the right. You will see a list of notes which contain the selected Tag. You will also be able to add additional Tags to refine your note selection.\n"
-      
-    # Create the first entry now that the tags have been created.
-    hacker.entries.build({
-      content: content,
-      tag_ids: [Tag.find_by_name("todo").id]
-    })
-    hacker.save
-  end
-
 end

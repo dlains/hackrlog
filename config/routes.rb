@@ -84,8 +84,7 @@ Hackrlog::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # TODO: Reset this when beta starts.
-  #root to: 'home#index', as: 'home'
-  root to: 'beta_requests#new', as: 'home'
+  root to: 'home#index', as: 'home'
 
   # See how all your routes lay out with "rake routes"
 

@@ -8,7 +8,6 @@ describe 'beta_requests/index.html.erb' do
   it 'displays the beta request acknowledged page' do
     render
     rendered.should have_content('Your hackrLog() Beta request has been recorded. You will get further instrunctions when the Beta goes live.')
-    rendered.should have_content('@hackrlog')
   end
   
   it 'should not show a form' do
