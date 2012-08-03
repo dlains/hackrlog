@@ -1,28 +1,49 @@
-<%= form_for(@hacker) do |f| %>
-  <h3>Join hackrLog</h3>
+<%= form_for(@hacker, html: {class: 'well form-horizontal'}) do |f| %>
   <fieldset>
-    <ol>
-      <li class="required">
-        <%= f.label :email %>
-        <%= f.text_field :email, autofocus: true, tabindex: 1 %>
+    <legend>Join hackrLog()</legend>
+    <% if flash[:notice] %>
+      <div class="alert alert-block alert-info">
+        <a class="close" data-dismiss="alert" href="#">x</a>
+        <h4 class="alert-heading">Notice!</h4>
+        <p><%= flash[:notice] %></p>
+      </div>
+    <% elsif flash[:alert] %>
+    <div class="alert alert-block alert-error">
+      <a class="close" data-dismiss="alert" href="#">x</a>
+      <h4 class="alert-heading">Error!</h4>
+      <p><%= flash[:alert] %></p>
+    </div>
+    <% end %>
+    <div class="control-group">
+      <%= f.label :email, class: 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :email, autofocus: true, tabindex: 1, class: 'span4' %>
         <%= form_field_error(@hacker, :email) %>
-      </li>
-      <li>
-        <%= f.label :name, "Nickname (optional)" %>
-        <%= f.text_field :name, tabindex: 2 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :name, 'Nickname (optional)', class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, tabindex: 2, class: 'span4' %>
         <%= form_field_error(@hacker, :name) %>
-      </li>
-      <li class="required">
-        <%= f.label :password, 'Password' %>
-        <%= f.password_field :password, size: 40, tabindex: 3 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password, 'Password', class: 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password, size: 40, tabindex: 3, class: 'span4' %>
         <%= form_field_error(@hacker, :password) %>
-      </li>
-      <li class="required">
-        <%= f.label :password_confirmation, 'Confirm Password' %>
-        <%= f.password_field :password_confirmation, size: 40, tabindex: 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password_confirmation, 'Confirm Password', class: 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation, size: 40, tabindex: 4, class: 'span4' %>
         <%= form_field_error(@hacker, :password_confirmation) %>
-      </li>
-    </ol>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= submit_tag "Join", class: 'btn btn-primary' %>
+    </div>
   </fieldset>
-  <%= submit_tag "Join" %>
 <% end %>
