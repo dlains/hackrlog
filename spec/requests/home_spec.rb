@@ -28,6 +28,14 @@ describe 'Home' do
       page.should have_selector("input", type: 'checkbox', name: 'remember_me')
       page.should have_selector("input", type: 'submit')
     end
+    
+    it 'has a sign up link' do
+      visit home_url
+      
+      # Check for the sign up link.
+      page.should have_selector('p a', href: new_hacker_path, class: 'btn btn-primary btn-large')
+      page.should have_content('Sign Up!')
+    end
   end
   
   describe 'GET about_path' do
