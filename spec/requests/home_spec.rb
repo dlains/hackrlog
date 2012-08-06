@@ -60,18 +60,6 @@ describe 'Home' do
     end
   end
   
-  describe 'GET pricing_path' do
-    it 'gets the pricing page' do
-
-      visit home_url
-      click_link 'Pricing'
-      
-      page.should have_selector('ul.nav')
-      page.should have_selector('li', class: 'active')
-      page.should have_selector('a', href: home_pricing_path)
-    end
-  end
-  
   describe 'GET tos_path' do
     it 'gets the tos page' do
 
