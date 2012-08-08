@@ -1,7 +1,36 @@
-<% if @limit_exceeded %>
-  $('#entry_form').hide();
+<% if @limit %>
+  // Remove the entry form and show the alert message.
+  $('#entry_form').remove();
   $('#hackrlog-error-text').text('<%= flash[:alert] %>');
   $('#hackrlog-error').toggle();
+
+  // Insert the newly created entry into the 'entries' div and set its display property to 'none' in
+  // preparation for animation.
+  $('#entries').prepend($('<%= escape_javascript(render @entry) %>').css('display', 'none'));
+
+  // Perform the slideDown animation on the newly created entry.
+  $('#entries article#entry_<%= @entry.id %>').slideDown('slow');
+
+  // Update the Tag Manager sidebar.
+  $('#tag_manager').replaceWith('<%= escape_javascript(render partial: "tags/list") %>')
+
+  // Rebind all checkboxes because they have been replaced in the DOM.
+  $('.filter-checkbox').bind('change', function(event) {
+    if(event.target.checked) {
+      $.ajax({
+        url: '/entries',
+        data: { add_to_filter: event.target.value},
+        dataType: 'script'
+      });
+    }
+    else {
+      $.ajax({
+        url: '/entries',
+        data: { remove_from_filter: event.target.value },
+        dataType: 'script'
+      });
+    }
+  });
 <% else %>
   $('#entry_form').show();
   // Insert the newly created entry into the 'entries' div and set its display property to 'none' in

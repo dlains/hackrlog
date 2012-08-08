@@ -26,6 +26,7 @@ class Hacker < ActiveRecord::Base
   # Create an entry for the given user. Checks premium status and free limits.
   def create_entry(entry_attrs)
     if subscription.can_create_entry?
+      entry_attrs['hacker_id'] = self.id
       Entry.create! entry_attrs
     end
   end

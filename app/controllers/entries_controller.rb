@@ -28,6 +28,11 @@ class EntriesController < ApplicationController
       @entries = Entry.where('hacker_id = ?', current_user.id).order('created_at DESC').limit(20).offset(offset)
     end
 
+    if current_user.subscription.at_limit?
+      @limit = true
+      flash[:alert] = 'You have reached the limit for a free account. Upgrade to hackrLog() Premium to remove the limit.'
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.js   # index.js.erb
@@ -75,13 +80,18 @@ class EntriesController < ApplicationController
   # POST /entries
   # POST /entries.json
   def create
-    @limit_exceeded = false
+    @limit = false
     process_tags
     @entry = current_user.create_entry(params[:entry])
     
     if @entry == nil
-      @limit_exceeded = true
+      @limit = true
       flash[:alert] = 'Unable to create any more hackrLog() entries for this account. Upgrade to hackrLog() Premium to remove this limit.'
+    end
+    
+    if current_user.subscription.at_limit?
+      @limit = true
+      flash[:alert] = 'You have reached the entry limit for a free account. Upgrade to hackrLog() Premium to remove the limit.'
     end
     
     respond_to do |format|

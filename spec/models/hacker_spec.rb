@@ -67,7 +67,7 @@ describe Hacker do
       
       it 'adds a new entry record' do
         lambda {
-          entry = hacker.create_entry(content: 'This is the entry content.', hacker_id: hacker.id)
+          entry = hacker.create_entry(content: 'This is the entry content.')
         }.should change(Entry, :count)
       end
     end
@@ -79,7 +79,7 @@ describe Hacker do
       
       it 'does not add a new entry record' do
         lambda {
-          entry = hacker.create_entry(content: 'This is not going to be created.', hacker_id: hacker.id)
+          entry = hacker.create_entry(content: 'This is not going to be created.')
         }.should_not change(Entry, :count)
       end
     end

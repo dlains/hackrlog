@@ -1,14 +1,23 @@
-<div id="hackrlog-error" style="display: none">
-  <div class="alert alert-block alert-error">
+<% if @limit %>
+<div id="hackrlog-error">
+  <div class="alert alert-block alert-info">
     <a class="close" data-dismiss="alert" href="#">x</a>
-    <h4 class="alert-heading">Error!</h4>
+    <h4 class="alert-heading">Alert!</h4>
+    <p id="hackrlog-error-text"><%= flash[:alert] %></p>
+  </div>
+</div>
+<% else %>
+<div id="hackrlog-error" style="display: none">
+  <div class="alert alert-block alert-info">
+    <a class="close" data-dismiss="alert" href="#">x</a>
+    <h4 class="alert-heading">Alert!</h4>
     <p id="hackrlog-error-text"></p>
   </div>
 </div>
 <div id="entry_form">
   <%= render partial: 'form', locals: {remote: true} %>
 </div><%# entry_form end %>
-
+<% end %>
 <div id="entries" data-last="<%= @count %>">
   <%= render partial: 'entry', collection: @entries %>
 </div><%# entries end %>
