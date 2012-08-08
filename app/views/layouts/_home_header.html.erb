@@ -11,6 +11,7 @@
         <ul class="nav">
           <li class="<%= active?('About') %>"><%= link_to 'About', controller: 'home', action: 'about' %></li>
           <li class="<%= active?('Help') %>"><%= link_to 'Help', controller: 'home', action: 'help' %></li>
+          <li class="<%= active?('Pricing') %>"><%= link_to 'Pricing', controller: 'home', action: 'pricing' %></li>
         </ul>
         <%= render 'sessions/login_inline' unless controller.controller_name == 'sessions' && controller.action_name == 'new' %>
       </div>

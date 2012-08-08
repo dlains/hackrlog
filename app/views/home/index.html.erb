@@ -1,38 +1,58 @@
-<div class="hero-unit">
-  <h1>hackrLog()</h1>
-  <p>
-    Your note books are filled with tricky configuration solutions, handy algorithms, keyboard
-    shortcuts and reminders to touch up certain bits of code. How do you find the right note when
-    you need it again six months later?
-  </p>
-  <p>
-    hackrLog makes it easy to enter and tag development notes so you can find the note you need when
-    you need it.
-  </p>
-  <p><%= link_to 'Sign Up!', new_hacker_path, class: 'btn btn-primary btn-large' %></p>
-</div><%# hero_unit end %>
+<header class="jumbotron masthead">
+  <div class="hero-unit">
+    <h1>Welcome to hackrLog()</h1>
+    <p>
+      Note taking built for developers.
+    </p>
+    <p><%= link_to 'Sign Up!', new_hacker_path, class: 'btn btn-primary btn-large' %></p>
+    <div class="ui">
+      <%= image_tag "ui.png" %>
+    </div>
+  </div><%# hero_unit end %>
+</header><%# header end %>
 
+<div id="description" class="row">
+  <div class="span6">
+    <p class="lead">
+      Tired of searching through paper notebooks for that Tomcat configuration setting you used last year
+      and suddenly need again? Spending more time organizing your plain text note files than actually writing
+      in them? Fed up with other note taking services that force the less than useful <em>page</em> paradigm on you?
+    </p>
+  </div>
+  <div class="span6">
+    <p class="lead">
+      hackrLog() was created to solve those headaches. With hackrLog() each note is a separate entity. Tag your
+      notes with keywords to categorize them and then filter your note stream using those tags to see just
+      the data you're interested in.
+    </p>
+  </div>
+</div>
 <div id="features" class="row">
+  <div class="page-header span12">
+    <h1>Features</h1>
+  </div>
   <div class="span4">
     <%= image_tag "write.png" %>
     <p>
       <strong>Enter Notes Quickly</strong> Capture notes while they are fresh in your mind. No need to hunt down
-      the correct file or wiki page to edit. Use <a href="http://textile.thresholdstate.com/" title="Textile Reference">Textile</a>,
-      <a href="http://daringfireball.net/projects/markdown/" title="Markdown Reference">Markdown</a> or plain text formatting.
+      the correct file or wiki page to edit. Use <a href="http://github.github.com/github-flavored-markdown/" title="Markdown">
+      Github Flavored Markdown</a> to format your notes and code blocks nicely.
     </p>
   </div>
   <div class="span4">
     <%= image_tag "tag.png" %>
     <p>
-      <strong>Tag Your Notes</strong> Use tags liberally to increase the chance of finding the information again in the future.
-      Creating new tags is easy, simply add a new tag to a note and it will be created automatically.
+      <strong>Tag Your Notes</strong> Use tags liberally to help categorize your information. Creating new tags is
+      easy, simply add space separated words to your note and any tags that don't already exist will be created when
+      you save the note.
     </p>
   </div>
   <div class="span4">
     <%= image_tag "find.png" %>
     <p>
-      <strong>Find Notes</strong> Combine tags to filter out notes that are not relevant or use full text search
-      to find the information you need.
+      <strong>Filter Your Notes</strong> Check a tag in the <strong>Used Tags</strong>list and the notes shown on the
+      page will be filtered to that tag. Check another tag to further refine the filter. You can create more notes while
+      the filter is active as well.
     </p>
   </div>
 </div>

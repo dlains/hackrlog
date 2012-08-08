@@ -1,6 +1,7 @@
 class Hacker < ActiveRecord::Base
   has_many :entries, inverse_of: :hacker, dependent: :delete_all
-
+  belongs_to :subscription
+  
   has_secure_password
   attr_accessible :email, :name, :time_zone, :password, :password_confirmation, :save_tags
   validates :email, presence: true, uniqueness: true, email: true
@@ -8,7 +9,10 @@ class Hacker < ActiveRecord::Base
   validates_presence_of :password_confirmation, if: :password_provided?
   validates_presence_of :time_zone
 
-  before_create { generate_token(:auth_token) }
+  before_create { 
+    generate_token(:auth_token)
+    add_free_subscription
+  }
 
   attr_accessor :stripe_card_token
 
@@ -19,6 +23,15 @@ class Hacker < ActiveRecord::Base
     super(options)
   end
 
+  # Create an entry for the given user. Checks premium status and free limits.
+  def create_entry(entry_attrs)
+    if subscription.can_create_entry?
+      Entry.create! entry_attrs
+    end
+  end
+  
+  # Upgrade existing account to hackrLog() Premium.
+  # TODO: Switch to StripeService and write RSpec tests.
   def update_with_premium(params)
     if valid?
       customer = Stripe::Customer.create(email: self.email, plan: 'hackrlog_1', card: params[:stripe_card_token])
@@ -37,9 +50,9 @@ class Hacker < ActiveRecord::Base
   # Cancel the Stripe Customer Subscription if this is a premium account.
   def cancel_account
     self.enabled = false
-    if self.premium_active
-      self.premium_active = false
-      self.premium_start_date = nil
+    if self.subscription.premium_account
+      self.subscription.premium_account = false
+      self.subscription.premium_start_date = nil
       StripeService.cancel_customer_subscription(self)
     end
     self.entries.clear
@@ -89,6 +102,10 @@ class Hacker < ActiveRecord::Base
 
   private
 
+  def add_free_subscription
+    self.subscription = Subscription.create!
+  end
+  
   def password_provided?
     self.password != "" && self.password != nil
   end

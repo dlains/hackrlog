@@ -42,7 +42,6 @@ describe Hacker do
     it 'does not show sensitive data' do
       @hacker.generate_token(:auth_token)
       @hacker.generate_token(:password_reset_token)
-      @hacker.generate_token(:stripe_customer_token)
       
       xml = @hacker.to_xml
       
@@ -51,9 +50,38 @@ describe Hacker do
       xml.include?('<auth_token').should be_false
       xml.include?('<password_reset_token>').should be_false
       xml.include?('<password_reset_sent_at>').should be_false
-      xml.include?('<premium_start_date>').should be_false
-      xml.include?('<premium_active>').should be_false
-      xml.include?('<stripe_customer_token>').should be_false 
+    end
+  end
+  
+  describe '#create_entry' do
+    let(:hacker) { FactoryGirl.create(:hacker) }
+
+    before(:each) do
+      hacker.subscription = Subscription.new
+    end
+    
+    context 'when the hacker account is free and their entry limit has not been reached' do
+      before(:each) do
+        hacker.subscription.stub(:can_create_entry?).and_return true
+      end
+      
+      it 'adds a new entry record' do
+        lambda {
+          entry = hacker.create_entry(content: 'This is the entry content.', hacker_id: hacker.id)
+        }.should change(Entry, :count)
+      end
+    end
+    
+    context 'when the hacker account is free and their entry limit has been reached' do
+      before(:each) do
+        hacker.subscription.stub(:can_create_entry?).and_return false
+      end
+      
+      it 'does not add a new entry record' do
+        lambda {
+          entry = hacker.create_entry(content: 'This is not going to be created.', hacker_id: hacker.id)
+        }.should_not change(Entry, :count)
+      end
     end
   end
   

@@ -76,28 +76,18 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @limit_exceeded = false
-    if can_create_entries?
-      process_tags
-      @entry = Entry.new(params[:entry])
-      @entry.hacker_id = current_user.id
+    process_tags
+    @entry = current_user.create_entry(params[:entry])
     
-      respond_to do |format|
-        if @entry.save
-          format.html { redirect_to entries_url }
-          format.js
-          format.json { render json: @entry, status: :created, location: @entry }
-        else
-          format.html { render action: "new" }
-          format.json { render json: @entry.errors, status: :unprocessable_entity }
-        end
-      end
-    else
+    if @entry == nil
       @limit_exceeded = true
       flash[:alert] = 'Unable to create any more hackrLog() entries for this account. Upgrade to hackrLog() Premium to remove this limit.'
-      
-      respond_to do |format|
-        format.js
-      end
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to entries_url }
+      format.js
+      format.json { render json: @entry, status: :created, location: @entry }
     end
   end
 
@@ -145,15 +135,6 @@ class EntriesController < ApplicationController
   
   private
 
-  # Can the current hacker create new entries?
-  def can_create_entries?
-    if current_user.premium_active || current_user.entries.count <= 25
-      return true
-    else
-      return false
-    end
-  end
-  
   # Find existing tags or create new tags from user input.
   def process_tags
     return unless params.has_key?(:tags)

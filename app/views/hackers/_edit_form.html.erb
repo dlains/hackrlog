@@ -103,9 +103,9 @@
             <p id="stripe-error-text"></p>
           </div>
         </div>
-        <% if @hacker.premium_active %>
-          <p>Your account was upgraded to hackrLog() Premium on <%= @hacker.premium_start_date %>. The next charge will
-             occur in <%= distance_of_time_in_words(Date.today, @hacker.premium_start_date + 1.year) %>.</p>
+        <% if @hacker.subscription.premium_account %>
+          <p>Your account was upgraded to hackrLog() Premium on <%= @hacker.subscription.premium_start_date %>. The next charge will
+             occur in <%= distance_of_time_in_words(Date.today, @hacker.subscription.premium_start_date + 1.year) %>.</p>
         <% else %>
         <div class="control-group">
           <%= label_tag :card_number, "Card Number", class: 'control-label' %>

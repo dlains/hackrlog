@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501162804) do
+ActiveRecord::Schema.define(:version => 20120807210313) do
 
   create_table "entries", :force => true do |t|
     t.integer  "hacker_id",  :null => false
@@ -36,18 +36,24 @@ ActiveRecord::Schema.define(:version => 20120501162804) do
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.date     "premium_start_date"
-    t.boolean  "premium_active"
-    t.string   "stripe_customer_token"
     t.string   "time_zone",              :default => "Pacific Time (US & Canada)"
     t.boolean  "enabled",                :default => true
     t.boolean  "beta_access",            :default => false
     t.boolean  "save_tags",              :default => true
+    t.integer  "subscription_id"
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
   end
 
   add_index "hackers", ["email"], :name => "index_hackers_on_email", :unique => true
+
+  create_table "subscriptions", :force => true do |t|
+    t.boolean  "premium_account",       :default => false
+    t.date     "premium_start_date"
+    t.string   "stripe_customer_token"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
 
   create_table "tags", :force => true do |t|
     t.string   "name",       :null => false

@@ -72,10 +72,14 @@ describe 'Hackers' do
       end
       
       context 'with premium enabled' do
-        let(:hacker) { FactoryGirl.create(:hacker, premium_active: true, premium_start_date: Time.now, stripe_customer_token: 'premium_token') }
+        let(:hacker) { FactoryGirl.create(:hacker_with_entries, entries_count: 55) }
         let(:StripeService) { mock('StripeService')}
         
         before(:each) do
+          hacker.subscription.premium_account = true
+          hacker.subscription.premium_start_date = Time.now
+          hacker.subscription.stripe_customer_token = 'premium_token'
+          hacker.save!
           StripeService.stub('cancel_customer_subscription')
         end
         
@@ -84,8 +88,8 @@ describe 'Hackers' do
           fill_in 'cancel_password', with: hacker.password
           click_button 'Cancel'
           hacker.reload
-          hacker.premium_active.should be_false
-          hacker.premium_start_date.should be_nil
+          hacker.subscription.premium_account.should be_false
+          hacker.subscription.premium_start_date.should be_nil
           hacker.should have(:no).errors_on(:base)
         end
       end

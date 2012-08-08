@@ -17,6 +17,7 @@
  *= require entries
  *= require tags
  *= require hackers
+ *= require home
  */
 
 /* Pad the body tag at least 40px to move the content below the navbar. */

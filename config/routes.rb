@@ -3,6 +3,7 @@ Hackrlog::Application.routes.draw do
   get "home/index"
   get "home/about"
   get "home/help"
+  get "home/pricing"
   get "home/tos"
   get "home/privacy"
 
