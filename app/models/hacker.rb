@@ -32,19 +32,21 @@ class Hacker < ActiveRecord::Base
   end
   
   # Upgrade existing account to hackrLog() Premium.
-  # TODO: Switch to StripeService and write RSpec tests.
   def update_with_premium(params)
     if valid?
-      customer = Stripe::Customer.create(email: self.email, plan: 'hackrlog_1', card: params[:stripe_card_token])
-      self.premium_active = true
-      self.premium_start_date = Date.today
-      self.stripe_customer_token = customer.id
-      save!
+      customer = StripeService.create_customer(self, params[:stripe_card_token])
+      
+      if customer != nil
+        self.subscription.premium_account = true
+        self.subscription.premium_start_date = Date.today
+        self.subscription.stripe_customer_token = customer.id
+        self.subscription.save!
+      else
+        logger.error "Stripe customer creation failed for hacker: #{self.email}."
+        return false
+      end
     end
-  rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating customer: #{e.message}."
-    errors.add :base, "There was a problem processing your credit card."
-    false
+    return true
   end
   
   # Cancel the hacker's account and remove their entries.
@@ -55,6 +57,7 @@ class Hacker < ActiveRecord::Base
       self.subscription.premium_account = false
       self.subscription.premium_start_date = nil
       StripeService.cancel_customer_subscription(self)
+      self.subscription.save!
     end
     self.entries.clear
     save!

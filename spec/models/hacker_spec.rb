@@ -149,4 +149,19 @@ describe Hacker do
       @hacker.auth_token.should_not be_nil
     end
   end
+  
+  describe '#create_initial_data' do
+    let(:hacker) { FactoryGirl.create(:hacker) }
+
+    before(:each) do
+      todo = Tag.new
+      todo.name = 'todo'
+      todo.save!
+    end
+    
+    it 'creates the hackers first entry' do
+      hacker.create_initial_data
+      hacker.entries.count.should eq(1)
+    end
+  end
 end

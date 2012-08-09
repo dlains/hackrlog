@@ -35,7 +35,7 @@ describe 'Entries' do
       end
       
       it 'shows the free account limit reached message' do
-        page.should have_content('You have reached the limit for a free account. Upgrade to hackrLog() Premium to remove the limit.')
+        page.should have_content("You have reached the entry limit for a free account.")
       end
     end
   end

@@ -30,7 +30,7 @@ class EntriesController < ApplicationController
 
     if current_user.subscription.at_limit?
       @limit = true
-      flash[:alert] = 'You have reached the limit for a free account. Upgrade to hackrLog() Premium to remove the limit.'
+      flash.now[:alert] = "You have reached the entry limit for a free account. Upgrade to <a href='#{url_for(edit_hacker_url(current_user.id))}'>hackrLog() Premium</a> to remove the limit.".html_safe
     end
 
     respond_to do |format|
@@ -86,12 +86,12 @@ class EntriesController < ApplicationController
     
     if @entry == nil
       @limit = true
-      flash[:alert] = 'Unable to create any more hackrLog() entries for this account. Upgrade to hackrLog() Premium to remove this limit.'
+      flash.now[:alert] = "Unable to create any more hackrLog() entries for this account. Upgrade to <a href='#{url_for(edit_hacker_url(current_user.id))}'>hackrLog() Premium</a> to remove this limit.".html_safe
     end
     
     if current_user.subscription.at_limit?
       @limit = true
-      flash[:alert] = 'You have reached the entry limit for a free account. Upgrade to hackrLog() Premium to remove the limit.'
+      flash.now[:alert] = "You have reached the entry limit for a free account. Upgrade to <a href='#{url_for(edit_hacker_url(current_user.id))}'>hackrLog() Premium</a> to remove the limit.".html_safe
     end
     
     respond_to do |format|

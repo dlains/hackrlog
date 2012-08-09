@@ -65,7 +65,7 @@ class HackersController < ApplicationController
           format.html { redirect_to edit_hacker_path(@hacker), notice: "Congratulations, your account has been upgraded to hackrLog() Premium!" }
           format.json { head :no_content }
         else
-          format.html { render action: "edit" }
+          format.html { redirect_to edit_hacker_path(@hacker), alert: "There was a problem processing your credit card." }
           format.json { render json: @hacker.errors, status: :unprocessable_entity }
         end
       end
