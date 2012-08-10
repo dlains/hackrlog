@@ -102,28 +102,21 @@ class HackersController < ApplicationController
   # DELETE /hackers/1
   # DELETE /hackers/1.json
   def destroy
-    # Don't destroy hackers.
-
-    respond_to do |format|
-      format.html { redirect_to entries_path }
-      format.json { head :no_content }
-    end
-  end
-  
-  # POST /hackers/1/cancel
-  def cancel
     return unless modifying_self?
-
-    if current_user.authenticate(params[:cancel_password])
-      current_user.cancel_account
+    @hacker = current_user
+    
+    if @hacker.authenticate(params[:cancel_password])
+      @hacker.cancel_account
     
       cookies.delete :auth_token
       session.delete :filter
       session.delete :current_tags
-    
+
+      @hacker.destroy
+      
       redirect_to home_url
     else
-      redirect_to(edit_hacker_path(current_user), alert: 'Incorrect password supplied')
+      redirect_to(edit_hacker_path(@hacker), alert: 'Incorrect password supplied')
     end
   end
   

@@ -47,18 +47,6 @@ class Notifier < ActionMailer::Base
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.notifier.account_reopened.subject
-  #
-  def account_reopened(hacker, password)
-    @hacker = hacker
-    @password = password
-
-    mail to: @hacker.email, subject: 'hackrLog account reopened.'
-  end
-
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
   #   en.notifier.account_closed.subject
   #
   def account_closed(hacker)

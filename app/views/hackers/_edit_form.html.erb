@@ -173,7 +173,7 @@
       <% end %>
     </div>
     <div class="tab-pane" id="cancel">
-      <%= form_tag(cancel_hacker_url(@hacker.id), method: :post, id: 'cancel-form', class: 'well form-horizontal') do %>
+      <%= form_tag(hacker_url(@hacker.id), method: :delete, id: 'cancel-form', class: 'well form-horizontal') do %>
         <fieldset>
           <legend>Cancel Account</legend>
           <div class="alert alert-info">

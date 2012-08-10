@@ -11,8 +11,6 @@ Hackrlog::Application.routes.draw do
     get  'login'  => :new
     post 'login'  => :create
     get  'logout' => :destroy
-    get  'reopen' => :reopen
-    post 'reopen' => :reopen_send
   end
 
   controller :search do
@@ -22,7 +20,6 @@ Hackrlog::Application.routes.draw do
   resources :hackers do
     member do
       get  'export'
-      post 'cancel'
     end
   end
   resources :entries

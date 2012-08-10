@@ -94,21 +94,11 @@ describe 'Hackers' do
         click_link 'Profile'
       end
       
-      it 'sets the hacker to inactive' do
+      it 'destroys the hacker' do
         check 'cancel'
         fill_in 'cancel_password', with: hacker.password
         click_button('Cancel')
-        hacker.reload
-        hacker.enabled.should be_false
-      end
-      
-      it 'removes associated entries' do
-        hacker.entries.length.should eq(5)
-        check 'cancel'
-        fill_in 'cancel_password', with: hacker.password
-        click_button 'Cancel'
-        hacker.reload
-        hacker.entries.length.should eq(0)
+        Hacker.exists?(hacker).should be_false
       end
       
       it 'shows an error if the wrong password is provided' do
@@ -145,14 +135,11 @@ describe 'Hackers' do
           StripeService.stub('cancel_customer_subscription')
         end
         
-        it 'should remove premium information' do
+        it 'should destroy the hacker' do
           check 'cancel'
           fill_in 'cancel_password', with: hacker.password
           click_button 'Cancel'
-          hacker.subscription.reload
-          hacker.subscription.premium_account.should be_false
-          hacker.subscription.premium_start_date.should be_nil
-          hacker.should have(:no).errors_on(:base)
+          Hacker.exists?(hacker).should be_false
         end
       end
     end

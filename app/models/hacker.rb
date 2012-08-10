@@ -1,6 +1,6 @@
 class Hacker < ActiveRecord::Base
-  has_many :entries, inverse_of: :hacker, dependent: :delete_all
-  belongs_to :subscription
+  has_many :entries, inverse_of: :hacker, dependent: :destroy
+  belongs_to :subscription, dependent: :delete
   
   has_secure_password
   attr_accessible :email, :name, :time_zone, :password, :password_confirmation, :save_tags
@@ -52,15 +52,9 @@ class Hacker < ActiveRecord::Base
   # Cancel the hacker's account and remove their entries.
   # Cancel the Stripe Customer Subscription if this is a premium account.
   def cancel_account
-    self.enabled = false
     if self.subscription.premium_account
-      self.subscription.premium_account = false
-      self.subscription.premium_start_date = nil
       StripeService.cancel_customer_subscription(self)
-      self.subscription.save!
     end
-    self.entries.clear
-    save!
 
     Notifier.account_closed(self).deliver
   end
