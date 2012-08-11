@@ -81,7 +81,8 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @limit = false
-    process_tags
+    set_current_tags
+    params[:entry][:tag_ids] = Tag.process_tag_names(params)
     @entry = current_user.create_entry(params[:entry])
     
     if @entry == nil
@@ -104,7 +105,8 @@ class EntriesController < ApplicationController
   # PUT /entries/1
   # PUT /entries/1.json
   def update
-    process_tags
+    set_current_tags
+    params[:entry][:tag_ids] = Tag.process_tag_names(params)
     begin
       @entry = current_user.entries.find(params[:id])
     rescue
@@ -145,38 +147,16 @@ class EntriesController < ApplicationController
   
   private
 
-  # Find existing tags or create new tags from user input.
-  def process_tags
-    return unless params.has_key?(:tags)
-
-    # Save the current set of tags if the setting is true.
-    logger.info "Does the user want to save tags?"
+  # Set current tags if needed.
+  def set_current_tags
     if current_user.save_tags
-      logger.info "It seems the user DOES want to save tags."
       unless session.has_key?(:current_tags)
         session[:current_tags] = Array.new
       end
       session[:current_tags] = params[:tags]
-      logger.info "And the final result is Params: #{params[:tags]}, Session: #{session[:current_tags]}"
     end
-    
-    ids = []
-    tag_names = params[:tags].split(" ").collect! { |name| name.strip.downcase }
-
-    tag_names.each do |name|
-      tag = Tag.find_by_name(name)
-      if tag != nil
-        ids << tag.id
-      else
-        new_tag = Tag.new
-        new_tag.name = name
-        new_tag.save!
-        ids << new_tag.id
-      end
-    end
-    params[:entry][:tag_ids] = ids
   end
-
+  
   # Is the /entries page being filtered?
   def is_filtered?
     if session.has_key?(:filter)

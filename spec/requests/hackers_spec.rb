@@ -81,7 +81,7 @@ describe 'Hackers' do
       
     it 'shows the cancel account form' do
       click_link 'Profile'
-      page.should have_selector('form', method: 'post', action: cancel_hacker_url(hacker.id)) do |form|
+      page.should have_selector('form', method: 'delete', action: hacker_url(hacker.id)) do |form|
         form.should have_selector('input', type: 'checkbox', id: 'cancel')
         form.should have_selector('input', type: 'password', name: 'cancel_password')
       end
