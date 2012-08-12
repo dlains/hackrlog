@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120807210313) do
     t.boolean  "enabled",                :default => true
     t.boolean  "beta_access",            :default => false
     t.boolean  "save_tags",              :default => true
+    t.string   "highlight_style",        :default => "default"
     t.integer  "subscription_id"
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false

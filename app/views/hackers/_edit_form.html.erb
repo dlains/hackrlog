@@ -41,7 +41,7 @@
           <div class="control-group">
             <%= f.label :time_zone, "Time Zone", class: 'control-label' %>
             <div class="controls">
-              <%= select_tag("hacker[time_zone]", time_zone_options_for_select(@hacker.time_zone, ActiveSupport::TimeZone.us_zones), class: 'span5') %><br/>
+              <%= select_tag("hacker[time_zone]", time_zone_options_for_select(@hacker.time_zone, ActiveSupport::TimeZone.us_zones), class: 'span5') %>
             </div>
           </div>
           <div class="control-group">
@@ -51,6 +51,12 @@
                 <%= f.check_box :save_tags, tabindex: 4 %>
                 Reuse previous tags for next log entry?
               </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :highlight_style, "Syntax Highlight Style", class: 'control-label' %>
+            <div class="controls">
+              <%= select_tag('hacker[highlight_style]', options_for_select(highlight_styles, selected = @hacker.highlight_style), class: 'span5') %>
             </div>
           </div>
           <div class="form-actions">

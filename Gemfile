@@ -4,7 +4,7 @@ gem 'rails', '3.2.6'
 
 gem 'mysql2', :require => 'mysql2'
 gem 'redcarpet', :require => 'redcarpet'
-gem 'albino', :require => 'albino'
+gem 'pygments.rb'
 gem 'stripe'
 
 # Gems used only for assets and not required

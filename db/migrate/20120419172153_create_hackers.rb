@@ -11,6 +11,7 @@ class CreateHackers < ActiveRecord::Migration
       t.boolean  :enabled, default: true
       t.boolean  :beta_access, default: false
       t.boolean  :save_tags, default: true
+      t.string   :highlight_style, default: 'default'
       t.integer  :subscription_id
       
       t.timestamps

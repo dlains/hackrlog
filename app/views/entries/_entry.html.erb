@@ -7,7 +7,7 @@
     </ul>
   </div><%# meta end %>
   <div class="entry_content span7">
-    <%= sanitize format_content(entry) %>
+    <%= format_content(entry.content) %>
     <ul class="tag_list">
       <%= render partial: '/tags/tag', collection: entry.tags %>
     </ul>

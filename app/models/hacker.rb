@@ -3,7 +3,7 @@ class Hacker < ActiveRecord::Base
   belongs_to :subscription, dependent: :delete
   
   has_secure_password
-  attr_accessible :email, :name, :time_zone, :password, :password_confirmation, :save_tags
+  attr_accessible :email, :name, :time_zone, :password, :password_confirmation, :save_tags, :highlight_style
   validates :email, presence: true, uniqueness: true, email: true
   validates :password, confirmation: true
   validates_presence_of :password_confirmation, if: :password_provided?
