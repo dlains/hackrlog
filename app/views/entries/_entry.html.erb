@@ -1,15 +1,17 @@
-<article id="entry_<%= entry.id %>" class="entry row" data-id="<%= entry.id %>">
-  <div class="meta span2">
-    <ul>
-      <li class="meta-time"><time datetime="<%= entry.updated_at %>">Created <%= time_ago_in_words(entry.updated_at) %> ago.</time></li>
-      <li><a class="btn btn-mini" href="<%= edit_entry_path(entry) %>" data-remote="true" rel="nofollow"><i class="icon-edit"></i> Edit</a></li>
-      <li><a class="btn btn-mini btn-danger" href="<%= entry_path(entry) %>" data-confirm="Are you sure?" data-method="delete" data-remote="true" rel="nofollow"><i class="icon-remove icon-white"></i> Delete</a></li>
-    </ul>
-  </div><%# meta end %>
-  <div class="entry_content span7">
-    <%= format_content(entry.content) %>
-    <ul class="tag_list">
-      <%= render partial: '/tags/tag', collection: entry.tags %>
-    </ul>
-  </div><%# entry_content end %>
-</article>
+<div id="entry_<%= entry.id %>" class="entry-container" data-id="<%= entry.id %>">
+  <article class="entry">
+    <div class="entry-header">
+      <small class="time"><time datetime="<%= entry.updated_at %>">Created <%= time_ago_in_words(entry.updated_at) %> ago.</time></small>
+      <ul class="entry-actions">
+        <li><a href="<%= edit_entry_path(entry) %>" data-remote="true" rel="nofollow"><i class="icon-edit"></i><b>Edit</b></a></li>
+        <li><a href="<%= entry_path(entry) %>" data-confirm="Are you sure?" data-method="delete" data-remote="true" rel="nofollow"><i class="icon-remove"></i><b>Delete</b></a></li>
+      </ul>
+    </div><%# meta end %>
+    <div class="entry_content">
+      <%= format_content(entry.content) %>
+      <ul class="tag_list">
+        <%= render partial: '/tags/tag', collection: entry.tags %>
+      </ul>
+    </div><%# entry_content end %>
+  </article>
+</div>

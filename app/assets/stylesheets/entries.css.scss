@@ -21,24 +21,70 @@ section#content div#loading
   }
 }
 
+#entries
+{
+  border-top: 1px solid #e1e1e8;
+  border-bottom: 1px solid #e1e1e8;
+}
+
+div.entry-container
+{
+  border-left: 1px solid #e1e1e8;
+  border-right: 1px solid #e1e1e8;
+  border-bottom: 1px solid #e1e1e8;
+  padding: 10px;
+
+  &.selected
+  {
+    background: #f7f7f9;
+    border-left: 1px solid #08c;
+  }
+
+//  &:hover
+//  {
+//    background: #f7f7f9;
+//    border-left: 1px solid #08c;
+//  }
+}
+
 article.entry
 {
-  margin-bottom: 10px;
-  
-  .meta
+  .entry-header
   {
-    margin-right: -1px;
-    border-right: 1px solid #eee;
+    margin-bottom: 5px;
     
-    ul
+    .time
     {
+      color: #aaa;
+    }
+    
+    .entry-actions
+    {
+      float: right;
       margin: 0;
       padding: 0;
       list-style: none;
-
+      margin-right: 5px;
+      
       li
       {
+        display: inline;
         margin-bottom: 5px;
+        
+        a
+        {
+          color: #333;
+        }
+
+        a:hover
+        {
+          color: #000;
+        }
+        
+        i
+        {
+          padding-right: 2px;
+        }
       }
     }
   }
