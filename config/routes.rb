@@ -13,10 +13,6 @@ Hackrlog::Application.routes.draw do
     get  'logout' => :destroy
   end
 
-  controller :search do
-    get  'search' => :search
-  end
-
   resources :hackers do
     member do
       get  'export'
