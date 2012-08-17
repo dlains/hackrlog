@@ -16,7 +16,7 @@
 //= require_tree .
 
 $(function() {
-  $('.filter-checkbox').bind('change', function(event) {
+  $('.onoffswitch-checkbox').bind('change', function(event) {
     if(event.target.checked) {
       $.ajax({
         url: '/entries',

@@ -1,14 +1,32 @@
 <% @tags = get_updated_tag_list %>
 <div id="tag_manager">
-  <h3 id="list_name">Used Tags</h3>
-  <ul>
-    <% @tags.each do |tag| %>
-      <li>
-        <label class="checkbox">
-          <%= tags_check_box_tag 'tag_ids[]', "tag_id_#{tag.id}", tag.id, checked?(tag), class: 'filter-checkbox' %>
-          <span class="badge"><%= tag.name %></span>
-        </label>
-      </li>
-    <% end %>
-  </ul>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Filter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each do |tag| %>
+      <tr>
+        <td class="name">
+          <span class="tag" title="<%= tag.name %>"><%= tag.name %></span>
+        </td>
+        <td align="right">
+          <div class="onoffswitch">
+            <%= tags_check_box_tag 'tag_ids[]', "tag_id_#{tag.id}", tag.id, checked?(tag), class: 'onoffswitch-checkbox' %>
+            <label class="onoffswitch-label" for="tag_id_<%= tag.id %>">
+              <div class="onoffswitch-inner">
+                <div class="onoffswitch-active">On</div>
+                <div class="onoffswitch-inactive">Off</div>
+              </div>
+              <div class="onoffswitch-switch"></div>
+            </label>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

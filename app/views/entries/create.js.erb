@@ -15,7 +15,7 @@
   $('#tag_manager').replaceWith('<%= escape_javascript(render partial: "tags/list") %>')
 
   // Rebind all checkboxes because they have been replaced in the DOM.
-  $('.filter-checkbox').bind('change', function(event) {
+  $('.onoffswitch-checkbox').bind('change', function(event) {
     if(event.target.checked) {
       $.ajax({
         url: '/entries',
@@ -52,7 +52,7 @@
   <% end %>
 
   // Rebind all checkboxes because they have been replaced in the DOM.
-  $('.filter-checkbox').bind('change', function(event) {
+  $('.onoffswitch-checkbox').bind('change', function(event) {
     if(event.target.checked) {
       $.ajax({
         url: '/entries',

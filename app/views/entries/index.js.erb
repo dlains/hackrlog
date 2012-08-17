@@ -16,7 +16,7 @@ $('div#entries').attr('data-last', '<%= (@entries.count > 0) ? @count : "complet
 <% end %>
 
 // Rebind all checkboxes because they have been replaced in the DOM.
-$('.filter-checkbox').bind('change', function(event) {
+$('.onoffswitch-checkbox').bind('change', function(event) {
   if(event.target.checked) {
     $.ajax({
       url: '/entries',
