@@ -19,7 +19,9 @@
   @include border-radius(3px);
 }
 .badge {
-  padding: 1px 9px 2px;
+// ORIGINAL LINE
+//  padding: 1px 9px 2px;
+  padding: 1px 9px 3px;
   @include border-radius(9px);
 }
 
@@ -45,7 +47,8 @@ a {
 .label-success, .badge-success                   { background-color: $successText; }
 .label-success[href], .badge-success[href]       { background-color: darken($successText, 10%); }
 // Info (turquoise)
-.label-info, .badge-info                         { background-color: $infoText; }
+//.label-info, .badge-info                         { background-color: $infoText; }
+.label-info, .badge-info                         { background-color: #08c; text-shadow: black 1px 1px 1px; }
 .label-info[href], .badge-info[href]             { background-color: darken($infoText, 10%); }
 // Inverse (black)
 .label-inverse, .badge-inverse                   { background-color: $grayDark; }

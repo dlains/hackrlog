@@ -30,6 +30,16 @@ $orange:                #f89406 !default;
 $pink:                  #c3325f !default;
 $purple:                #7a43b6 !default;
 
+// hackrLog() colors
+// -------------------------
+$hlBlack:               #0d0d0d !default;
+$hlBlackDarker:         darken($hlBlack, 20%) !default;
+$hlAqua:                #295e52 !default;
+$hlYellow:              #f2e085 !default;
+$hlPeach:               #fcab55 !default;
+$hlPeachDarker:         darken($hlPeach, 20%) !default;
+$hlOrange:              #ee7f38 !default;
+$hlOrangeDarker:        darken($hlOrange, 20%) !default;
 
 // Scaffolding
 // -------------------------
@@ -88,8 +98,11 @@ $btnWarningBackgroundHighlight:     $orange !default;
 $btnDangerBackground:               #ee5f5b !default;
 $btnDangerBackgroundHighlight:      #bd362f !default;
 
-$btnInverseBackground:              $gray !default;
-$btnInverseBackgroundHighlight:     $grayDarker !default;
+// ORIGINAL LINES
+//$btnInverseBackground:              $gray !default;
+//$btnInverseBackgroundHighlight:     $grayDarker !default;
+$btnInverseBackground:              $hlPeach !default;
+$btnInverseBackgroundHighlight:     $hlPeachDarker !default;
 
 
 // Forms
@@ -144,12 +157,18 @@ $hrBorder:                $grayLighter !default;
 // Navbar
 // -------------------------
 $navbarHeight:                    40px !default;
-$navbarBackground:                $grayDarker !default;
-$navbarBackgroundHighlight:       $grayDark !default;
+// ORIGINAL LINES
+//$navbarBackground:                $grayDarker !default;
+//$navbarBackgroundHighlight:       $grayDark !default;
+$navbarBackground:                $hlOrangeDarker !default;
+$navbarBackgroundHighlight:       $hlOrange !default;
 
-$navbarText:                      $grayLight !default;
-$navbarLinkColor:                 $grayLight !default;
-$navbarLinkColorHover:            $white !default;
+// ORIGINAL LINES
+//$navbarText:                      $grayLight !default;
+//$navbarLinkColor:                 $grayLight !default;
+$navbarText:                      $white !default;
+$navbarLinkColor:                 $white !default;
+$navbarLinkColorHover:            $hlYellow !default;
 $navbarLinkColorActive:           $navbarLinkColorHover !default;
 $navbarLinkBackgroundHover:       transparent !default;
 $navbarLinkBackgroundActive:      $navbarBackground !default;

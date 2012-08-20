@@ -32,6 +32,15 @@ class Tag < ActiveRecord::Base
       return ids.uniq
     end
     
+    # Get a count of tags used by user.
+    def current_hacker_tag_count(hacker_id)
+      result = find_by_sql("SELECT COUNT(*) AS used
+        FROM (SELECT DISTINCT tag_id FROM entries_tags AS et
+        JOIN entries AS e ON e.id = et.entry_id
+        WHERE e.hacker_id = #{hacker_id}) AS sub;")
+      return result.first.used
+    end
+
     # Get a list of all tags used by the logged in hacker.
     def current_hacker_tags(hacker_id)
       find_by_sql("SELECT DISTINCT t.* FROM tags AS t

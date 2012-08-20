@@ -1,15 +1,16 @@
-<div id="profile_sidebar">
-  <ul class="thumbnails">
-    <li>
-      <div class="thumbnail">
-        <%= image_tag gravatar_url(current_user) %>
-        <div class="caption">
-          <h3>Stats</h3>
-          <ul>
-            <li>Entry Count: <%= current_user.entries.count %></li>
-          </ul>
-        </div>
-      </div>
-    </li>
-  </ul>
+<div id="profile_sidebar" class="sidebar-panel">
+  <h3>Profile</h3>
+  <div id="profile">
+    <div class="gravatar">
+      <%= image_tag gravatar_url(current_user) %>
+      <a href="http://gravatar.com" class="gravatar" target="_blank">Update Image</a>
+    </div>
+    <div class="stats">
+      <h4>Stats</h4>
+      <ul>
+        <li>Entry Count: <%= current_user.entries.count %></li>
+        <li>Tags Used: <%= Tag.current_hacker_tag_count(current_user.id) %></li>
+      </ul>
+    </div>
+  </div>
 </div>

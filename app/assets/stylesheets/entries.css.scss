@@ -7,6 +7,11 @@ section#content div#entry_form
   margin-bottom: 20px;
 }
 
+div#entry_form
+{
+  border-bottom: 1px solid #ee7f38;
+}
+
 section#content div#loading
 {
   display: none;
@@ -39,12 +44,6 @@ div.entry-container
     background: #f7f7f9;
     border-left: 1px solid #08c;
   }
-
-//  &:hover
-//  {
-//    background: #f7f7f9;
-//    border-left: 1px solid #08c;
-//  }
 }
 
 article.entry
