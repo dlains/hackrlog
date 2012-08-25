@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # Get a name to use for the page title.
   def owners
-    if current_user.name != nil
+    if !current_user.name.empty?
       if current_user.name.end_with?('s')
         "#{current_user.name}'"
       else
@@ -10,6 +10,14 @@ module ApplicationHelper
       end
     else
       "Your"
+    end
+  end
+
+  def controller_active?(name)
+    if controller.controller_name.casecmp(name) == 0
+      'active'
+    else
+      'inactive'
     end
   end
 

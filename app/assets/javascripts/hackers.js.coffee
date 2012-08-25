@@ -3,9 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
-  premium.setupForm()
-  
+  if typeof(Stripe) != 'undefined'
+    Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+    premium.setupForm()
+
 premium =
   setupForm: ->
     $('#hacker_premium').submit ->

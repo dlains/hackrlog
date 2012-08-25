@@ -1,4 +1,187 @@
-<div class="grid_8 push_2 alpha">
-  <h1>hackrLog Help</h1>
-  <p>Lorem ipsum</p>
+<div class="row">
+  <div class="span9 offset1">
+    <div class="tabbable tabs-left">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#help" data-toggle="tab">Help</a></li>
+        <li><a href="#tips" data-toggle="tab">Tips</a></li>
+        <li><a href="#support" data-toggle="tab">Support</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="help" class="tab-pane active fade in">
+          <h2>hackrLog() Help</h2>
+          <p>Choose from the list of topics below for more detailed information. If you are having a problem with something not covered here see the <a href="#support" data-toggle="tab">Support</a> section to ask for help.</p>
+          <ul>
+            <li><a href="#basic-usage">Basic <strong>hackrLog()</strong> Usage</a></li>
+            <li><a href="#markdown">Markdown Syntax</a></li>
+            <li><a href="#profile-settings">Profile Settings</a></li>
+            <li><a href="#keyboard-interface">Keyboard Interface</a></li>
+          </ul>
+          <div id="#basic-usage">
+            <h3>Basic Usage</h3>
+            <p>
+              <strong>hackrLog()</strong> was created to be extremely easy to use. Creating a new note, or entry,
+              is as simple as entering the text into the Log Entry field and then adding one or more tags to
+              categorize the entry so you can find it again later.
+            </p>
+            <ul class="thumbnails">
+              <li>
+                <div class="thumbnail">
+                  <%= image_tag "entry-form.png" %>
+                  <div class="caption"><p>Create a new entry in hackrLog().</p></div>
+                </div>
+              </li>
+            </ul>
+            <p>
+              You can use plain text or Markdown in the Log Entry field. See the <a href="#markdown">Markdown Syntax</a>
+              section for more information about the version of Markdown used on hackrLog().
+            </p>
+            <p>
+              Tags are single words separated by spaces. Any uppercase characters used when entering tags will be
+              converted to lowercase. If you need a multi-word tag connect the words with a dash or underscore
+              character.
+            </p>
+            <p>
+              Once you have entered the text and tags simple hit the enter key to create the Log Entry. You will
+              see the new entry slide into place just below the entry form. When there is no filter activated
+              all of your log entries will be available, newest to oldest. As you scroll down the page additional
+              entries will be loaded.
+            </p>
+            <p>
+              An entry shown in your log can be edited or deleted by clicking the edit or delete links in the top
+              right corner of the entry. When editing, the entry will be replaced with an in-place form. Make
+              whatever changes you like to the text or tags then click the update button or simply press the enter
+              key. When deleting an entry you will be asked to confirm deletion before the entry is actually
+              deleted.
+            </p>
+            <a href="#help">top</a>
+          </div><br/>
+          <div id="markdown">
+            <h3>Markdown</h3>
+            <p>
+              <strong>hackrLog()</strong> uses <a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown</a> for entry
+              formatting. In particular it uses <a href="http://github.github.com/github-flavored-markdown/" target="_blank">Github Flavored Markdown</a>
+              which adds support for language specific code blocks and syntax highlighting.
+            </p>
+            <h4>5 Minute Markdown Guide</h4>
+            <p>
+              If you don't want to go over the detailed Markdown information linked above here is a quick guide to get
+              you started with Markdown.
+              
+              <ul>
+                <li>
+                  <p>Use '#' characters to denote heading levels. One # becomes &lt;h1&gt;. Two ## becomes &lt;h2&gt; and so on.</p>
+                  <p>Example:</p>
+<pre>
+# This is Heading One
+
+## This is Heading Two
+
+###### This is Heading Six
+</pre>
+                </li>
+                <li>
+                  <p>Use asterisks, pluses or hyphens followed by a space to create an unordered list.</p>
+                  <p>Example:</p>
+<pre>
+* A List
+* In No
+* Particular Order
+</pre>
+                </li>
+                <li>
+                  <p>Use numbers followed by periods '1.' to create an ordered list.</p>
+                  <p>Example:</p>
+<pre>
+1. First Item
+2. Second Item
+3. Third Item
+</pre>
+                </li>
+                <li>
+                  <p>
+                    To create a link wrap the link text in square brackets and immediately after the closing
+                    bracket the URL wrapped in parentheses. You can also add an optional title for the link
+                    in double quotes after the URL.
+                  </p>
+                  <p>Example:</p>
+<pre>
+This is [an example](http://example.com/ "Title") inline link.
+
+[This link](http://example.net/) has no title attribute.
+</pre>
+                </li>
+                <li>
+                  <p>
+                    To create emphasis around a word or phrase use either asterisks or underline characters around
+                    the word or phrase. A single asterisk or underline character will generate &lt;em&gt; tags. Two
+                    asterisks or underlines will generate &lt;strong&gt; tags.
+                  </p>
+                  <p>Example:</p>
+<pre>
+*this will be emphasis*
+
+_so will this_
+
+**this will be strong**
+
+__this phrase is also strong__
+</pre>
+                </li>
+                <li>
+                  <p>
+                    To create inline code wrap the code with single <code>`</code> characters.
+                  </p>
+                  <p>Example:</p>
+<pre>
+Use the `puts` method to output a string to `stdout`.
+</pre>
+                </li>
+                <li>
+                  <p>Create a code block by wrapping the code with <code>```</code> characters. Adding a language
+                    name after the opening <code>```</code> characters will trigger syntax highlighting for that language.
+                  </p>
+                  <p>Example:</p>
+<pre>
+```ruby
+def hello(name)
+  puts "Hello, #{name}."
+end
+```
+</pre>
+                </li>
+              </ul>
+            </p>
+            <a href="#help">top</a>
+          </div><br/>
+          <div id="profile-settings">
+            <h3>Profile Settings</h3>
+            <p><strong>hackrLog()</strong> has a few settings that affect the way you work.
+            <a href="#help">top</a>
+          </div><br/>
+          <div id="keyboard-interface">
+            <h3>Keyboard Interface</h3>
+            <p><strong>hackrLog()</strong> provides a keyboard interface for working with entries.</p>
+            <a href="#help">top</a>
+          </div>
+        </div>
+        <div id="tips" class="tab-pane fade">
+          <h2>hackrLog() Tips</h2>
+          <p>There are many ways to make use of hackrLog() tags and filtering. A few examples are provided here to give you an idea of what is possible.</p>
+          <h3>Project Name</h3>
+          <p>When working on a project tag notes with the project name, the module or file you are working on and possibly the type of work you are doing, such as bug fixing, testing, tuning, research and so on. When you are working on that project in the future you can filter hackrLog() with the project name to see only the notes pertaining to the project.</p>
+          <h3>Reminders</h3>
+          <p>When working on code you often know a change needs to be made, but not until after some other module is finished. You write a TODO comment in the code, but how are you going to remember to revisit that code when the time comes to update it? Make an entry in hackrLog() with the project name and <strong>reminder</strong> tags. Then just periodically filter hackrLog() with the <strong>reminder</strong> tag to see all of your reminders. Add the project name to the filter to just see reminders for the project.</p>
+          <h3>Reference</h3>
+          <p>Have a hard time remembering the details of an infrequently used library? Tired of hunting down the documentation everytime you need it? Create your own cheat sheet with hackrLog(). Log the details as you find them and tag them with the library name, module name and method or function name. You could even add a project name tag to allow for further filtering.</p>
+        </div>
+        <div id="support" class="tab-pane fade">
+          <h2>hackrLog() Support</h2>
+          <p>
+            <strong>Track notes per project.</strong> Create a tag for every project you are working on. Create
+            tags for different types of work that need to be done on any given project (coding, documentation, testing).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
