@@ -6,7 +6,8 @@ Hackrlog::Application.routes.draw do
   get "home/pricing"
   get "home/tos"
   get "home/privacy"
-
+  post "home/support"
+  
   controller :sessions do
     get  'login'  => :new
     post 'login'  => :create

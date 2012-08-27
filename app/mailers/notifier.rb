@@ -54,4 +54,10 @@ class Notifier < ActionMailer::Base
 
     mail to: @hacker.email, subject: 'Sorry to see you go.'
   end
+  
+  def support_request(name, email, subject, comments)
+    @name, @email, @subject, @comments = name, email, subject, comments
+    
+    mail to: 'support@hackrlog.com', from: @email, subject: 'Support request'
+  end
 end

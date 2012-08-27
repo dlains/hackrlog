@@ -7,6 +7,13 @@
         <li><a href="#support" data-toggle="tab">Support</a></li>
       </ul>
       <div class="tab-content">
+        <% if flash[:notice] %>
+          <div class="alert alert-block alert-info">
+            <a class="close" data-dismiss="alert" href="#">x</a>
+            <h4 class="alert-heading">Notice!</h4>
+            <p><%= flash[:notice] %></p>
+          </div>
+        <% end %>
         <div id="help" class="tab-pane active fade in">
           <h2>hackrLog() Help</h2>
           <p>Choose from the list of topics below for more detailed information. If you are having a problem with something not covered here see the <a href="#support" data-toggle="tab">Support</a> section to ask for help.</p>
@@ -155,12 +162,135 @@ end
           </div><br/>
           <div id="profile-settings">
             <h3>Profile Settings</h3>
-            <p><strong>hackrLog()</strong> has a few settings that affect the way you work.
+            <p>
+              <strong>hackrLog()</strong> has a few settings that affect the way you work. When logged in you can
+              view your Profile Settings by clicking the <strong>Profile</strong> link in the page header.
+            </p>
+            <ul class="thumbnails">
+              <li>
+                <div class="thumbnail">
+                  <%= image_tag "settings.png" %>
+                  <div class="caption"><p>View or update your Profile Settings.</p></div>
+                </div>
+              </li>
+            </ul>
+            <p>
+              From this form you can update your e-mail address, nickname, timezone, syntax highlighting style and
+              whether or not your last used tags are saved for new entries.
+            </p>
+            <h4>E-Mail Address</h4>
+            <p>
+              The e-mail provided here serves as your account identifier and will also be used to communicate with
+              you regarding any changes in your account status.
+            </p>
+            <h4>Nickname</h4>
+            <p>
+              The nickname is simply for display purposes and does not need to be unique. You will see it in the
+              page title when logged in.
+            </p>
+            <h4>Timezone</h4>
+            <p>
+              The timezone is used to adjust the creation and update times for your entries. Entries are shown with
+              an approximate time since creation. Setting your timezone will ensure that the time value will be correct.
+            </p>
+            <h4>Save Tags</h4>
+            <p>
+              This setting, when turned on, will reuse the last set of tags for your next entry. If you typically
+              create many entries that are related to each other this can save you the hassle of re-typing the
+              tags for each entry. When turned off you must enter the tags manually for each entry.
+            </p>
+            <h4>Syntax Highlighting Style</h4>
+            <p>
+              This drop down provides a list of syntax highlighting color styles. Select a color style and code blocks
+              in entries will display with the selected color styles.
+            </p>
+            <h4>Additional Profile Options</h4>
+            <p>
+              If you have a Gravatar account you will see your primary Gravatar image on the profile page. There is
+              also a link to the Gravatar site if you wish to create an account or update your existing account.
+            </p>
+            <p>
+              You can change your account password by clicking the <strong>Password</strong> tab and providing your
+              existing password and the new password.
+            </p>
+            <p>
+              Upgrading to <strong>hackrLog() Premium</strong> can be accomplished by clicking the <strong>Go Premium</strong>
+              tab and entering your credit card information.
+            </p>
+            <p>
+              You can export your entry data at any time by clicking the <strong>Export Data</strong> tab. Select the
+              desired export format and then click the <strong>Export</strong> button. Your data will be downloaded to
+              your machine in a Zip file.
+            </p>
+            <p>
+              If you wish to cancel your account click the <strong>Cancel Account</strong> tab. Check the cancel
+              account checkbox, supply your account password and click the <strong>Cancel</strong> button. Your account
+              will be closed, all data removed from <strong>hackrLog()</strong> and any recurring credit card charges will
+              be stopped.
+            </p>
             <a href="#help">top</a>
           </div><br/>
           <div id="keyboard-interface">
             <h3>Keyboard Interface</h3>
-            <p><strong>hackrLog()</strong> provides a keyboard interface for working with entries.</p>
+            <p>
+              <strong>hackrLog()</strong> provides a keyboard interface for working with entries to make entering, editing
+              and deleting entries easy. While the <strong>Log Entry</strong> or <strong>Tags</strong> fields have focus
+              the keys shown below will not trigger the corresponding actions.
+            </p>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="key">
+                    <p>n</p>
+                  </td>
+                  <td>
+                    <p>Create a new entry. This moves the cursor to the <strong>Log Entry</strong> field in preparation for a new entry.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>j</p>
+                  </td>
+                  <td>
+                    <p>Select the next item in the entry list. Repeatedly pressing the j key will continue moving down the entry list. The selected entry is shown with a blue left border highlight and a darker background.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>k</p>
+                  </td>
+                  <td>
+                    <p>Select the previous item in the entry list. Repeatedly pressing the k key will continue moving up the entry list. The selected entry is shown with a blue left border highlight and a darker background.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>e</p>
+                  </td>
+                  <td>
+                    <p>Edit the selected entry. This is the same as clicking the <strong>Edit</strong> link for an entry.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>d</p>
+                  </td>
+                  <td>
+                    <p>Delete the selected entry. This is the same as clicking the <strong>Delete</strong> link for an entry.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Another way of selecting an entry is to hover the mouse over it. You can mouse over and entry and still use the <em>e</em>
+              and <em>d</em> keys to edit or delete the selected entry.
+            </p>
             <a href="#help">top</a>
           </div>
         </div>
@@ -177,9 +307,41 @@ end
         <div id="support" class="tab-pane fade">
           <h2>hackrLog() Support</h2>
           <p>
-            <strong>Track notes per project.</strong> Create a tag for every project you are working on. Create
-            tags for different types of work that need to be done on any given project (coding, documentation, testing).
+            If you need help, have a question or comment, or if you have a suggestion for improving <strong>hackrLog()</strong>
+            please contact us at <a href="mailto:support@hackrlog.com">support@hackrlog.com</a> or use the form below.
           </p>
+          <%= form_tag(home_support_path, method: "post", class: 'well') do %>
+            <fieldset>
+              <legend>Support</legend>
+              <div class="control-group">
+                <%= label_tag :name, nil, class: 'control-label' %>
+                <div class="controls">
+                  <%= text_field_tag :name, params[:name], placeholder: 'Name', class: 'span7' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= label_tag :email, nil, class: 'control-label' %>
+                <div class="controls">
+                  <%= email_field_tag :email, params[:email], placeholder: 'Email', class: 'span7' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= label_tag :subject, nil, class: 'control-label' %>
+                <div class="controls">
+                  <%= text_field_tag :subject, params[:subject], placeholder: 'Subject', class: 'span7' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= label_tag 'Comments / Suggestions / Requests', nil, class: 'control-label' %>
+                <div class="controls">
+                  <%= text_area_tag :comments, params[:comments], class: 'span7' %>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+              </div>
+            </fieldset>
+          <% end %>
         </div>
       </div>
     </div>
