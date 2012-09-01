@@ -3,6 +3,7 @@ require 'bundler/capistrano'
 load "config/recipes/base"
 load "config/recipes/nginx"
 load "config/recipes/unicorn"
+load "config/recipes/stripe"
 load "config/recipes/monit"
 
 server "66.175.220.122", :web, :app, :db, primary: true
@@ -20,17 +21,19 @@ set :keep_releases, 3
 
 default_run_options[:pty] = true
 
+after "deploy", "deploy:cleanup"
+
 # Access to start, stop and restart for Unicorn.
-namespace :deploy do
-  task :start, roles: :app do
-    run "#{sudo} /etc/init.d/hackrlog start", pty: true
-  end
-
-  task :stop, roles: :app do
-    run "#{sudo} /etc/init.d/hackrlog stop", pty: true
-  end
-
-  task :restart, roles: :app do
-    run "#{sudo} /etc/init.d/hackrlog restart", pty: true
-  end
-end
+# namespace :deploy do
+#   task :start, roles: :app do
+#     run "#{sudo} /etc/init.d/hackrlog start", pty: true
+#   end
+# 
+#   task :stop, roles: :app do
+#     run "#{sudo} /etc/init.d/hackrlog stop", pty: true
+#   end
+# 
+#   task :restart, roles: :app do
+#     run "#{sudo} /etc/init.d/hackrlog restart", pty: true
+#   end
+# end
