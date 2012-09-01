@@ -1,0 +1,43 @@
+upstream hackrlog {
+    # fail_timeout=0 means we always retry an upstream even if it failed
+    # to return a good HTTP response (in case the Unicorn master nukes a
+    # single worker for timing out).
+    server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
+}
+
+server {
+    listen 80;
+    server_name  www.hackrlog.com;
+    rewrite ^/(.*) http://hackrlog.com/$1 permanent;
+}
+
+server {
+    listen 80 default deferred;
+    server_name hackrlog.com;
+
+    access_log <%= current_path %>/log/access.log;
+    error_log <%= current_path %>/log/error.log;
+
+    root   <%= current_path %>/public/;
+    index  index.html;
+
+    location / {
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+
+        if (-f $request_filename/index.html) {
+            rewrite (.*) $1/index.html break;
+        }
+
+        if (-f $request_filename.html) {
+            rewrite (.*) $1.html break;
+        }
+
+        if (!-f $request_filename) {
+            proxy_pass http://hackrlog;
+            break;
+        }
+    }
+}
