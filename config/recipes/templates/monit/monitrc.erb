@@ -1,0 +1,27 @@
+# Check services every 30 seconds
+  set daemon 30
+
+# Set log, state and id file locations
+  set logfile /var/log/monit.log
+  set idfile /var/lib/monit/id
+  set statefile /var/lib/monit/state
+
+# Send alerts via the local mail server.
+  set mailserver localhost
+  
+# Store events that can not be delivered by mail
+  set eventqueue
+      basedir /var/lib/monit/events # set the base directory where events will be stored
+      slots 100                     # optionally limit the queue size
+
+# Send alert emails to the support address.
+  set alert support@hackrlog.com
+
+# Some system level alerts.
+check system hackrlog_server
+  if loadavg(5min) > 2 for 2 cycles then alert
+  if memory > 75% for 2 cycles then alert
+  if cpu(user) > 75% for 2 cycles then alert
+
+# Include files for specific configurations.
+   include /etc/monit/conf.d/*
