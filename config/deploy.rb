@@ -3,6 +3,7 @@ require 'bundler/capistrano'
 load "config/recipes/base"
 load "config/recipes/nginx"
 load "config/recipes/unicorn"
+load "config/recipes/mysql"
 load "config/recipes/stripe"
 load "config/recipes/monit"
 

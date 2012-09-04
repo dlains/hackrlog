@@ -1,0 +1,8 @@
+#!/bin/bash
+DIR="/home/backup/mysql"
+
+# Run backup
+/usr/bin/innobackupex --user=backup --password=h4ckrl0gbkup $DIR
+
+# Remove backups older than 7 days
+find $DIR -name backup.\* -ctime +7 -exec rm -rf {} \;
