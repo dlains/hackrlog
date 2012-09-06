@@ -6,6 +6,7 @@ gem 'mysql2', :require => 'mysql2'
 gem 'redcarpet', :require => 'redcarpet'
 gem 'pygments.rb'
 gem 'stripe'
+gem 'rack-mini-profiler', '<= 0.1.14'
 
 # Gems used only for assets and not required
 # in production environments by default.

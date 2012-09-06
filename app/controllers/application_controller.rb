@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
   before_filter :authorize
+  before_filter :mini_profiler
   protect_from_forgery
 
   protected
@@ -26,5 +27,11 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= Hacker.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
   end
-  
+
+  # Enable rack-mini-profiler when requested.
+  def mini_profiler
+    if current_user != nil
+      Rack::MiniProfiler.authorize_request if current_user.admin?
+    end
+  end
 end
