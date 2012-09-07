@@ -5,15 +5,28 @@ upstream hackrlog {
     server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
 }
 
+# Forward any HTTP traffic to HTTPS.
 server {
-    listen 80;
-    server_name  www.hackrlog.com;
-    rewrite ^/(.*) http://hackrlog.com/$1 permanent;
+    listen                   80;
+    server_name              www.hackrlog.com;
+    rewrite                  ^ https://$server_name$request_uri permanent;
 }
 
 server {
-    listen 80 default deferred;
-    server_name hackrlog.com;
+    listen                   80;
+    server_name              hackrlog.com;
+    rewrite                  ^ https://$server_name$request_uri permanent;
+}
+
+server {
+    listen                   443;
+    server_name              www.hackrlog.com;
+    rewrite                  ^/(.*) http://hackrlog.com/$1 permanent;
+}
+
+server {
+    listen                   443 default;
+    server_name              hackrlog.com;
 
     access_log <%= current_path %>/log/access.log;
     error_log <%= current_path %>/log/error.log;
