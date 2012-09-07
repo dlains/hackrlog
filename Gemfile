@@ -7,6 +7,7 @@ gem 'redcarpet', :require => 'redcarpet'
 gem 'pygments.rb'
 gem 'stripe'
 gem 'rack-mini-profiler', '<= 0.1.14'
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.
