@@ -41,7 +41,7 @@ class Notifier < ActionMailer::Base
   def account_created(hacker)
     @hacker = hacker
 
-    mail to: @hacker.email, subject: 'Welcome to hackrLog!'
+    mail to: @hacker.email, subject: 'Welcome to hackrLog()!'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
