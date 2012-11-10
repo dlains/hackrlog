@@ -8,15 +8,17 @@ Every log entry is tagged so tracking down that three year old note is easy.
 
 Clone the repository from Github with the following command:
 
-`clone git@github.com:dlains/hackrlog.git`
+```bash
+clone git@github.com:dlains/hackrlog.git
+```
 
 This will create a new `hackrlog` directory with the source code in the directory where you run the command. Now make sure your
 machine has all of the gems required by the application.
 
-`
+```bash
 cd hackrlog
 bundle install
-`
+```
 
 The next step is to make sure the database is setup.
 
@@ -24,7 +26,9 @@ Install MySQL on your machine if you haven't already. A good guide to building M
 
 Now you need to create the hackrlog user and grant privileges for that user. Start MySQL with the root account and the password you created for root.
 
-`mysql -u root -p`
+```bash
+mysql -u root -p
+```
 
 Then enter the following commands the create the hackrlog user for the development and test databases.
 
@@ -36,16 +40,18 @@ grant select, insert, update, delete, create, alter, drop, index, lock tables on
 
 Now you should be able to run the rake database tasks.
 
-`
+```bash
 rake db:create
 rake db:migrate
 rake db:seed
 rake db:test:prepare
-`
+```
 
 Optionally you can fill the database with some test data that is provided in a SQL script.
 
-`mysql -u root -p hackrlog < script/fill.sql`
+```bash
+mysql -u root -p hackrlog < script/fill.sql
+```
 
 TODO: Add additional information here about setting up Nginx on OS X and configuring it to work with the hackrLog() project.
 
@@ -53,20 +59,24 @@ TODO: Add additional information here about setting up Nginx on OS X and configu
 
 To run hackrLog() on your development maching first start Nginx and then Unicorn.
 
-`
+```bash
 sudo nginx
 unicorn
-`
+```
 
 You must run Nginx with sudo in order for it to have access to the logging files. To stop hackrLog() on your machine use
 CTRL-C to shut Unicorn down and the stop Nginx.
 
-`sudo nginx -s stop`
+```bash
+sudo nginx -s stop
+```
 
 You should also have another terminal tab open and running Guard. Guard watches selected directories in the application and will
 automatically run the test suite when changes are made to the code. Start Guard with:
 
-`bundle exec guard`
+```bash
+bundle exec guard
+```
 
 Like Unicorn, you can stop Guard with CTRL-C.
 
