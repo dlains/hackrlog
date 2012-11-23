@@ -31,7 +31,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-gem 'unicorn', '4.3.1'
+gem 'unicorn', '4.4.0'
 
 group :development do
   gem 'capistrano'
